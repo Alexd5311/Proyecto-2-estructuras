@@ -1,0 +1,5 @@
+1;Ana Rodriguez;1985-04-12;8888-1111;12;123;ana@gmail.com
+2;Carlos Perez;1978-09-25;8888-2222;23;12;carlos@gmail.com
+3;Maria Vargas;1992-03-18;8888-3333;12;456;maria@gmail.com
+4;Jose Gomez;1965-11-07;8888-4444;23;12;jose@gmail.com
+5;Laura Mendez;2001-06-30;8888-5555;12;123;laura@gmail.com

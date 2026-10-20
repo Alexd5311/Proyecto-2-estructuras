@@ -1,0 +1,5 @@
+1;Cardiologia;Atencion de enfermedades del corazon
+2;Pediatria;Atencion medica para ninos
+3;Medicina General;Atencion medica general
+4;Dermatologia;Atencion de enfermedades de la piel
+5;Neurologia;Atencion de enfermedades del sistema nervioso

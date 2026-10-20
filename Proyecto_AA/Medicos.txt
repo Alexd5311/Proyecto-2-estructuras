@@ -1,0 +1,5 @@
+1;Juan Sanchez;2222-1111;juan@hospital.com;1
+2;Laura Vargas;2222-2222;laura@hospital.com;2
+3;Pedro Gomez;2222-3333;pedro@hospital.com;3
+4;Maria Rojas;2222-4444;maria@hospital.com;4
+5;Carlos Mora;2222-5555;carlos@hospital.com;5

@@ -1,0 +1,19 @@
+PROYECTO AA — Visual Studio (IDE completo)
+
+1. Abre "Proyecto AA.sln" con Visual Studio 2022.
+2. Selecciona la configuración x64 y Debug.
+3. Compila con Compilar > Compilar solución (Ctrl+Shift+B).
+4. Ejecuta con F5 o Ctrl+F5.
+
+Dependencia externa:
+El código usa libHaru mediante #include <hpdf.h> y enlaza hpdf.lib.
+El proyecto está configurado para buscar estos archivos en:
+  C:\vcpkg\installed\x64-windows\include
+  C:\vcpkg\installed\x64-windows\lib
+
+Si libHaru no está instalado ahí, instala/configura libHaru para la arquitectura x64 o cambia esas rutas en:
+  Proyecto AA.vcxproj > Propiedades de configuración > C/C++ > General > Directorios de inclusión adicionales
+  Proyecto AA.vcxproj > Propiedades de configuración > Vinculador > General > Directorios de bibliotecas adicionales
+
+Los archivos .txt se copian automáticamente a la carpeta bin\Debug o bin\Release y el directorio de trabajo se configura para que el programa encuentre sus datos.
+Las DLL incluidas en el ZIP también se copian al directorio de salida.

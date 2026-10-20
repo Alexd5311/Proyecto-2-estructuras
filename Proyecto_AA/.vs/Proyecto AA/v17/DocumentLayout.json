@@ -1,0 +1,49 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajos TEC\\Proyecto 2\\Proyecto_AA_Visual_Studio\\Proyecto AA\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajos TEC\\Proyecto 2\\Proyecto_AA_Visual_Studio\\Proyecto AA\\Habitaciones.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Habitaciones.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Habitaciones.txt",
+              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajos TEC\\Proyecto 2\\Proyecto_AA_Visual_Studio\\Proyecto AA\\Habitaciones.txt",
+              "RelativeDocumentMoniker": "Habitaciones.txt",
+              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajos TEC\\Proyecto 2\\Proyecto_AA_Visual_Studio\\Proyecto AA\\Habitaciones.txt",
+              "RelativeToolTip": "Habitaciones.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-10-20T17:49:08.572Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
