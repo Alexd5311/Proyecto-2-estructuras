@@ -303,13 +303,14 @@ ListaCiudades::~ListaCiudades()
 //╚═════════════════════════════════════════════════════════════════════╝
 
 void CargarCiudades(ListaCiudades &Ciudades, ListaPaises &Paises){
-    ifstream archivo("Ciudades.txt");
+    ifstream archivo("Ciudades.csv");
     if (!archivo){
-        cout << "No se pudo abrir el archivo Ciudades.txt" << endl;
+        cout << "No se pudo abrir el archivo Ciudades.csv" << endl;
         return;
     }
 
     string linea;
+    getline(archivo, linea); // Saltar encabezado del CSV
     string codPaisTexto;
     string codCiudadTexto;
     string Nombre;
@@ -341,16 +342,4 @@ void CargarCiudades(ListaCiudades &Ciudades, ListaPaises &Paises){
     archivo.close();
     cout << "Ciudades cargadas correctamente." << endl;
 }
-
-
-
-
-
-
-
-
-
-//╔═══════════════════════════════════════════════════════════════════════════════════════════════╗
-//║                                         NODO PACIENTE                                         ║
-//╚═══════════════════════════════════════════════════════════════════════════════════════════════╝
 

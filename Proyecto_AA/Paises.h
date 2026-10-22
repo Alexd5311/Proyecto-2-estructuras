@@ -202,12 +202,13 @@ ListaPaises::~ListaPaises()
 //║                             CARGAR PAISES                           ║
 //╚═════════════════════════════════════════════════════════════════════╝
 void CargarPaises(ListaPaises &Paises){
-    ifstream archivo("Paises.txt");
+    ifstream archivo("Paises.csv");
     if (!archivo){
-        cout << "No se pudo abrir el archivo Paises.txt" << endl;
+        cout << "No se pudo abrir el archivo Paises.csv" << endl;
         return;
     }
     string linea;
+    getline(archivo, linea); // Saltar encabezado del CSV
     string codPaisTexto;
     string Nombre;
     while (getline(archivo, linea)){
@@ -227,20 +228,3 @@ void CargarPaises(ListaPaises &Paises){
     cout << "Paises cargados correctamente." << endl;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//╔═══════════════════════════════════════════════════════════════════════════════════════════════╗
-//║                                          NODO CIUDAD                                          ║
-//╚═══════════════════════════════════════════════════════════════════════════════════════════════╝

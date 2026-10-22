@@ -446,14 +446,17 @@ void ListaHospitalizaciones::Mostrar()
 void CargarHospitalizaciones(ListaHospitalizaciones &Hospitalizaciones, TablaHashingPacientes &Pacientes, 
     ListaHabitaciones &Habitaciones, TablaHashingMedicos &Medicos)
 {
-    ifstream archivo("Hospitalizaciones.txt");
+    ifstream archivo("Hospitalizaciones.csv");
 
     if (!archivo){
-        cout << "No se pudo abrir el archivo Hospitalizaciones.txt" << endl;
+        cout << "No se pudo abrir el archivo Hospitalizaciones.csv" << endl;
         return;
     }
 
-    string IdHospitalizacionTexto;
+    
+    string encabezado;
+    getline(archivo, encabezado); // Saltar encabezado del CSV
+string IdHospitalizacionTexto;
     string IdPacienteTexto;
     string IdHabitacionTexto;
     string IdMedicoTexto;
@@ -494,30 +497,3 @@ void CargarHospitalizaciones(ListaHospitalizaciones &Hospitalizaciones, TablaHas
     archivo.close();
     cout << "Hospitalizaciones cargadas correctamente." << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //╔════════════════════════════════════════════════════════════════════════════════════════════════════╗
-    //║                                               CRUD's                                               ║
-    //╚════════════════════════════════════════════════════════════════════════════════════════════════════╝
-
-    //╔════════════════════════════════════════════════════════════════════════╗
-    //║                                INSERTAR                                ║
-    //╚════════════════════════════════════════════════════════════════════════╝
-
-    //Pais

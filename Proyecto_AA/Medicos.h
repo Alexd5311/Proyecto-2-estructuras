@@ -443,13 +443,16 @@ void ReporteMedicosPorEspecialidad(TablaHashingMedicos &Medicos)
 //╚═════════════════════════════════════════════════════════════════════╝
 
 void CargarMedicos(TablaHashingMedicos &Medicos, ListaEspecialidades &Especialidades){
-    ifstream archivo("Medicos.txt");
+    ifstream archivo("Medicos.csv");
     if (!archivo){
-        cout << "No se pudo abrir el archivo Medicos.txt" << endl;
+        cout << "No se pudo abrir el archivo Medicos.csv" << endl;
         return;
     }
 
-    string IdMedicoTexto;
+    
+    string encabezado;
+    getline(archivo, encabezado); // Saltar encabezado del CSV
+string IdMedicoTexto;
     string Nombre;
     string Telefono;
     string Correo;
@@ -482,31 +485,3 @@ void CargarMedicos(TablaHashingMedicos &Medicos, ListaEspecialidades &Especialid
     archivo.close();
     cout << "Medicos cargados correctamente." << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//╔═══════════════════════════════════════════════════════════════════════════════════════════════╗
-//║                                         NODO CITA                                             ║
-//╚═══════════════════════════════════════════════════════════════════════════════════════════════╝
-

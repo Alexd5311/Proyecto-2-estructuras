@@ -248,6 +248,7 @@ void InsertarHabitacion(ListaHabitaciones &Habitaciones)
     int IdHabitacion;
     int Numero;
     int Piso;
+    string Pisotexto;
     int Tipo;
     int Estado;
     cout << " " << endl;
@@ -263,13 +264,24 @@ void InsertarHabitacion(ListaHabitaciones &Habitaciones)
     cout << "Ingrese el numero: ";
     cin >> Numero;
     cout << "Ingrese el piso: ";
-    cin >> Piso;
+    cin >> Pisotexto;
+
+    if (Pisotexto == "Piso") {
+        cin >> Piso;
+    }
+    else {
+        Piso = stoi(Pisotexto);
+    }
+
     cout << "Ingrese el tipo (1: Individual, 2: Compartida, 3: UCI): ";
-    cin >> Tipo;
-    if (Tipo < 1 || Tipo > 3){
-        cout << "Tipo de habitacion invalido." << endl;
+    if (!(cin >> Tipo)) {
+        cout << "Entrada de tipo invalida." << endl;
+        cin.clear();
+        cin.ignore(10000, '\n');
         return;
     }
+
+    cout << "Tipo ingresado: " << Tipo << endl;
     cout << "Ingrese el estado (0: Disponible, 1: Ocupada): ";
     cin >> Estado;
     if (Estado < 0 || Estado > 1){

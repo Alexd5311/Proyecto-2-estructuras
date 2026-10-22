@@ -1,0 +1,19 @@
+PROYECTO AA - MODULARIZADO POR ENTIDAD
+
+Abre Proyecto AA.sln en Visual Studio.
+
+Módulos separados:
+- Paises.h
+- Ciudades.h
+- Pacientes.h
+- Especialidades.h
+- Medicos.h
+- Citas.h
+- Habitaciones.h
+- Hospitalizaciones.h
+- Operaciones.h: funciones de insertar, buscar, eliminar, modificar y menús.
+- Comun_PDF.h: utilidades compartidas y generación de PDF.
+- ProyectoDefinitivo.cpp: punto de entrada (main).
+
+Los módulos conservan el código original y se incluyen en orden para mantener las dependencias entre entidades.
+Los archivos TXT y DLL se mantienen junto al proyecto.

@@ -306,14 +306,17 @@ int ListaHabitaciones::ReportePDF(GeneradorPDF &pdf, int Estado)
 
 void CargarHabitaciones(ListaHabitaciones &Habitaciones)
 {
-    ifstream archivo("Habitaciones.txt");
+    ifstream archivo("Habitaciones.csv");
 
     if (!archivo){
-        cout << "No se pudo abrir el archivo Habitaciones.txt" << endl;
+        cout << "No se pudo abrir el archivo Habitaciones.csv" << endl;
         return;
     }
 
-    string IdHabitacionTexto;
+    
+    string encabezado;
+    getline(archivo, encabezado); // Saltar encabezado del CSV
+string IdHabitacionTexto;
     string NumeroTexto;
     string PisoTexto;
     string TipoTexto;
@@ -327,7 +330,7 @@ void CargarHabitaciones(ListaHabitaciones &Habitaciones)
     {
         int IdHabitacion = stoi(IdHabitacionTexto);
         int Numero = stoi(NumeroTexto);
-        int Piso = stoi(PisoTexto);
+        int Piso = stoi(PisoTexto.substr(5));
         int Tipo = stoi(TipoTexto);
         int Estado = stoi(EstadoTexto);
 
@@ -356,27 +359,3 @@ void CargarHabitaciones(ListaHabitaciones &Habitaciones)
 
     cout << "Habitaciones cargadas correctamente." << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//╔═════════════════════════════════════════════════════════════════════════════╗
-//║                          NODO HOSPITALIZACION                               ║
-//╚═════════════════════════════════════════════════════════════════════════════╝
-

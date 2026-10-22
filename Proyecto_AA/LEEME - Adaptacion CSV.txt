@@ -1,0 +1,12 @@
+Proyecto AA adaptado para leer archivos CSV
+
+Cambios realizados:
+- Los módulos de carga existentes usan los nombres .csv en lugar de .txt.
+- Cada función de carga salta la primera fila (encabezados), siguiendo el ejemplo de lectura entregado por la profesora.
+- Los archivos CSV se incluyen en la carpeta raíz junto al proyecto, por lo que las rutas son, por ejemplo, \"Paises.csv\".
+
+IMPORTANTE:
+1. En Visual Studio, configura el Directorio de trabajo (Propiedades del proyecto > Depuración > Directorio de trabajo) para que apunte a la carpeta donde están ProyectoDefinitivo.cpp y los CSV, o copia los CSV al directorio de trabajo usado al ejecutar.
+2. Este cambio adapta los módulos de carga que ya existían en el proyecto. No añade todavía módulos CRUD para Diagnostico.csv ni Tratamiento.csv, que no estaban implementados en esta versión modularizada.
+3. Revisa los datos y tipos de cada CSV. Por ejemplo, Habitaciones.csv trae valores como \"Piso 1\" en el campo Piso, mientras que el código previo espera un entero; eso requiere un ajuste adicional antes de que ese módulo cargue sin errores.
+4. Los CSV originales se copiaron sin modificar.

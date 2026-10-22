@@ -452,13 +452,16 @@ void ListaCitas::Mostrar()
 void CargarCitas(ListaCitas &Citas, TablaHashingPacientes &Pacientes,
     TablaHashingMedicos &Medicos, ListaEspecialidades &Especialidades)
 {
-    ifstream archivo("Citas.txt");
+    ifstream archivo("Citas.csv");
     if (!archivo){
-        cout << "No se pudo abrir el archivo Citas.txt" << endl;
+        cout << "No se pudo abrir el archivo Citas.csv" << endl;
         return;
     }
 
-    string IdCitaTexto;
+    
+    string encabezado;
+    getline(archivo, encabezado); // Saltar encabezado del CSV
+string IdCitaTexto;
     string IdPacienteTexto;
     string IdMedicoTexto;
     string IdEspecialidadTexto;
@@ -507,29 +510,3 @@ void CargarCitas(ListaCitas &Citas, TablaHashingPacientes &Pacientes,
     archivo.close();
     cout << "Citas cargadas correctamente." << endl;
 }   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//╔═════════════════════════════════════════════════════════════════════════════╗
-//║                         NODO HABITACION                                     ║
-//╚═════════════════════════════════════════════════════════════════════════════╝
-

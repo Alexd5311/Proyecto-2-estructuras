@@ -269,14 +269,17 @@ void ListaEspecialidades::Mostrar()
 
 void CargarEspecialidades(ListaEspecialidades &Especialidades)
 {
-    ifstream archivo("Especialidades.txt");
+    ifstream archivo("Especialidades.csv");
 
     if (!archivo){
-        cout << "No se pudo abrir el archivo Especialidades.txt" << endl;
+        cout << "No se pudo abrir el archivo Especialidades.csv" << endl;
         return;
     }
 
-    string IdEspecialidadTexto;
+    
+    string encabezado;
+    getline(archivo, encabezado); // Saltar encabezado del CSV
+string IdEspecialidadTexto;
     string Nombre;
     string Descripcion;
 
@@ -297,23 +300,3 @@ void CargarEspecialidades(ListaEspecialidades &Especialidades)
 
     cout << "Especialidades cargadas correctamente." << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//╔═══════════════════════════════════════════════════════════════════════════════════════════════╗
-//║                                          NODO MEDICO                                          ║
-//╚═══════════════════════════════════════════════════════════════════════════════════════════════╝
-

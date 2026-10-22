@@ -404,13 +404,16 @@ public:
 //╚═════════════════════════════════════════════════════════════════════╝
 void CargarPacientes(TablaHashingPacientes &Pacientes, ListaCiudades &Ciudades)
 {
-    ifstream archivo("Pacientes.txt");
+    ifstream archivo("Pacientes.csv");
     if (!archivo){
-        cout << "No se pudo abrir el archivo Pacientes.txt" << endl;
+        cout << "No se pudo abrir el archivo Pacientes.csv" << endl;
         return;
     }
 
-    string IdPacienteTexto;
+    
+    string encabezado;
+    getline(archivo, encabezado); // Saltar encabezado del CSV
+string IdPacienteTexto;
     string Nombre;
     string FechaNacimiento;
     string Telefono;
@@ -425,6 +428,7 @@ void CargarPacientes(TablaHashingPacientes &Pacientes, ListaCiudades &Ciudades)
             getline(archivo, CodPaisTexto, ';') &&
             getline(archivo, CodCiudadTexto, ';') &&
             getline(archivo, Correo))
+
     {
         int IdPaciente = stoi(IdPacienteTexto);
         int CodPais = stoi(CodPaisTexto);
@@ -453,26 +457,3 @@ void CargarPacientes(TablaHashingPacientes &Pacientes, ListaCiudades &Ciudades)
 
     cout << "Pacientes cargados correctamente." << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//╔═══════════════════════════════════════════════════════════════════════════════════════════════╗
-//║                                      NODO ESPECIALIDAD                                        ║
-//╚═══════════════════════════════════════════════════════════════════════════════════════════════╝
-
