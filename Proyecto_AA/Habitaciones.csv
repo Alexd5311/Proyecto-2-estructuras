@@ -1,0 +1,12 @@
+﻿IdHabitacion;Numero;Piso;Tipo;Estado
+101;101;Piso 1;2;0
+102;102;Piso 1;1;0
+103;103;Piso 1;1;0
+104;104;Piso 1;2;1
+105;105;Piso 1;1;0
+201;201;Piso 2;2;0
+202;202;Piso 2;1;0
+203;203;Piso 2;1;1
+204;204;Piso 2;1;1
+205;205;Piso 2;1;1
+301;301;Piso 3;1;0

@@ -1,0 +1,9 @@
+﻿IdTratamiento;Nombre;Descripcion;Costo
+1;Antibioticoterapia;Tratamiento con antibióticos por vía oral o intravenosa;35000
+2;Fisioterapia;Sesiones de rehabilitación física;20000
+3;Hidratación IV;Administración de líquidos intravenosos;15000
+4;Cirugía menor;Procedimiento quirúrgico ambulatorio;250000
+5;Quimioterapia;Ciclo de tratamiento oncológico;800000
+6;Oxigenoterapia;Suministro de oxígeno suplementario;45000
+7;Analgesia;Control del dolor con medicamentos;12000
+8;Terapia respiratoria;Ejercicios y nebulizaciones;28000

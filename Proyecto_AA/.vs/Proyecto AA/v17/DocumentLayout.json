@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajos TEC\\Proyecto 2\\Proyecto_AA_Visual_Studio\\Proyecto AA\\",
+  "WorkspaceRootPath": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajos TEC\\Proyecto 2\\Proyecto_AA_Visual_Studio\\Proyecto AA\\Habitaciones.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Habitaciones.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
@@ -32,9 +32,9 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Habitaciones.txt",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajos TEC\\Proyecto 2\\Proyecto_AA_Visual_Studio\\Proyecto AA\\Habitaciones.txt",
+              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.txt",
               "RelativeDocumentMoniker": "Habitaciones.txt",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajos TEC\\Proyecto 2\\Proyecto_AA_Visual_Studio\\Proyecto AA\\Habitaciones.txt",
+              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.txt",
               "RelativeToolTip": "Habitaciones.txt",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",

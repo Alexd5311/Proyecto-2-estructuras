@@ -1,0 +1,26 @@
+﻿IdHospitalizacion;IdPaciente;IdHabitacion;IdMedico;Fechaingreso;Fechasalida;Motivo
+1;1001;205;105;27/9/2026;0;Deshidratación severa
+2;1038;402;110;27/9/2026;0;Observación postoperatoria
+3;1010;204;108;28/9/2026;0;Observación postoperatoria
+4;1022;304;109;12/9/2026;0;Crisis hipertensiva
+5;1021;401;114;15/9/2026;0;Infarto agudo
+6;1016;203;110;23/9/2026;0;Crisis hipertensiva
+7;1050;104;107;8/9/2026;0;Neumonía
+8;1048;305;108;11/9/2026;0;Crisis hipertensiva
+9;1003;105;103;20/7/2026;29/7/2026;Cirugía programada
+10;1034;305;115;13/6/2026;16/6/2026;Observación postoperatoria
+11;1042;105;103;2/6/2026;10/6/2026;Apendicitis
+12;1040;204;112;31/7/2026;7/8/2026;Crisis hipertensiva
+;;;;;;
+;;;;;;
+;;;;;;
+;;;;;;
+;;;;;;
+;;;;;;
+;;;;;;
+;;;;;;
+;;;;;;
+;;;;;;
+;;;;;;
+;;;;;;
+;;;;;;
