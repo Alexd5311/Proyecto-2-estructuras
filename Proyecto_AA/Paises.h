@@ -1,230 +1,209 @@
+
 #pragma once
+#include <iostream>
+#include <string>
+#include <fstream>
+#include "Comun_PDF.h"
 
-class NodoPais
-{
+using namespace std;
+
+class NodoPais {
 public:
-    NodoPais(int nuevoCodPais, string nuevoNombre){
-        CodPais = nuevoCodPais;
-        Nombre = nuevoNombre;
-        siguiente = NULL;
-    }
-
-private:
     int CodPais;
     string Nombre;
-    NodoPais *siguiente;
-    friend class ListaPaises;
-};
-typedef NodoPais *pnodoPais;
+    NodoPais* izquierdo;
+    NodoPais* derecho;
 
-//╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
-//║                                             LISTA SIMPLE PAISES                                             ║
-//╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
-class ListaPaises
-{
+    NodoPais(int nuevoCodPais, string nuevoNombre) {
+        CodPais = nuevoCodPais;
+        Nombre = nuevoNombre;
+        izquierdo = NULL;
+        derecho = NULL;
+    }
+};
+
+class ListaPaises {
 private:
-    pnodoPais primero;
+    NodoPais* raiz;
+
+    NodoPais* BuscarNodo(NodoPais* nodo, int CodPais) {
+        if (nodo == NULL || nodo->CodPais == CodPais)
+            return nodo;
+        if (CodPais < nodo->CodPais)
+            return BuscarNodo(nodo->izquierdo, CodPais);
+        return BuscarNodo(nodo->derecho, CodPais);
+    }
+
+    NodoPais* InsertarNodo(NodoPais* nodo, int CodPais, string Nombre) {
+        if (nodo == NULL)
+            return new NodoPais(CodPais, Nombre);
+        if (CodPais < nodo->CodPais)
+            nodo->izquierdo = InsertarNodo(nodo->izquierdo, CodPais, Nombre);
+        else if (CodPais > nodo->CodPais)
+            nodo->derecho = InsertarNodo(nodo->derecho, CodPais, Nombre);
+        return nodo;
+    }
+
+    NodoPais* MenorNodo(NodoPais* nodo) {
+        while (nodo != NULL && nodo->izquierdo != NULL)
+            nodo = nodo->izquierdo;
+        return nodo;
+    }
+
+    NodoPais* EliminarNodo(NodoPais* nodo, int CodPais) {
+        if (nodo == NULL)
+            return NULL;
+        if (CodPais < nodo->CodPais)
+            nodo->izquierdo = EliminarNodo(nodo->izquierdo, CodPais);
+        else if (CodPais > nodo->CodPais)
+            nodo->derecho = EliminarNodo(nodo->derecho, CodPais);
+        else {
+            if (nodo->izquierdo == NULL) {
+                NodoPais* temp = nodo->derecho;
+                delete nodo;
+                return temp;
+            }
+            if (nodo->derecho == NULL) {
+                NodoPais* temp = nodo->izquierdo;
+                delete nodo;
+                return temp;
+            }
+            NodoPais* temp = MenorNodo(nodo->derecho);
+            nodo->CodPais = temp->CodPais;
+            nodo->Nombre = temp->Nombre;
+            nodo->derecho = EliminarNodo(nodo->derecho, temp->CodPais);
+        }
+        return nodo;
+    }
+
+    void MostrarInorden(NodoPais* nodo) {
+        if (nodo != NULL) {
+            MostrarInorden(nodo->izquierdo);
+            cout << "CodPais: " << nodo->CodPais
+                << " | Nombre: " << nodo->Nombre << endl;
+            MostrarInorden(nodo->derecho);
+        }
+    }
+
+    void ReporteInorden(NodoPais* nodo, GeneradorPDF& pdf) {
+        if (nodo != NULL) {
+            ReporteInorden(nodo->izquierdo, pdf);
+            pdf.Linea(Rellenar(to_string(nodo->CodPais), 10) +
+                Rellenar(nodo->Nombre, 40));
+            ReporteInorden(nodo->derecho, pdf);
+        }
+    }
+
+    void Liberar(NodoPais* nodo) {
+        if (nodo != NULL) {
+            Liberar(nodo->izquierdo);
+            Liberar(nodo->derecho);
+            delete nodo;
+        }
+    }
+
 public:
-    ListaPaises();
-    bool ListaVacia();
-    bool Existe(int CodPais);
-    bool Insertar(int CodPais, string Nombre);
-    bool Buscar(int CodPais);
-    bool Eliminar(int CodPais);
-    bool Modificar(int CodPais, string Nombre);
-    void Mostrar();
-    void ReportePDF(GeneradorPDF &pdf);
-    ~ListaPaises();
-};
-
-ListaPaises::ListaPaises(){
-    primero = NULL;
-}
-
-bool ListaPaises::ListaVacia(){
-    return primero == NULL;
-}
-
-//╔═══════════════════════════════════════════════════════════════╗
-//║                         VALIDACION                            ║
-//╚═══════════════════════════════════════════════════════════════╝
-bool ListaPaises::Existe(int CodPais){
-    pnodoPais aux = primero;
-    while (aux != NULL){
-        if (aux->CodPais == CodPais){
-            return true;
-        }
-        aux = aux->siguiente;
+    ListaPaises() {
+        raiz = NULL;
     }
-    return false;
-}
 
-//╔═══════════════════════════════════════════════════════════════╗
-//║                          INSERTAR                             ║
-//╚═══════════════════════════════════════════════════════════════╝
-bool ListaPaises::Insertar(int CodPais, string Nombre){
-    if (Existe(CodPais)){
-        return false;
+    bool ListaVacia() {
+        return raiz == NULL;
     }
-    if (ListaVacia()){
-        primero = new NodoPais(CodPais, Nombre);
-    }
-    else{
-        pnodoPais aux = primero;
-        while (aux->siguiente != NULL){
-            aux = aux->siguiente;
-        }
-        aux->siguiente = new NodoPais(CodPais, Nombre);
-    }
-    return true;
-}
 
-//╔═════════════════════════════════════════════════════════════════╗
-//║                             BUSCAR                              ║
-//╚═════════════════════════════════════════════════════════════════╝
-bool ListaPaises::Buscar(int CodPais){
-    pnodoPais aux = primero;
-    while (aux != NULL){
-        if (aux->CodPais == CodPais){
-            cout << "CodPais: " << aux->CodPais << endl;
-            cout << "Nombre: " << aux->Nombre << endl;
-            return true;
-        }
-        aux = aux->siguiente;
+    bool Existe(int CodPais) {
+        return BuscarNodo(raiz, CodPais) != NULL;
     }
-    return false;
-}
 
-//╔═══════════════════════════════════════════════════════════════════╗
-//║                              ELIMINAR                              ║
-//╚═══════════════════════════════════════════════════════════════════╝
-
-bool ListaPaises::Eliminar(int CodPais){
-    if (ListaVacia()){
-        return false;
-    }
-    if (primero->CodPais == CodPais){
-        pnodoPais temp = primero;
-        primero = primero->siguiente;
-        delete temp;
+    bool Insertar(int CodPais, string Nombre) {
+        if (Existe(CodPais))
+            return false;
+        raiz = InsertarNodo(raiz, CodPais, Nombre);
         return true;
     }
-    pnodoPais aux = primero;
-    while (aux->siguiente != NULL && aux->siguiente->CodPais!= CodPais){
-        aux = aux->siguiente;
+
+    bool Buscar(int CodPais) {
+        NodoPais* encontrado = BuscarNodo(raiz, CodPais);
+        if (encontrado == NULL)
+            return false;
+        cout << "CodPais: " << encontrado->CodPais << endl;
+        cout << "Nombre: " << encontrado->Nombre << endl;
+        return true;
     }
-    if (aux->siguiente == NULL){
-        return false;
+
+    bool Eliminar(int CodPais) {
+        if (!Existe(CodPais))
+            return false;
+        raiz = EliminarNodo(raiz, CodPais);
+        return true;
     }
-    pnodoPais temp = aux->siguiente;
-    aux->siguiente = aux->siguiente->siguiente;
-    delete temp;
-    return true;
-}
 
-//╔═════════════════════════════════════════════════════════════════╗
-//║                             Modificar                           ║
-//╚═════════════════════════════════════════════════════════════════╝
-
-
-bool ListaPaises::Modificar(int CodPais, string Nombre){
-    pnodoPais aux = primero;
-    while (aux != NULL){
-        if (aux->CodPais == CodPais){
-            aux->Nombre = Nombre;
-            return true;
-        }
-        aux = aux->siguiente;
+    bool Modificar(int CodPais, string Nombre) {
+        NodoPais* encontrado = BuscarNodo(raiz, CodPais);
+        if (encontrado == NULL)
+            return false;
+        encontrado->Nombre = Nombre;
+        return true;
     }
-    return false;
-}
 
-
-//╔═══════════════════════════════════════════════════════════════════╗
-//║                              REPORTES                             ║
-//╚═══════════════════════════════════════════════════════════════════╝
-void ListaPaises::ReportePDF(GeneradorPDF &pdf)
-{
-    pnodoPais aux = primero;
-    while (aux != NULL){
-        pdf.Linea(Rellenar(to_string(aux->CodPais), 10) + Rellenar(aux->Nombre, 40));
-        aux = aux->siguiente;
+    void Mostrar() {
+        MostrarInorden(raiz);
     }
-}
 
-void ReportePaises(ListaPaises &Paises)
-{
+    void ReportePDF(GeneradorPDF& pdf) {
+        ReporteInorden(raiz, pdf);
+    }
+
+    ~ListaPaises() {
+        Liberar(raiz);
+    }
+};
+
+void ReportePaises(ListaPaises& Paises) {
     GeneradorPDF pdf("Reporte_Paises.pdf", "REPORTE DE PAISES",
-                Rellenar("CODIGO", 10) + Rellenar("NOMBRE", 40));
-    if (!pdf.Valido()){
+        Rellenar("CODIGO", 10) + Rellenar("NOMBRE", 40));
+
+    if (!pdf.Valido()) {
         cout << "No se pudo crear el documento PDF." << endl;
         return;
     }
-    if (Paises.ListaVacia()){
+
+    if (Paises.ListaVacia())
         pdf.Linea("(No hay paises registrados)");
-    }
-    else{
+    else
         Paises.ReportePDF(pdf);
-    }
-    if (pdf.Guardar()){
+
+    if (pdf.Guardar())
         cout << "Reporte generado: Reporte_Paises.pdf" << endl;
-    }
-    else{
+    else
         cout << "No se pudo guardar el archivo PDF." << endl;
-    }
 }
 
-//╔═══════════════════════════════════════════════════════════════════╗
-//║                              MOSTRAR                              ║
-//╚═══════════════════════════════════════════════════════════════════╝
-void ListaPaises::Mostrar(){
-    pnodoPais aux = primero;
-    while (aux != NULL)
-    {
-        cout << "CodPais: " << aux->CodPais<< " | Nombre: " << aux->Nombre << endl;
-        aux = aux->siguiente;
-    }
-}
-
-ListaPaises::~ListaPaises()
-{
-    pnodoPais aux = primero;
-    while (aux != NULL)
-    {
-        pnodoPais temp = aux;
-        aux = aux->siguiente;
-        delete temp;
-    }
-}
-
-
-//╔═════════════════════════════════════════════════════════════════════╗
-//║                             CARGAR PAISES                           ║
-//╚═════════════════════════════════════════════════════════════════════╝
-void CargarPaises(ListaPaises &Paises){
+void CargarPaises(ListaPaises& Paises) {
     ifstream archivo("Paises.csv");
-    if (!archivo){
+
+    if (!archivo) {
         cout << "No se pudo abrir el archivo Paises.csv" << endl;
         return;
     }
+
     string linea;
-    getline(archivo, linea); // Saltar encabezado del CSV
-    string codPaisTexto;
-    string Nombre;
-    while (getline(archivo, linea)){
-        if (linea != ""){
-            size_t separador = linea.find(';');
-            if (separador != string::npos)
-            {
-                codPaisTexto = linea.substr(0, separador);
-                Nombre = linea.substr(separador + 1);
-                int CodPais = stoi(codPaisTexto);
-                Paises.Insertar(CodPais, Nombre);
-            }
+    getline(archivo, linea);
+
+    while (getline(archivo, linea)) {
+        if (linea.empty())
+            continue;
+
+        size_t separador = linea.find(';');
+
+        if (separador != string::npos) {
+            string codPaisTexto = linea.substr(0, separador);
+            string Nombre = linea.substr(separador + 1);
+            int CodPais = stoi(codPaisTexto);
+            Paises.Insertar(CodPais, Nombre);
         }
     }
 
     archivo.close();
     cout << "Paises cargados correctamente." << endl;
 }
-
