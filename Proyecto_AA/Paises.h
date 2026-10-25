@@ -22,7 +22,7 @@ public:
     }
 };
 
-class ListaPaises {
+class ArbolABBPaises {
 private:
     NodoPais* raiz;
 
@@ -103,7 +103,7 @@ private:
     }
 
 public:
-    ListaPaises() {
+    ArbolABBPaises() {
         raiz = NULL;
     }
 
@@ -154,12 +154,12 @@ public:
         ReporteInorden(raiz, pdf);
     }
 
-    ~ListaPaises() {
+    ~ArbolABBPaises() {
         Liberar(raiz);
     }
 };
 
-void ReportePaises(ListaPaises& Paises) {
+void ReportePaises(ArbolABBPaises& Paises) {
     GeneradorPDF pdf("Reporte_Paises.pdf", "REPORTE DE PAISES",
         Rellenar("CODIGO", 10) + Rellenar("NOMBRE", 40));
 
@@ -179,7 +179,7 @@ void ReportePaises(ListaPaises& Paises) {
         cout << "No se pudo guardar el archivo PDF." << endl;
 }
 
-void CargarPaises(ListaPaises& Paises) {
+void CargarPaises(ArbolABBPaises& Paises) {
     ifstream archivo("Paises.csv");
 
     if (!archivo) {

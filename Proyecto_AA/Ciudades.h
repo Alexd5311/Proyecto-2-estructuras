@@ -27,7 +27,7 @@ public:
 
 typedef NodoCiudad* pnodoCiudad;
 
-class ListaCiudades {
+class ArbolABBCiudades {
 private:
     pnodoCiudad raiz;
 
@@ -156,11 +156,11 @@ private:
     }
 
 public:
-    ListaCiudades() {
+    ArbolABBCiudades() {
         raiz = NULL;
     }
 
-    ~ListaCiudades() {
+    ~ArbolABBCiudades() {
         Liberar(raiz);
     }
 
@@ -230,7 +230,7 @@ public:
     }
 };
 
-void ReporteCiudades(ListaCiudades& Ciudades, ListaPaises& Paises) {
+void ReporteCiudades(ArbolABBCiudades& Ciudades, ArbolABBPaises& Paises) {
     int CodPais;
     cout << endl;
     cout << "Ingrese el CodPais: ";
@@ -260,7 +260,7 @@ void ReporteCiudades(ListaCiudades& Ciudades, ListaPaises& Paises) {
 }
 
 
-void CargarCiudades(ListaCiudades &Ciudades, ListaPaises &Paises){
+void CargarCiudades(ArbolABBCiudades &Ciudades, ArbolABBPaises &Paises){
     ifstream archivo("Ciudades.csv");
     if (!archivo){
         cout << "No se pudo abrir el archivo Ciudades.csv" << endl;

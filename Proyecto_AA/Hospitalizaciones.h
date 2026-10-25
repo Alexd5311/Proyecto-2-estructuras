@@ -444,7 +444,7 @@ void ListaHospitalizaciones::Mostrar()
 //╚═════════════════════════════════════════════════════════════════════════════╝
 
 void CargarHospitalizaciones(ListaHospitalizaciones &Hospitalizaciones, ArbolBPacientes &Pacientes, 
-    ListaHabitaciones &Habitaciones, ArbolBMedicos &Medicos)
+    ArbolAVLHabitaciones &Habitaciones, ArbolBMedicos &Medicos)
 {
     ifstream archivo("Hospitalizaciones.csv");
 

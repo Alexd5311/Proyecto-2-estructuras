@@ -1,6 +1,6 @@
 #pragma once
 
-void InsertarPais(ListaPaises &Paises)
+void InsertarPais(ArbolABBPaises &Paises)
 {
     int CodPais;
     string Nombre;
@@ -24,7 +24,7 @@ void InsertarPais(ListaPaises &Paises)
 
 
 //Ciudad
-void InsertarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises)
+void InsertarCiudad(ArbolABBCiudades &Ciudades, ArbolABBPaises &Paises)
 {
     int CodPais;
     int CodCiudad;
@@ -52,7 +52,7 @@ void InsertarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises)
 }
 
 //Pacientes
-void InsertarPaciente(ArbolBPacientes &Pacientes, ListaCiudades &Ciudades)
+void InsertarPaciente(ArbolBPacientes &Pacientes, ArbolABBCiudades &Ciudades)
 {
     int IdPaciente;
     string Nombre;
@@ -175,7 +175,7 @@ void InsertarMedico(ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
 }
 
 //Citas
-void InsertarCita(ListaCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
+void InsertarCita(ArbolAVLCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
 {
     int IdCita;
     int IdPaciente;
@@ -242,7 +242,7 @@ void InsertarCita(ListaCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos &
 
 
 //Habitaciones
-void InsertarHabitacion(ListaHabitaciones &Habitaciones)
+void InsertarHabitacion(ArbolAVLHabitaciones &Habitaciones)
 {
     int IdHabitacion;
     int Numero;
@@ -302,7 +302,7 @@ void InsertarHabitacion(ListaHabitaciones &Habitaciones)
 }
 
 //Hospitalizaciones
-void InsertarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones, ArbolBPacientes &Pacientes, ListaHabitaciones &Habitaciones, ArbolBMedicos &Medicos)
+void InsertarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones, ArbolBPacientes &Pacientes, ArbolAVLHabitaciones &Habitaciones, ArbolBMedicos &Medicos)
 {
     int IdHospitalizacion;
     int IdPaciente;
@@ -372,7 +372,7 @@ void InsertarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones, ArbolBPa
     //╚════════════════════════════════════════════════════════════════════════╝
 
 //Paises
-void BuscarPais(ListaPaises &Paises)
+void BuscarPais(ArbolABBPaises &Paises)
 {
     int CodPais;
     cout << " " << endl;
@@ -387,7 +387,7 @@ void BuscarPais(ListaPaises &Paises)
 }
 
 //Ciudades
-void BuscarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises)
+void BuscarCiudad(ArbolABBCiudades &Ciudades, ArbolABBPaises &Paises)
 {
     int CodPais;
     int CodCiudad;
@@ -413,7 +413,7 @@ void BuscarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises)
 }
 
 //Pacientes
-void BuscarPaciente(ArbolBPacientes &Pacientes, ListaCiudades &Ciudades, ListaPaises &Paises)
+void BuscarPaciente(ArbolBPacientes &Pacientes, ArbolABBCiudades &Ciudades, ArbolABBPaises &Paises)
 {
     int IdPaciente;
     int CodCiudad;
@@ -488,7 +488,7 @@ void BuscarMedico(ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
 }
 
 //Citas
-void BuscarCita(ListaCitas &Citas, ArbolBMedicos &Medicos, ArbolBPacientes &Pacientes)
+void BuscarCita(ArbolAVLCitas &Citas, ArbolBMedicos &Medicos, ArbolBPacientes &Pacientes)
 {
     int IdCita;
     int IdPaciente;
@@ -520,7 +520,7 @@ void BuscarCita(ListaCitas &Citas, ArbolBMedicos &Medicos, ArbolBPacientes &Paci
 
 
 //Habitacion
-void BuscarHabitacion(ListaHabitaciones &Habitaciones)
+void BuscarHabitacion(ArbolAVLHabitaciones &Habitaciones)
 {
     int IdHabitacion;
     cout << " " << endl;
@@ -536,7 +536,7 @@ void BuscarHabitacion(ListaHabitaciones &Habitaciones)
 
 
 //Hospitalizaciones
-void BuscarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones,ArbolBPacientes &Pacientes, ListaHabitaciones &Habitaciones)
+void BuscarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones,ArbolBPacientes &Pacientes, ArbolAVLHabitaciones &Habitaciones)
 {
     int IdHospitalizacion;
     int IdPaciente;
@@ -574,8 +574,8 @@ void BuscarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones,ArbolBPacie
 
 
 
-void EliminarPais(ListaPaises &Paises, ListaCiudades &Ciudades, ArbolBPacientes &Pacientes,
-    ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarPais(ArbolABBPaises &Paises, ArbolABBCiudades &Ciudades, ArbolBPacientes &Pacientes,
+    ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
 {
     int CodPais;
     cout << " " << endl;
@@ -607,7 +607,7 @@ void EliminarPais(ListaPaises &Paises, ListaCiudades &Ciudades, ArbolBPacientes 
     }
 }
 
-void EliminarPaciente(ArbolBPacientes &Pacientes, ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarPaciente(ArbolBPacientes &Pacientes, ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
 {
     int IdPaciente;
     cout << " " << endl;
@@ -646,7 +646,7 @@ void EliminarPaciente(ArbolBPacientes &Pacientes, ListaCitas &Citas, ListaHospit
 }
 
 
-void EliminarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises, ArbolBPacientes &Pacientes, ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarCiudad(ArbolABBCiudades &Ciudades, ArbolABBPaises &Paises, ArbolBPacientes &Pacientes, ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
 {
     int CodPais;
     int CodCiudad;
@@ -718,7 +718,7 @@ void EliminarPaciente(ArbolBPacientes &Pacientes)
 
 
 
-void EliminarMedico(ArbolBMedicos &Medicos, ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarMedico(ArbolBMedicos &Medicos, ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
 {
     int IdMedico;
     cout << " " << endl;
@@ -747,7 +747,7 @@ void EliminarMedico(ArbolBMedicos &Medicos, ListaCitas &Citas, ListaHospitalizac
     }
 }
 
-void EliminarEspecialidad(ListaEspecialidades &Especialidades, ArbolBMedicos &Medicos, ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarEspecialidad(ListaEspecialidades &Especialidades, ArbolBMedicos &Medicos, ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
 {
     int IdEspecialidad;
     cout << " " << endl;
@@ -782,7 +782,7 @@ void EliminarEspecialidad(ListaEspecialidades &Especialidades, ArbolBMedicos &Me
     }
 }
 
-void EliminarCita(ListaCitas &Citas)
+void EliminarCita(ArbolAVLCitas &Citas)
 {
     int IdCita;
     cout << " " << endl;
@@ -808,7 +808,7 @@ void EliminarCita(ListaCitas &Citas)
     }
 }
 
-void EliminarHabitacion(ListaHabitaciones &Habitaciones, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarHabitacion(ArbolAVLHabitaciones &Habitaciones, ListaHospitalizaciones &Hospitalizaciones)
 {
     int IdHabitacion;
     cout << " " << endl;
@@ -866,7 +866,7 @@ void EliminarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones)
 //║                             Modificar                           ║
 //╚═════════════════════════════════════════════════════════════════╝
 
-void ModificarPais(ListaPaises &Paises)
+void ModificarPais(ArbolABBPaises &Paises)
 {
     int CodPais;
     string Nombre;
@@ -892,7 +892,7 @@ void ModificarPais(ListaPaises &Paises)
 }
 
 
-void ModificarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises)
+void ModificarCiudad(ArbolABBCiudades &Ciudades, ArbolABBPaises &Paises)
 {
     int CodPais;
     int CodCiudad;
@@ -924,7 +924,7 @@ void ModificarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises)
     }
 }
 
-void ModificarPaciente(ArbolBPacientes &Pacientes, ListaCiudades &Ciudades)
+void ModificarPaciente(ArbolBPacientes &Pacientes, ArbolABBCiudades &Ciudades)
 {
     int IdPaciente;
     string Nombre;
@@ -1051,7 +1051,7 @@ void ModificarMedico(ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades
     }
 }
 
-void ModificarCita(ListaCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
+void ModificarCita(ArbolAVLCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
 {
     int IdCita;
     int IdPaciente;
@@ -1117,7 +1117,7 @@ void ModificarCita(ListaCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos 
 }
 
 
-void ModificarHabitacion(ListaHabitaciones &Habitaciones)
+void ModificarHabitacion(ArbolAVLHabitaciones &Habitaciones)
 {
     int IdHabitacion;
     int Numero;
@@ -1164,7 +1164,7 @@ void ModificarHabitacion(ListaHabitaciones &Habitaciones)
 }
 
 
-void ModificarHospitalizacion(ListaHospitalizaciones& Hospitalizaciones, ArbolBPacientes& Pacientes, ListaHabitaciones& Habitaciones, ArbolBMedicos& Medicos)
+void ModificarHospitalizacion(ListaHospitalizaciones& Hospitalizaciones, ArbolBPacientes& Pacientes, ArbolAVLHabitaciones& Habitaciones, ArbolBMedicos& Medicos)
 {
     int IdHospitalizacion;
     int IdPaciente;

@@ -13,13 +13,13 @@
 
 int main()
 {
-    ListaPaises Paises;
-    ListaCiudades Ciudades;
+    ArbolABBPaises Paises;
+    ArbolABBCiudades Ciudades;
     ArbolBPacientes Pacientes;
     ListaEspecialidades Especialidades;
     ArbolBMedicos Medicos;
-    ListaCitas Citas;
-    ListaHabitaciones Habitaciones;
+    ArbolAVLCitas Citas;
+    ArbolAVLHabitaciones Habitaciones;
     ListaHospitalizaciones Hospitalizaciones;
 
     CargarPaises(Paises);

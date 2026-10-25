@@ -508,7 +508,7 @@ public:
 //║                         CARGAR PACIENTES                             ║
 //╚══════════════════════════════════════════════════════════════════════╝
 
-void CargarPacientes(ArbolBPacientes& Pacientes, ListaCiudades& Ciudades)
+void CargarPacientes(ArbolBPacientes& Pacientes, ArbolABBCiudades& Ciudades)
 {
     ifstream archivo("Pacientes.csv");
     if (!archivo)
