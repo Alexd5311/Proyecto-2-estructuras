@@ -449,8 +449,8 @@ void ListaCitas::Mostrar()
 //║                              CARGAR CITAS                                   ║
 //╚═════════════════════════════════════════════════════════════════════════════╝
 
-void CargarCitas(ListaCitas &Citas, TablaHashingPacientes &Pacientes,
-    TablaHashingMedicos &Medicos, ListaEspecialidades &Especialidades)
+void CargarCitas(ListaCitas &Citas, ArbolBPacientes &Pacientes,
+    ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
 {
     ifstream archivo("Citas.csv");
     if (!archivo){

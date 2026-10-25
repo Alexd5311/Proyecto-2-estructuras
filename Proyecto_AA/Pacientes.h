@@ -52,7 +52,9 @@ class ArbolBPacientes
 {
 private:
     NodoBPacientes* Raiz;
+    static constexpr int MIN = 2;
 
+    // ╬ Limpia el arbol al inicio ╬
     void Destruir(NodoBPacientes* P)
     {
         if (P == nullptr) return;
@@ -61,6 +63,7 @@ private:
         delete P;
     }
 
+    // ╬ Busca mediante el IdPaciente ╬
     int Posicion(NodoBPacientes* P, int IdPaciente)
     {
         int i = 0;
@@ -69,6 +72,7 @@ private:
         return i;
     }
 
+    // ╬ 
     RegistroPaciente* BuscarRegistro(NodoBPacientes* P, int IdPaciente)
     {
         if (P == nullptr) return nullptr;
@@ -78,7 +82,7 @@ private:
         return BuscarRegistro(P->Ramas[i], IdPaciente);
     }
 
-    // Inserta recursivamente. Si un nodo llega a cinco claves, lo divide.
+    // ╬ Es el insertar, en el esta el Empujar, MeterHoja y DividirNodo ╬
     bool InsertarRecursivo(NodoBPacientes* P, const RegistroPaciente& Registro,
         bool& Dividido, RegistroPaciente& Promovido, NodoBPacientes*& RamaDerecha)
     {
@@ -102,7 +106,7 @@ private:
         if (!Resultado) return false;
         if (!Dividido) return true;
 
-        // Hay espacio: insertar la clave promovida en este nodo.
+        // ╚ Hay espacio para añadir
         if (P->Cuenta < MAX_CLAVES_PACIENTES)
         {
             for (int i = P->Cuenta; i > K; i--)
@@ -116,7 +120,7 @@ private:
             return true;
         }
 
-        // Nodo lleno: se crea temporalmente un arreglo de cinco claves.
+        //╚ No hay espacio para añadir
         RegistroPaciente ClavesTemp[MAX_CLAVES_PACIENTES + 1];
         NodoBPacientes* RamasTemp[MAX_CLAVES_PACIENTES + 2];
 
@@ -148,6 +152,7 @@ private:
         return true;
     }
 
+    // ╬ Guarda en un vector toda la ifnromacion del arbol para otros metodos ╬ 
     void Recopilar(NodoBPacientes* P, vector<RegistroPaciente>& Registros)
     {
         if (P == nullptr) return;
@@ -159,6 +164,194 @@ private:
         Recopilar(P->Ramas[P->Cuenta], Registros);
     }
 
+
+
+
+    // ╬ Elimina una clave de una pagina hoja. ╬
+    void QuitarClave(NodoBPacientes* P, int K)
+    {
+        for (int i = K; i < P->Cuenta - 1; i++)
+            P->Claves[i] = P->Claves[i + 1];
+
+        P->Cuenta--;
+    }
+
+    // ╬ Devuelve el indice de la primera clave mayor o igual al ID. ╬ 
+    int BuscarPosicion(NodoBPacientes* P, int IdPaciente)
+    {
+        int K = 0;
+
+        while (K < P->Cuenta &&
+            P->Claves[K].IdPaciente < IdPaciente)
+            K++;
+
+        return K;
+    }
+
+    // ╬ Combina el hijo izquierdo, la clave y el hijo derecho. ╬
+    // ╬ El hijo izquierdo conserva la pagina resultante.       ╬
+    void Combinar(NodoBPacientes* P, int K)
+    {
+        NodoBPacientes* Izquierdo = P->Ramas[K];
+        NodoBPacientes* Derecho = P->Ramas[K + 1];
+
+        int Pos = Izquierdo->Cuenta;
+
+        // ╚ Bajar la clave separadora al hijo izquierdo.
+        Izquierdo->Claves[Pos] = P->Claves[K];
+        Pos++;
+
+        // ╚ Copiar las claves del hijo derecho.
+        for (int i = 0; i < Derecho->Cuenta; i++)
+            Izquierdo->Claves[Pos + i] = Derecho->Claves[i];
+
+        // ╚ Copiar las ramas del hijo derecho.
+        for (int i = 0; i <= Derecho->Cuenta; i++)
+            Izquierdo->Ramas[Pos + i] = Derecho->Ramas[i];
+
+        Izquierdo->Cuenta += Derecho->Cuenta + 1;
+
+        // ╚ Quitar la clave separadora del padre.
+        for (int i = K; i < P->Cuenta - 1; i++)
+            P->Claves[i] = P->Claves[i + 1];
+
+        // ╚ Quitar la referencia a la pagina derecha.
+        for (int i = K + 1; i < P->Cuenta; i++)
+            P->Ramas[i] = P->Ramas[i + 1];
+
+        P->Ramas[P->Cuenta] = nullptr;
+        P->Cuenta--;
+
+        delete Derecho;
+    }
+
+    // ╬ Presta una clave del hermano izquierdo o derecho. ╬ 
+    // ╬ Si ninguno puede prestar, combina las paginas.    ╬ 
+    void Restablecer(NodoBPacientes* P, int K)
+    {
+        NodoBPacientes* Hijo = P->Ramas[K];
+
+        // Intentar prestar del hermano izquierdo.
+        if (K > 0 && P->Ramas[K - 1]->Cuenta > MIN)
+        {
+            NodoBPacientes* Izquierdo = P->Ramas[K - 1];
+
+            // Desplazar las claves del hijo hacia la derecha.
+            for (int i = Hijo->Cuenta; i > 0; i--)
+                Hijo->Claves[i] = Hijo->Claves[i - 1];
+
+            // Desplazar las ramas del hijo.
+            for (int i = Hijo->Cuenta + 1; i > 0; i--)
+                Hijo->Ramas[i] = Hijo->Ramas[i - 1];
+
+            // Bajar la clave del padre.
+            Hijo->Claves[0] = P->Claves[K - 1];
+
+            // Subir la clave mayor del hermano izquierdo.
+            P->Claves[K - 1] = Izquierdo->Claves[Izquierdo->Cuenta - 1];
+
+            // Transferir la rama correspondiente.
+            Hijo->Ramas[0] = Izquierdo->Ramas[Izquierdo->Cuenta];
+
+            Izquierdo->Ramas[Izquierdo->Cuenta] = nullptr;
+            Izquierdo->Cuenta--;
+            Hijo->Cuenta++;
+            return;
+        }
+
+        // ╚ Intentar prestar del hermano derecho.
+        if (K < P->Cuenta && P->Ramas[K + 1]->Cuenta > MIN)
+        {
+            NodoBPacientes* Derecho = P->Ramas[K + 1];
+
+            // Bajar la clave del padre al hijo.
+            Hijo->Claves[Hijo->Cuenta] = P->Claves[K];
+            Hijo->Ramas[Hijo->Cuenta + 1] = Derecho->Ramas[0];
+            Hijo->Cuenta++;
+
+            // Subir la primera clave del hermano derecho.
+            P->Claves[K] = Derecho->Claves[0];
+
+            // Desplazar las claves y ramas del hermano derecho.
+            for (int i = 0; i < Derecho->Cuenta - 1; i++)
+                Derecho->Claves[i] = Derecho->Claves[i + 1];
+
+            for (int i = 0; i < Derecho->Cuenta; i++)
+                Derecho->Ramas[i] = Derecho->Ramas[i + 1];
+
+            Derecho->Ramas[Derecho->Cuenta] = nullptr;
+            Derecho->Cuenta--;
+            return;
+        }
+
+        // ╚ Ningun hermano puede prestar asi que llama combinar.
+        if (K > 0)
+            Combinar(P, K - 1);
+        else
+            Combinar(P, K);
+    }
+
+    // ╬ Metodo principal de eliminacion ╬
+    bool EliminarRecursivo(NodoBPacientes* P, int IdPaciente)
+    {
+        if (P == nullptr)
+            return false;
+
+        int K = BuscarPosicion(P, IdPaciente);
+
+        // La clave esta en esta pagina.
+        if (K < P->Cuenta &&
+            P->Claves[K].IdPaciente == IdPaciente)
+        {
+            // Caso 1: la clave esta en una hoja.
+            if (P->Ramas[0] == nullptr)
+            {
+                QuitarClave(P, K);
+                return true;
+            }
+
+            // Caso 2: la clave esta en una pagina interna.
+            // Buscar el sucesor: la menor clave del hijo derecho.
+            NodoBPacientes* Sucesor = P->Ramas[K + 1];
+
+            while (Sucesor->Ramas[0] != nullptr)
+                Sucesor = Sucesor->Ramas[0];
+
+            RegistroPaciente RegistroSucesor =
+                Sucesor->Claves[0];
+
+            // Sustituir el registro completo.
+            P->Claves[K] = RegistroSucesor;
+
+            // Eliminar el sucesor de su ubicacion original.
+            bool Eliminado = EliminarRecursivo(
+                P->Ramas[K + 1],
+                RegistroSucesor.IdPaciente
+            );
+
+            // Reparar si el hijo quedo por debajo del minimo.
+            if (Eliminado && P->Ramas[K + 1]->Cuenta < MIN)
+                Restablecer(P, K + 1);
+
+            return Eliminado;
+        }
+
+        // La clave no esta en esta pagina.
+        bool Eliminado = EliminarRecursivo(P->Ramas[K], IdPaciente);
+
+        // Solo restablecer si la eliminacion tuvo exito.
+        if (Eliminado &&
+            P->Ramas[K] != nullptr &&
+            P->Ramas[K]->Cuenta < MIN)
+        {
+            Restablecer(P, K);
+        }
+
+        return Eliminado;
+    }
+
+
+    // ╬ Metodo de printear todo ╬
     void MostrarRecursivo(NodoBPacientes* P)
     {
         if (P == nullptr) return;
@@ -228,25 +421,26 @@ public:
         return true;
     }
 
+    
     bool Eliminar(int IdPaciente)
     {
-        vector<RegistroPaciente> Registros;
-        Recopilar(Raiz, Registros);
-        bool Encontrado = false;
-        Destruir(Raiz);
-        Raiz = nullptr;
-        for (const RegistroPaciente& R : Registros)
+        if (Raiz == nullptr)
+            return false;
+
+        bool Eliminado = EliminarRecursivo(Raiz, IdPaciente);
+
+        // Si la raiz queda vacia, su unica rama pasa a ser
+        // la nueva raiz.
+        if (Raiz != nullptr && Raiz->Cuenta == 0)
         {
-            if (R.IdPaciente == IdPaciente)
-            {
-                Encontrado = true;
-                continue;
-            }
-            Insertar(R.IdPaciente, R.Nombre, R.FechaNacimiento, R.Telefono,
-                R.CodCiudad, R.CodPais, R.Correo);
+            NodoBPacientes* AntiguaRaiz = Raiz;
+            Raiz = Raiz->Ramas[0];
+            delete AntiguaRaiz;
         }
-        return Encontrado;
+
+        return Eliminado;
     }
+
 
     bool Modificar(int IdPaciente, string Nombre, string FechaNacimiento,
         string Telefono, int CodCiudad, int CodPais, string Correo)
@@ -304,15 +498,6 @@ public:
         MostrarRecursivo(Raiz);
     }
 };
-
-
-
-
-// Alias temporal para que los módulos existentes sigan compilando mientras
-// se actualizan sus nombres de tipo. La implementación ya no utiliza hashing.
-using TablaHashingPacientes = ArbolBPacientes;
-
-
 
 
 

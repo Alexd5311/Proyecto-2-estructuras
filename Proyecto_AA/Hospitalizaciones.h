@@ -443,8 +443,8 @@ void ListaHospitalizaciones::Mostrar()
 //║                    CARGAR HOSPITALIZACIONES                                ║
 //╚═════════════════════════════════════════════════════════════════════════════╝
 
-void CargarHospitalizaciones(ListaHospitalizaciones &Hospitalizaciones, TablaHashingPacientes &Pacientes, 
-    ListaHabitaciones &Habitaciones, TablaHashingMedicos &Medicos)
+void CargarHospitalizaciones(ListaHospitalizaciones &Hospitalizaciones, ArbolBPacientes &Pacientes, 
+    ListaHabitaciones &Habitaciones, ArbolBMedicos &Medicos)
 {
     ifstream archivo("Hospitalizaciones.csv");
 
@@ -456,7 +456,7 @@ void CargarHospitalizaciones(ListaHospitalizaciones &Hospitalizaciones, TablaHas
     
     string encabezado;
     getline(archivo, encabezado); // Saltar encabezado del CSV
-string IdHospitalizacionTexto;
+    string IdHospitalizacionTexto;
     string IdPacienteTexto;
     string IdHabitacionTexto;
     string IdMedicoTexto;

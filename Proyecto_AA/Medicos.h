@@ -1,485 +1,470 @@
 #pragma once
 
-class NodoMedico
-{
-public:
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <algorithm>
+#include <sstream>
+using namespace std;
 
-    NodoMedico(int nuevoIdMedico, string nuevoNombre, string nuevoTelefono, 
-        string nuevoCorreo, int nuevoIdEspecialidad)
-    {
-        IdMedico = nuevoIdMedico;
-        Nombre = nuevoNombre;
-        Telefono = nuevoTelefono;
-        Correo = nuevoCorreo;
-        IdEspecialidad = nuevoIdEspecialidad;
-        siguiente = NULL;
-    }
-
-private:
+struct RegistroMedico {
     int IdMedico;
     string Nombre;
     string Telefono;
     string Correo;
     int IdEspecialidad;
-    NodoMedico *siguiente;
-
-    friend class ListaMedicos;
 };
 
-typedef NodoMedico *pnodoMedico;
+const int MAX_CLAVES_MEDICOS = 4;
+const int MIN_CLAVES_MEDICOS = 2;
 
-
-
-//╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
-//║                                               HASHING MEDICOS                                               ║
-//╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
-class ListaMedicos
-{
+class NodoBMedicos {
 public:
-    ListaMedicos(){
-        primero = NULL;
+    int Cuenta;
+    RegistroMedico Claves[MAX_CLAVES_MEDICOS + 1];
+    NodoBMedicos* Ramas[MAX_CLAVES_MEDICOS + 2];
+
+    NodoBMedicos() {
+        Cuenta = 0;
+        for (int i = 0; i < MAX_CLAVES_MEDICOS + 2; i++)
+            Ramas[i] = nullptr;
     }
-    ~ListaMedicos(){
-        pnodoMedico aux = primero;
-        while (aux != NULL){
-            pnodoMedico temp = aux;
-            aux = aux->siguiente;
-            delete temp;
-        }
-    }
+};
 
-    bool ListaVacia(){
-        return primero == NULL;
-    }
+class ArbolBMedicos {
+private:
+    NodoBMedicos* Raiz;
 
-//╔═══════════════════════════════════════════════════════════════╗
-//║                         VALIDACION                            ║
-//╚═══════════════════════════════════════════════════════════════╝
-    bool Existe(int IdMedico){
-        pnodoMedico aux = primero;
-
-        while (aux != NULL){
-            if (aux->IdMedico == IdMedico){
-                return true;
-            }
-            aux = aux->siguiente;
-        }
-
-        return false;
+    void Destruir(NodoBMedicos* P) {
+        if (P == nullptr) return;
+        for (int i = 0; i <= P->Cuenta; i++)
+            Destruir(P->Ramas[i]);
+        delete P;
     }
 
-//╔═══════════════════════════════════════════════════════════════╗
-//║                          INSERTAR                             ║
-//╚═══════════════════════════════════════════════════════════════╝
-    bool Insertar(int IdMedico, string Nombre, string Telefono, 
-        string Correo, int IdEspecialidad){
-        if (Existe(IdMedico)){
-            return false;
-        }
-        if (ListaVacia()){
-            primero = new NodoMedico(
-                IdMedico, Nombre, Telefono, Correo, IdEspecialidad
-            );
-        }
-        else{
-            pnodoMedico aux = primero;
-            while (aux->siguiente != NULL){
-                aux = aux->siguiente;
-            }
-            aux->siguiente = new NodoMedico(
-                IdMedico, Nombre, Telefono, Correo, IdEspecialidad
-            );
-        }
-        return true;
+    int Posicion(NodoBMedicos* P, int IdMedico) const {
+        int i = 0;
+        while (i < P->Cuenta && IdMedico > P->Claves[i].IdMedico)
+            i++;
+        return i;
     }
 
-//╔═════════════════════════════════════════════════════════════════╗
-//║                             BUSCAR                              ║
-//╚═════════════════════════════════════════════════════════════════╝
-    bool Buscar(int IdMedico)
-    {
-        pnodoMedico aux = primero;
+    RegistroMedico* BuscarRegistro(NodoBMedicos* P, int IdMedico) {
+        if (P == nullptr) return nullptr;
 
-        while (aux != NULL){
-            if (aux->IdMedico == IdMedico){
-                cout << "IdMedico: " << aux->IdMedico << endl;
-                cout << "Nombre: " << aux->Nombre << endl;
-                cout << "Telefono: " << aux->Telefono << endl;
-                cout << "Correo: " << aux->Correo << endl;
-                cout << "IdEspecialidad: " << aux->IdEspecialidad << endl;
-                return true;
-            }
-            aux = aux->siguiente;
-        }
-        return false;
+        int i = Posicion(P, IdMedico);
+        if (i < P->Cuenta && P->Claves[i].IdMedico == IdMedico)
+            return &P->Claves[i];
+
+        return BuscarRegistro(P->Ramas[i], IdMedico);
     }
 
-
-//╔═══════════════════════════════════════════════════════════════════╗
-//║                              ELIMINAR                              ║
-//╚═══════════════════════════════════════════════════════════════════╝
-
-
-    bool Eliminar(int IdMedico){
-        if (ListaVacia()){
-            return false;
-        }
-        if (primero->IdMedico==IdMedico){
-            pnodoMedico temp=primero;
-            primero= primero->siguiente;
-            delete temp;
+    bool InsertarRecursivo(NodoBMedicos* P, const RegistroMedico& Registro,
+        bool& Dividido, RegistroMedico& Promovido, NodoBMedicos*& RamaDerecha) {
+        if (P == nullptr) {
+            Dividido = true;
+            Promovido = Registro;
+            RamaDerecha = nullptr;
             return true;
         }
-        pnodoMedico aux = primero;
-        while (aux->siguiente!= NULL && aux->siguiente->IdMedico!= IdMedico){
-            aux = aux->siguiente;
-        }
-        if (aux->siguiente==NULL){
+
+        int K = Posicion(P, Registro.IdMedico);
+        if (K < P->Cuenta&& P->Claves[K].IdMedico == Registro.IdMedico) {
+            Dividido = false;
             return false;
         }
-        pnodoMedico temp = aux->siguiente;
-        aux->siguiente = aux->siguiente->siguiente;
-        delete temp;
+
+        bool Resultado = InsertarRecursivo(P->Ramas[K], Registro, Dividido,
+            Promovido, RamaDerecha);
+        if (!Resultado) return false;
+        if (!Dividido) return true;
+
+        if (P->Cuenta < MAX_CLAVES_MEDICOS) {
+            for (int i = P->Cuenta; i > K; i--)
+                P->Claves[i] = P->Claves[i - 1];
+            for (int i = P->Cuenta + 1; i > K + 1; i--)
+                P->Ramas[i] = P->Ramas[i - 1];
+
+            P->Claves[K] = Promovido;
+            P->Ramas[K + 1] = RamaDerecha;
+            P->Cuenta++;
+            Dividido = false;
+            return true;
+        }
+
+        RegistroMedico ClavesTemp[MAX_CLAVES_MEDICOS + 1];
+        NodoBMedicos* RamasTemp[MAX_CLAVES_MEDICOS + 2];
+
+        for (int i = 0; i < K; i++)
+            ClavesTemp[i] = P->Claves[i];
+        ClavesTemp[K] = Promovido;
+        for (int i = K; i < P->Cuenta; i++)
+            ClavesTemp[i + 1] = P->Claves[i];
+
+        for (int i = 0; i <= K; i++)
+            RamasTemp[i] = P->Ramas[i];
+        RamasTemp[K + 1] = RamaDerecha;
+        for (int i = K + 1; i <= P->Cuenta; i++)
+            RamasTemp[i + 1] = P->Ramas[i];
+
+        const int Medio = 2;
+        NodoBMedicos* NuevaRama = new NodoBMedicos();
+
+        P->Cuenta = Medio;
+        for (int i = 0; i < Medio; i++)
+            P->Claves[i] = ClavesTemp[i];
+        for (int i = 0; i <= Medio; i++)
+            P->Ramas[i] = RamasTemp[i];
+        for (int i = Medio + 1; i < MAX_CLAVES_MEDICOS + 2; i++)
+            P->Ramas[i] = nullptr;
+
+        NuevaRama->Cuenta = MAX_CLAVES_MEDICOS - Medio;
+        for (int i = 0; i < NuevaRama->Cuenta; i++)
+            NuevaRama->Claves[i] = ClavesTemp[Medio + 1 + i];
+        for (int i = 0; i <= NuevaRama->Cuenta; i++)
+            NuevaRama->Ramas[i] = RamasTemp[Medio + 1 + i];
+
+        Promovido = ClavesTemp[Medio];
+        RamaDerecha = NuevaRama;
+        Dividido = true;
         return true;
     }
 
+    void Recopilar(NodoBMedicos* P, vector<RegistroMedico>& Registros) const {
+        if (P == nullptr) return;
+        for (int i = 0; i < P->Cuenta; i++) {
+            Recopilar(P->Ramas[i], Registros);
+            Registros.push_back(P->Claves[i]);
+        }
+        Recopilar(P->Ramas[P->Cuenta], Registros);
+    }
 
-//╔═════════════════════════════════════════════════════════════════╗
-//║                             Modificar                           ║
-//╚═════════════════════════════════════════════════════════════════╝
+    void MostrarRecursivo(NodoBMedicos* P) const {
+        if (P == nullptr) return;
+        for (int i = 0; i < P->Cuenta; i++) {
+            MostrarRecursivo(P->Ramas[i]);
+            const RegistroMedico& R = P->Claves[i];
+            cout << "IdMedico: " << R.IdMedico
+                << " | Nombre: " << R.Nombre
+                << " | Telefono: " << R.Telefono
+                << " | Correo: " << R.Correo
+                << " | IdEspecialidad: " << R.IdEspecialidad << endl;
+        }
+        MostrarRecursivo(P->Ramas[P->Cuenta]);
+    }
 
+    void QuitarClave(NodoBMedicos* P, int K) {
+        for (int i = K; i < P->Cuenta - 1; i++)
+            P->Claves[i] = P->Claves[i + 1];
+        P->Cuenta--;
+    }
 
-    bool Modificar(int IdMedico, string Nombre, string Telefono, 
-        string Correo, int IdEspecialidad)
-    {
-        pnodoMedico aux = primero;
-        while (aux != NULL){
-            if (aux->IdMedico == IdMedico){
-                aux->Nombre = Nombre;
-                aux->Telefono = Telefono;
-                aux->Correo = Correo;
-                aux->IdEspecialidad = IdEspecialidad;
-                return true;
+    int BuscarPosicion(NodoBMedicos* P, int IdMedico, bool& Encontrado) const {
+        int K = 0;
+        while (K < P->Cuenta && IdMedico > P->Claves[K].IdMedico)
+            K++;
+        Encontrado = (K < P->Cuenta && P->Claves[K].IdMedico == IdMedico);
+        return K;
+    }
+
+    void Combinar(NodoBMedicos* P, int K) {
+        NodoBMedicos* Izquierdo = P->Ramas[K - 1];
+        NodoBMedicos* Derecho = P->Ramas[K];
+        int Pos = Izquierdo->Cuenta;
+
+        Izquierdo->Claves[Pos] = P->Claves[K - 1];
+        Pos++;
+        Izquierdo->Ramas[Pos] = Derecho->Ramas[0];
+
+        for (int i = 0; i < Derecho->Cuenta; i++) {
+            Izquierdo->Claves[Pos + i] = Derecho->Claves[i];
+            Izquierdo->Ramas[Pos + i + 1] = Derecho->Ramas[i + 1];
+        }
+        Izquierdo->Cuenta += Derecho->Cuenta + 1;
+
+        for (int i = K - 1; i < P->Cuenta - 1; i++)
+            P->Claves[i] = P->Claves[i + 1];
+        for (int i = K; i < P->Cuenta; i++)
+            P->Ramas[i] = P->Ramas[i + 1];
+
+        P->Cuenta--;
+        P->Ramas[P->Cuenta + 1] = nullptr;
+        delete Derecho;
+    }
+
+    void Restablecer(NodoBMedicos* P, int K) {
+        if (K > 0 && P->Ramas[K - 1]->Cuenta > MIN_CLAVES_MEDICOS) {
+            NodoBMedicos* Hijo = P->Ramas[K];
+            NodoBMedicos* Izquierdo = P->Ramas[K - 1];
+
+            for (int i = Hijo->Cuenta; i > 0; i--)
+                Hijo->Claves[i] = Hijo->Claves[i - 1];
+            for (int i = Hijo->Cuenta + 1; i > 0; i--)
+                Hijo->Ramas[i] = Hijo->Ramas[i - 1];
+
+            Hijo->Claves[0] = P->Claves[K - 1];
+            Hijo->Ramas[0] = Izquierdo->Ramas[Izquierdo->Cuenta];
+            Hijo->Cuenta++;
+
+            P->Claves[K - 1] = Izquierdo->Claves[Izquierdo->Cuenta - 1];
+            Izquierdo->Cuenta--;
+            Izquierdo->Ramas[Izquierdo->Cuenta + 1] = nullptr;
+        }
+        else if (K < P->Cuenta && P->Ramas[K + 1]->Cuenta > MIN_CLAVES_MEDICOS) {
+            NodoBMedicos* Hijo = P->Ramas[K];
+            NodoBMedicos* Derecho = P->Ramas[K + 1];
+
+            Hijo->Claves[Hijo->Cuenta] = P->Claves[K];
+            Hijo->Ramas[Hijo->Cuenta + 1] = Derecho->Ramas[0];
+            Hijo->Cuenta++;
+
+            P->Claves[K] = Derecho->Claves[0];
+            for (int i = 0; i < Derecho->Cuenta - 1; i++)
+                Derecho->Claves[i] = Derecho->Claves[i + 1];
+            for (int i = 0; i < Derecho->Cuenta; i++)
+                Derecho->Ramas[i] = Derecho->Ramas[i + 1];
+            Derecho->Cuenta--;
+            Derecho->Ramas[Derecho->Cuenta + 1] = nullptr;
+        }
+        else {
+            if (K > 0)
+                Combinar(P, K);
+            else
+                Combinar(P, K + 1);
+        }
+    }
+
+    bool EliminarRecursivo(NodoBMedicos* P, int IdMedico) {
+        if (P == nullptr) return false;
+
+        bool Encontrado = false;
+        int K = BuscarPosicion(P, IdMedico, Encontrado);
+        bool EsHoja = (P->Ramas[0] == nullptr);
+
+        if (Encontrado) {
+            if (EsHoja) {
+                QuitarClave(P, K);
             }
-            aux = aux->siguiente;
-        }
-        return false;
-    }
+            else {
+                NodoBMedicos* Sucesor = P->Ramas[K + 1];
+                while (Sucesor->Ramas[0] != nullptr)
+                    Sucesor = Sucesor->Ramas[0];
 
-
-
-//╔═══════════════════════════════════════════════════════════════════╗
-//║                              MOSTRAR                              ║
-//╚═══════════════════════════════════════════════════════════════════╝
-    void Mostrar(){
-        pnodoMedico aux = primero;
-        while (aux != NULL){
-            cout << "IdMedico: " << aux->IdMedico
-                << " | Nombre: " << aux->Nombre
-                << " | Telefono: " << aux->Telefono
-                << " | Correo: " << aux->Correo
-                << " | IdEspecialidad: " << aux->IdEspecialidad
-                << endl;
-            aux = aux->siguiente;
-        }
-    }
-
-    void ObtenerIdsPorEspecialidad(int IdEspecialidad, vector<int> &ids){
-        pnodoMedico aux = primero;
-        while (aux != NULL){
-            if (aux->IdEspecialidad == IdEspecialidad){
-                ids.push_back(aux->IdMedico);
+                P->Claves[K] = Sucesor->Claves[0];
+                bool Eliminado = EliminarRecursivo(P->Ramas[K + 1],
+                    Sucesor->Claves[0].IdMedico);
+                if (Eliminado && P->Ramas[K + 1] != nullptr &&
+                    P->Ramas[K + 1]->Cuenta < MIN_CLAVES_MEDICOS)
+                    Restablecer(P, K + 1);
             }
-            aux = aux->siguiente;
+            return true;
         }
+
+        bool Eliminado = EliminarRecursivo(P->Ramas[K], IdMedico);
+        if (Eliminado && P->Ramas[K] != nullptr &&
+            P->Ramas[K]->Cuenta < MIN_CLAVES_MEDICOS)
+            Restablecer(P, K);
+        return Eliminado;
     }
 
-    void EliminarPorEspecialidad(int IdEspecialidad){
-        if (ListaVacia()){
-            return;
-        }
-        while (primero != NULL && primero->IdEspecialidad == IdEspecialidad){
-            pnodoMedico temp = primero;
-            primero = primero->siguiente;
-            delete temp;
-        }
-        if (ListaVacia()){
-            return;
-        }
-        pnodoMedico aux = primero;
-        while (aux->siguiente != NULL){
-            if (aux->siguiente->IdEspecialidad == IdEspecialidad){
-                pnodoMedico temp = aux->siguiente;
-                aux->siguiente = aux->siguiente->siguiente;
-                delete temp;
-            }
-            else{
-                aux = aux->siguiente;
-            }
-        }
-    }
-
-    int ReportePDF(GeneradorPDF &pdf){
-        int cantidad = 0;
-        pnodoMedico aux = primero;
-        while (aux != NULL){
-            pdf.Linea(Rellenar(to_string(aux->IdMedico), 8) + Rellenar(aux->Nombre, 28)
-                        + Rellenar(aux->Telefono, 14) + Rellenar(aux->Correo, 36)
-                        + Rellenar(to_string(aux->IdEspecialidad), 8));
-            cantidad++;
-            aux = aux->siguiente;
-        }
-        return cantidad;
-    }
-
-    int ReportePDFPorEspecialidad(GeneradorPDF &pdf, int IdEspecialidad){
-        int cantidad = 0;
-        pnodoMedico aux = primero;
-        while (aux != NULL){
-            if (aux->IdEspecialidad == IdEspecialidad){
-                pdf.Linea(Rellenar(to_string(aux->IdMedico), 8) + Rellenar(aux->Nombre, 28)
-                            + Rellenar(aux->Telefono, 14) + Rellenar(aux->Correo, 36)
-                            + Rellenar(to_string(aux->IdEspecialidad), 8));
-                cantidad++;
-            }
-            aux = aux->siguiente;
-        }
-        return cantidad;
-    }
-private:
-    pnodoMedico primero;
-};
-
-
-//╔═══════════════════════════════════════════════════════════════╗
-//║                            TABLA                              ║
-//╚═══════════════════════════════════════════════════════════════╝
-
-class TablaHashingMedicos
-{
-private:
-    ListaMedicos *tabla[Tam_Tabla];
 public:
-    TablaHashingMedicos(){
-        for (int i = 0; i < Tam_Tabla; i++){
-            tabla[i] = new ListaMedicos();
-        }
+    ArbolBMedicos() : Raiz(nullptr) {}
+
+    ~ArbolBMedicos() {
+        Destruir(Raiz);
     }
 
-    ~TablaHashingMedicos(){
-        for (int i = 0; i < Tam_Tabla; i++){
-            delete tabla[i];
-        }
+    bool ListaVacia() const {
+        return Raiz == nullptr;
     }
 
-    int FuncionHash(int IdMedico){
-        return IdMedico % Tam_Tabla;
+    bool Existe(int IdMedico) {
+        return BuscarRegistro(Raiz, IdMedico) != nullptr;
     }
 
-//╔═══════════════════════════════════════════════════════════════╗
-//║                         VALIDACION                            ║
-//╚═══════════════════════════════════════════════════════════════╝
-    bool Existe(int IdMedico){
-        int pos = FuncionHash(IdMedico);
-        return tabla[pos]->Existe(IdMedico);
-    }
+    bool Insertar(int IdMedico, string Nombre, string Telefono,
+        string Correo, int IdEspecialidad) {
+        RegistroMedico Registro = { IdMedico, Nombre, Telefono, Correo, IdEspecialidad };
+        bool Dividido = false;
+        RegistroMedico Promovido{};
+        NodoBMedicos* RamaDerecha = nullptr;
 
-//╔═══════════════════════════════════════════════════════════════╗
-//║                          INSERTAR                             ║
-//╚═══════════════════════════════════════════════════════════════╝
-    bool Insertar(int IdMedico, string Nombre, string Telefono, 
-        string Correo, int IdEspecialidad)
-    {
-        int pos = FuncionHash(IdMedico);
-        return tabla[pos]->Insertar(
-            IdMedico,
-            Nombre,
-            Telefono,
-            Correo,
-            IdEspecialidad
-        );
-    }
+        bool Resultado = InsertarRecursivo(Raiz, Registro, Dividido,
+            Promovido, RamaDerecha);
+        if (!Resultado) return false;
 
-//╔═════════════════════════════════════════════════════════════════╗
-//║                             BUSCAR                              ║
-//╚═════════════════════════════════════════════════════════════════╝
-    bool Buscar(int IdMedico){
-        int pos = FuncionHash(IdMedico);
-        return tabla[pos]->Buscar(IdMedico);
-    }
-
-
-
-//╔═══════════════════════════════════════════════════════════════════╗
-//║                              ELIMINAR                              ║
-//╚═══════════════════════════════════════════════════════════════════╝
-
-
-
-    bool Eliminar(int IdMedico){
-        int pos = FuncionHash(IdMedico);
-        tabla[pos]->Eliminar(IdMedico);
-        return true;
-    }
-    bool EliminarPorEspecialidad(int IdEspecialidad){
-        for (int i = 0; i < Tam_Tabla; i++){
-            tabla[i]->EliminarPorEspecialidad(IdEspecialidad);
+        if (Dividido) {
+            NodoBMedicos* NuevaRaiz = new NodoBMedicos();
+            NuevaRaiz->Claves[0] = Promovido;
+            NuevaRaiz->Ramas[0] = Raiz;
+            NuevaRaiz->Ramas[1] = RamaDerecha;
+            NuevaRaiz->Cuenta = 1;
+            Raiz = NuevaRaiz;
         }
         return true;
     }
 
-    vector<int> ObtenerIdsPorEspecialidad(int IdEspecialidad){
+    bool Buscar(int IdMedico) {
+        RegistroMedico* R = BuscarRegistro(Raiz, IdMedico);
+        if (R == nullptr) return false;
+
+        cout << "IdMedico: " << R->IdMedico << endl;
+        cout << "Nombre: " << R->Nombre << endl;
+        cout << "Telefono: " << R->Telefono << endl;
+        cout << "Correo: " << R->Correo << endl;
+        cout << "IdEspecialidad: " << R->IdEspecialidad << endl;
+        return true;
+    }
+
+    bool Eliminar(int IdMedico) {
+        if (!EliminarRecursivo(Raiz, IdMedico))
+            return false;
+
+        if (Raiz != nullptr && Raiz->Cuenta == 0) {
+            NodoBMedicos* ViejaRaiz = Raiz;
+            Raiz = Raiz->Ramas[0];
+            ViejaRaiz->Ramas[0] = nullptr;
+            delete ViejaRaiz;
+        }
+        return true;
+    }
+
+    bool Modificar(int IdMedico, string Nombre, string Telefono,
+        string Correo, int IdEspecialidad) {
+        RegistroMedico* R = BuscarRegistro(Raiz, IdMedico);
+        if (R == nullptr) return false;
+        R->Nombre = Nombre;
+        R->Telefono = Telefono;
+        R->Correo = Correo;
+        R->IdEspecialidad = IdEspecialidad;
+        return true;
+    }
+
+    vector<int> ObtenerIdsPorEspecialidad(int IdEspecialidad) const {
+        vector<RegistroMedico> Registros;
         vector<int> ids;
-        for (int i = 0; i < Tam_Tabla; i++){
-            tabla[i]->ObtenerIdsPorEspecialidad(IdEspecialidad, ids);
-        }
+        Recopilar(Raiz, Registros);
+        for (const RegistroMedico& R : Registros)
+            if (R.IdEspecialidad == IdEspecialidad)
+                ids.push_back(R.IdMedico);
         return ids;
     }
 
-//╔═════════════════════════════════════════════════════════════════╗
-//║                             Modificar                           ║
-//╚═════════════════════════════════════════════════════════════════╝
-
-    bool Modificar(int IdMedico, string Nombre, string Telefono, 
-        string Correo, int IdEspecialidad)
-    {
-        int pos = FuncionHash(IdMedico);
-        return tabla[pos]->Modificar(
-            IdMedico,
-            Nombre,
-            Telefono,
-            Correo,
-            IdEspecialidad
-        );
+    bool EliminarPorEspecialidad(int IdEspecialidad) {
+        vector<int> ids = ObtenerIdsPorEspecialidad(IdEspecialidad);
+        for (int Id : ids)
+            Eliminar(Id);
+        return !ids.empty();
     }
 
-
-
-//╔═══════════════════════════════════════════════════════════════════╗
-//║                              MOSTRAR                              ║
-//╚═══════════════════════════════════════════════════════════════════╝
-    void Mostrar(){
-        cout << endl;
-        cout << " " << endl;
-        cout << "------------------------" << endl;
-        cout << "TABLA HASHING DE MEDICOS" << endl;
-        cout << "------------------------" << endl;
-        for (int i = 0; i < Tam_Tabla; i++){
-            cout << "[" << i << "]: ";
-            tabla[i]->Mostrar();
-            cout << endl;
-        }
+    void Mostrar() const {
+        cout << endl << "MEDICOS (ARBOL B)" << endl;
+        cout << "-----------------" << endl;
+        MostrarRecursivo(Raiz);
     }
 
-    int ReportePDF(GeneradorPDF &pdf){
-        int total = 0;
-        for (int i = 0; i < Tam_Tabla; i++){
-            total += tabla[i]->ReportePDF(pdf);
+    int ReportePDF(GeneradorPDF& pdf) {
+        vector<RegistroMedico> Registros;
+        Recopilar(Raiz, Registros);
+        for (const RegistroMedico& R : Registros) {
+            pdf.Linea(Rellenar(to_string(R.IdMedico), 8) + Rellenar(R.Nombre, 28)
+                + Rellenar(R.Telefono, 14) + Rellenar(R.Correo, 36)
+                + Rellenar(to_string(R.IdEspecialidad), 8));
         }
-        return total;
+        return static_cast<int>(Registros.size());
     }
 
-    int ReportePDFPorEspecialidad(GeneradorPDF &pdf, int IdEspecialidad){
-        int total = 0;
-        for (int i = 0; i < Tam_Tabla; i++){
-            total += tabla[i]->ReportePDFPorEspecialidad(pdf, IdEspecialidad);
+    int ReportePDFPorEspecialidad(GeneradorPDF& pdf, int IdEspecialidad) {
+        vector<RegistroMedico> Registros;
+        Recopilar(Raiz, Registros);
+        int cantidad = 0;
+        for (const RegistroMedico& R : Registros) {
+            if (R.IdEspecialidad == IdEspecialidad) {
+                pdf.Linea(Rellenar(to_string(R.IdMedico), 8) + Rellenar(R.Nombre, 28)
+                    + Rellenar(R.Telefono, 14) + Rellenar(R.Correo, 36)
+                    + Rellenar(to_string(R.IdEspecialidad), 8));
+                cantidad++;
+            }
         }
-        return total;
+        return cantidad;
     }
 };
 
-//╔═══════════════════════════════════════════════════════════════╗
-//║                           REPORTE                             ║
-//╚═══════════════════════════════════════════════════════════════╝
-
-void ReporteMedicos(TablaHashingMedicos &Medicos)
-{
+void ReporteMedicos(ArbolBMedicos& Medicos) {
     GeneradorPDF pdf("Reporte_Medicos.pdf", "REPORTE DE MEDICOS",
-                    Rellenar("ID", 8) + Rellenar("NOMBRE", 28) + Rellenar("TELEFONO", 14)
-                    + Rellenar("CORREO", 36) + Rellenar("ESPEC.", 8));
-    if (!pdf.Valido()){
+        Rellenar("ID", 8) + Rellenar("NOMBRE", 28) + Rellenar("TELEFONO", 14)
+        + Rellenar("CORREO", 36) + Rellenar("ESPEC.", 8));
+
+    if (!pdf.Valido()) {
         cout << "No se pudo crear el documento PDF." << endl;
         return;
     }
-    if (Medicos.ReportePDF(pdf) == 0){
+    if (Medicos.ReportePDF(pdf) == 0)
         pdf.Linea("(No hay medicos registrados)");
-    }
-    if (pdf.Guardar()){
+
+    if (pdf.Guardar())
         cout << "Reporte generado: Reporte_Medicos.pdf" << endl;
-    }
-    else{
+    else
         cout << "No se pudo guardar el archivo PDF." << endl;
-    }
 }
 
-void ReporteMedicosPorEspecialidad(TablaHashingMedicos &Medicos)
-{
+void ReporteMedicosPorEspecialidad(ArbolBMedicos& Medicos) {
     int IdEspecialidad;
     cout << "Ingrese el IdEspecialidad: ";
     cin >> IdEspecialidad;
 
     GeneradorPDF pdf("Reporte_Medicos_Especialidad_" + to_string(IdEspecialidad) + ".pdf",
-                    "REPORTE DE MEDICOS POR ESPECIALIDAD",
-                    Rellenar("ID", 8) + Rellenar("NOMBRE", 28) + Rellenar("TELEFONO", 14)
-                    + Rellenar("CORREO", 36) + Rellenar("ESPEC.", 8));
-    if (!pdf.Valido()){
+        "REPORTE DE MEDICOS POR ESPECIALIDAD",
+        Rellenar("ID", 8) + Rellenar("NOMBRE", 28) + Rellenar("TELEFONO", 14)
+        + Rellenar("CORREO", 36) + Rellenar("ESPEC.", 8));
+
+    if (!pdf.Valido()) {
         cout << "No se pudo crear el documento PDF." << endl;
         return;
     }
-    if (Medicos.ReportePDFPorEspecialidad(pdf, IdEspecialidad) == 0){
+    if (Medicos.ReportePDFPorEspecialidad(pdf, IdEspecialidad) == 0)
         pdf.Linea("(No hay medicos registrados para esta especialidad)");
-    }
-    if (pdf.Guardar()){
+
+    if (pdf.Guardar())
         cout << "Reporte generado: Reporte_Medicos_Especialidad_" << IdEspecialidad << ".pdf" << endl;
-    }
-    else{
+    else
         cout << "No se pudo guardar el archivo PDF." << endl;
-    }
 }
 
-
-//╔═════════════════════════════════════════════════════════════════════╗
-//║                            CARGAR MEDICOS                           ║
-//╚═════════════════════════════════════════════════════════════════════╝
-
-void CargarMedicos(TablaHashingMedicos &Medicos, ListaEspecialidades &Especialidades){
+void CargarMedicos(ArbolBMedicos& Medicos, ListaEspecialidades& Especialidades) {
     ifstream archivo("Medicos.csv");
-    if (!archivo){
+    if (!archivo) {
         cout << "No se pudo abrir el archivo Medicos.csv" << endl;
         return;
     }
 
-    
     string encabezado;
-    getline(archivo, encabezado); // Saltar encabezado del CSV
-string IdMedicoTexto;
-    string Nombre;
-    string Telefono;
-    string Correo;
-    string IdEspecialidadTexto;
+    getline(archivo, encabezado); // Idmedico;Nombre;Telefono;Correo;Idespecialidad
 
+    string IdMedicoTexto, Nombre, Telefono, Correo, IdEspecialidadTexto;
     while (getline(archivo, IdMedicoTexto, ';') &&
-            getline(archivo, Nombre, ';') &&
-            getline(archivo, Telefono, ';') &&
-            getline(archivo, Correo, ';') &&
-            getline(archivo, IdEspecialidadTexto))
-    {
-        int IdMedico = stoi(IdMedicoTexto);
-        int IdEspecialidad = stoi(IdEspecialidadTexto);
-        if (!Especialidades.Existe(IdEspecialidad)){
-            continue;
-        }
+        getline(archivo, Nombre, ';') &&
+        getline(archivo, Telefono, ';') &&
+        getline(archivo, Correo, ';') &&
+        getline(archivo, IdEspecialidadTexto)) {
+        try {
+            int IdMedico = stoi(IdMedicoTexto);
+            int IdEspecialidad = stoi(IdEspecialidadTexto);
 
-        if (Medicos.Existe(IdMedico)){
+            if (!Especialidades.Existe(IdEspecialidad))
+                continue;
+            if (Medicos.Existe(IdMedico))
+                continue; // Conserva la primera aparicion del ID.
+
+            Medicos.Insertar(IdMedico, Nombre, Telefono, Correo, IdEspecialidad);
+        }
+        catch (const invalid_argument&) {
             continue;
         }
-        Medicos.Insertar(
-            IdMedico,
-            Nombre,
-            Telefono,
-            Correo,
-            IdEspecialidad
-        );
+        catch (const out_of_range&) {
+            continue;
+        }
     }
 
     archivo.close();

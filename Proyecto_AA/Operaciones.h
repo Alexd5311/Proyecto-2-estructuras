@@ -52,7 +52,7 @@ void InsertarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises)
 }
 
 //Pacientes
-void InsertarPaciente(TablaHashingPacientes &Pacientes, ListaCiudades &Ciudades)
+void InsertarPaciente(ArbolBPacientes &Pacientes, ListaCiudades &Ciudades)
 {
     int IdPaciente;
     string Nombre;
@@ -130,7 +130,7 @@ void InsertarEspecialidad(ListaEspecialidades &Especialidades)
 }
 
 //Medicos
-void InsertarMedico(TablaHashingMedicos &Medicos, ListaEspecialidades &Especialidades)
+void InsertarMedico(ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
 {
     int IdMedico;
     string Nombre;
@@ -174,9 +174,8 @@ void InsertarMedico(TablaHashingMedicos &Medicos, ListaEspecialidades &Especiali
     }
 }
 
-//cITAS
-void InsertarCita(ListaCitas &Citas, TablaHashingPacientes &Pacientes,
-    TablaHashingMedicos &Medicos, ListaEspecialidades &Especialidades)
+//Citas
+void InsertarCita(ListaCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
 {
     int IdCita;
     int IdPaciente;
@@ -303,8 +302,7 @@ void InsertarHabitacion(ListaHabitaciones &Habitaciones)
 }
 
 //Hospitalizaciones
-void InsertarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones, TablaHashingPacientes &Pacientes, 
-    ListaHabitaciones &Habitaciones, TablaHashingMedicos &Medicos)
+void InsertarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones, ArbolBPacientes &Pacientes, ListaHabitaciones &Habitaciones, ArbolBMedicos &Medicos)
 {
     int IdHospitalizacion;
     int IdPaciente;
@@ -415,7 +413,7 @@ void BuscarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises)
 }
 
 //Pacientes
-void BuscarPaciente(TablaHashingPacientes &Pacientes, ListaCiudades &Ciudades, ListaPaises &Paises)
+void BuscarPaciente(ArbolBPacientes &Pacientes, ListaCiudades &Ciudades, ListaPaises &Paises)
 {
     int IdPaciente;
     int CodCiudad;
@@ -467,7 +465,7 @@ void BuscarEspecialidad(ListaEspecialidades &Especialidades)
 }
 
 //Medicos
-void BuscarMedico(TablaHashingMedicos &Medicos, ListaEspecialidades &Especialidades)
+void BuscarMedico(ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
 {
     int IdMedico;
     int IdEspecialidad;
@@ -490,7 +488,7 @@ void BuscarMedico(TablaHashingMedicos &Medicos, ListaEspecialidades &Especialida
 }
 
 //Citas
-void BuscarCita(ListaCitas &Citas, TablaHashingMedicos &Medicos, TablaHashingPacientes &Pacientes)
+void BuscarCita(ListaCitas &Citas, ArbolBMedicos &Medicos, ArbolBPacientes &Pacientes)
 {
     int IdCita;
     int IdPaciente;
@@ -538,7 +536,7 @@ void BuscarHabitacion(ListaHabitaciones &Habitaciones)
 
 
 //Hospitalizaciones
-void BuscarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones,TablaHashingPacientes &Pacientes, ListaHabitaciones &Habitaciones)
+void BuscarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones,ArbolBPacientes &Pacientes, ListaHabitaciones &Habitaciones)
 {
     int IdHospitalizacion;
     int IdPaciente;
@@ -576,7 +574,7 @@ void BuscarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones,TablaHashin
 
 
 
-void EliminarPais(ListaPaises &Paises, ListaCiudades &Ciudades, TablaHashingPacientes &Pacientes,
+void EliminarPais(ListaPaises &Paises, ListaCiudades &Ciudades, ArbolBPacientes &Pacientes,
     ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
 {
     int CodPais;
@@ -609,7 +607,7 @@ void EliminarPais(ListaPaises &Paises, ListaCiudades &Ciudades, TablaHashingPaci
     }
 }
 
-void EliminarPaciente(TablaHashingPacientes &Pacientes, ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarPaciente(ArbolBPacientes &Pacientes, ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
 {
     int IdPaciente;
     cout << " " << endl;
@@ -648,8 +646,7 @@ void EliminarPaciente(TablaHashingPacientes &Pacientes, ListaCitas &Citas, Lista
 }
 
 
-void EliminarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises, TablaHashingPacientes &Pacientes,
-    ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises, ArbolBPacientes &Pacientes, ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
 {
     int CodPais;
     int CodCiudad;
@@ -694,7 +691,7 @@ void EliminarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises, TablaHashingPa
 }
 
 
-void EliminarPaciente(TablaHashingPacientes &Pacientes)
+void EliminarPaciente(ArbolBPacientes &Pacientes)
 {
     int IdPaciente;
     cout << " " << endl;
@@ -721,7 +718,7 @@ void EliminarPaciente(TablaHashingPacientes &Pacientes)
 
 
 
-void EliminarMedico(TablaHashingMedicos &Medicos, ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarMedico(ArbolBMedicos &Medicos, ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
 {
     int IdMedico;
     cout << " " << endl;
@@ -750,8 +747,7 @@ void EliminarMedico(TablaHashingMedicos &Medicos, ListaCitas &Citas, ListaHospit
     }
 }
 
-void EliminarEspecialidad(ListaEspecialidades &Especialidades, TablaHashingMedicos &Medicos,
-    ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarEspecialidad(ListaEspecialidades &Especialidades, ArbolBMedicos &Medicos, ListaCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
 {
     int IdEspecialidad;
     cout << " " << endl;
@@ -928,7 +924,7 @@ void ModificarCiudad(ListaCiudades &Ciudades, ListaPaises &Paises)
     }
 }
 
-void ModificarPaciente(TablaHashingPacientes &Pacientes, ListaCiudades &Ciudades)
+void ModificarPaciente(ArbolBPacientes &Pacientes, ListaCiudades &Ciudades)
 {
     int IdPaciente;
     string Nombre;
@@ -1011,7 +1007,7 @@ void ModificarEspecialidad(ListaEspecialidades &Especialidades)
     }
 }
 
-void ModificarMedico(TablaHashingMedicos &Medicos, ListaEspecialidades &Especialidades)
+void ModificarMedico(ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
 {
     int IdMedico;
     string Nombre;
@@ -1055,8 +1051,7 @@ void ModificarMedico(TablaHashingMedicos &Medicos, ListaEspecialidades &Especial
     }
 }
 
-void ModificarCita(ListaCitas &Citas, TablaHashingPacientes &Pacientes,
-    TablaHashingMedicos &Medicos, ListaEspecialidades &Especialidades)
+void ModificarCita(ListaCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
 {
     int IdCita;
     int IdPaciente;
@@ -1169,8 +1164,7 @@ void ModificarHabitacion(ListaHabitaciones &Habitaciones)
 }
 
 
-void ModificarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones, TablaHashingPacientes &Pacientes,
-    ListaHabitaciones &Habitaciones, TablaHashingMedicos &Medicos)
+void ModificarHospitalizacion(ListaHospitalizaciones& Hospitalizaciones, ArbolBPacientes& Pacientes, ListaHabitaciones& Habitaciones, ArbolBMedicos& Medicos)
 {
     int IdHospitalizacion;
     int IdPaciente;
@@ -1187,28 +1181,28 @@ void ModificarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones, TablaHa
     cout << "Ingrese el IdHospitalizacion: ";
     cin >> IdHospitalizacion;
 
-    if (!Hospitalizaciones.Existe(IdHospitalizacion)){
+    if (!Hospitalizaciones.Existe(IdHospitalizacion)) {
         cout << "La hospitalizacion no existe." << endl;
         return;
     }
 
     cout << "Ingrese el nuevo IdPaciente: ";
     cin >> IdPaciente;
-    if (!Pacientes.Existe(IdPaciente)){
+    if (!Pacientes.Existe(IdPaciente)) {
         cout << "El IdPaciente no existe." << endl;
         return;
     }
 
     cout << "Ingrese el nuevo IdHabitacion: ";
     cin >> IdHabitacion;
-    if (!Habitaciones.Existe(IdHabitacion)){
+    if (!Habitaciones.Existe(IdHabitacion)) {
         cout << "El IdHabitacion no existe." << endl;
         return;
     }
 
     cout << "Ingrese el nuevo IdMedico: ";
     cin >> IdMedico;
-    if (!Medicos.Existe(IdMedico)){
+    if (!Medicos.Existe(IdMedico)) {
         cout << "El IdMedico no existe." << endl;
         return;
     }
@@ -1216,34 +1210,17 @@ void ModificarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones, TablaHa
     cin.ignore();
     cout << "Ingrese la nueva fecha de ingreso: ";
     getline(cin, FechaIngreso);
-    
+
     cout << "Ingrese la nueva fecha de salida (0000 si no tiene): ";
     getline(cin, FechaSalida);
 
     cout << "Ingrese el nuevo motivo: ";
     getline(cin, Motivo);
-    if (Hospitalizaciones.Modificar(IdHospitalizacion, IdPaciente, IdHabitacion, IdMedico, FechaIngreso, FechaSalida, Motivo)){
+    if (Hospitalizaciones.Modificar(IdHospitalizacion, IdPaciente, IdHabitacion, IdMedico, FechaIngreso, FechaSalida, Motivo)) {
         cout << "Hospitalizacion modificada correctamente." << endl;
     }
-    else{
+    else {
         cout << "No se pudo modificar la hospitalizacion." << endl;
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//╔════════════════════════════════════════════════════════════════════════════════════════╗
-//║                                         MAIN                                           ║
-//╚════════════════════════════════════════════════════════════════════════════════════════╝

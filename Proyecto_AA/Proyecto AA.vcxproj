@@ -87,22 +87,16 @@ for %%F in ("$(ProjectDir)*.dll") do copy /Y "%%~fF" "$(OutDir)" &gt;nul</Comman
   </ItemGroup>
   <ItemGroup>
     <None Include="Citas.csv" />
-    <None Include="Citas.txt" />
     <None Include="Ciudades.csv" />
-    <None Include="Ciudades.txt" />
     <None Include="Diagnostico.csv" />
     <None Include="Especialidades.csv" />
-    <None Include="Especialidades.txt" />
     <None Include="Habitaciones.csv" />
-    <None Include="Habitaciones.txt" />
     <None Include="Hospitalizaciones.csv" />
     <None Include="Hospitalizaciones.txt" />
     <None Include="Medicos.csv" />
-    <None Include="Medicos.txt" />
     <None Include="Pacientes.csv" />
     <None Include="Pacientes.txt" />
     <None Include="Paises.csv" />
-    <None Include="Paises.txt" />
     <None Include="hpdf.dll" />
     <None Include="libhpdf.dll" />
     <None Include="libpng16.dll" />

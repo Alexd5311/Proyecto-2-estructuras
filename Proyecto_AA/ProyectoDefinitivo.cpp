@@ -15,9 +15,9 @@ int main()
 {
     ListaPaises Paises;
     ListaCiudades Ciudades;
-    TablaHashingPacientes Pacientes;
+    ArbolBPacientes Pacientes;
     ListaEspecialidades Especialidades;
-    TablaHashingMedicos Medicos;
+    ArbolBMedicos Medicos;
     ListaCitas Citas;
     ListaHabitaciones Habitaciones;
     ListaHospitalizaciones Hospitalizaciones;
