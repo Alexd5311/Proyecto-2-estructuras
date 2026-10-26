@@ -75,6 +75,7 @@ for %%F in ("$(ProjectDir)*.dll") do copy /Y "%%~fF" "$(OutDir)" &gt;nul</Comman
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Comun_PDF.h" />
+    <ClInclude Include="Diagnostico.h" />
     <ClInclude Include="Paises.h" />
     <ClInclude Include="Ciudades.h" />
     <ClInclude Include="Pacientes.h" />

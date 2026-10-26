@@ -601,7 +601,7 @@ void ReporteCitasPorMedico(ArbolAVLCitas& Citas)
 
 
 void CargarCitas(ArbolAVLCitas& Citas, ArbolBPacientes& Pacientes,
-    ArbolBMedicos& Medicos, ListaEspecialidades& Especialidades)
+    ArbolBMedicos& Medicos, ArbolAAEspecialidades& Especialidades)
 {
     ifstream archivo("Citas.csv");
     if (!archivo) { cout << "No se pudo abrir el archivo Citas.csv" << endl; return; }

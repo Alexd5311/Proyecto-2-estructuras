@@ -1,5 +1,4 @@
-// Punto de entrada del sistema hospitalario.
-// Los módulos se incluyen en orden para respetar las dependencias entre clases.
+#include <iostream>
 #include "Comun_PDF.h"
 #include "Paises.h"
 #include "Ciudades.h"
@@ -9,18 +8,21 @@
 #include "Citas.h"
 #include "Habitaciones.h"
 #include "Hospitalizaciones.h"
+#include "Diagnostico.h"
 #include "Operaciones.h"
+
 
 int main()
 {
     ArbolABBPaises Paises;
     ArbolABBCiudades Ciudades;
     ArbolBPacientes Pacientes;
-    ListaEspecialidades Especialidades;
+    ArbolAAEspecialidades Especialidades;
     ArbolBMedicos Medicos;
     ArbolAVLCitas Citas;
     ArbolAVLHabitaciones Habitaciones;
     ListaHospitalizaciones Hospitalizaciones;
+	ArbolAADiagnostico Diagnosticos;
 
     CargarPaises(Paises);
     CargarCiudades(Ciudades, Paises);
@@ -30,7 +32,7 @@ int main()
     CargarCitas(Citas, Pacientes, Medicos, Especialidades);
     CargarHabitaciones(Habitaciones);
     CargarHospitalizaciones(Hospitalizaciones,Pacientes,Habitaciones,Medicos);
-
+	CargarDiagnosticos(Diagnosticos);
 
     int opcion = 0;
 
@@ -72,7 +74,8 @@ int main()
                         cout << "|  6. INSERTAR CITA                                                                        |" << endl;
                         cout << "|  7. INSERTAR HABITACION                                                                  |" << endl;
                         cout << "|  8. INSERTAR HOSPITALIZACION                                                             |" << endl;
-                        cout << "|  9. REGRESAR                                                                             |" << endl;
+						cout << "|  9. INSERTAR DIAGNOSTICO                                                                 |" << endl;
+                        cout << "|  10. REGRESAR                                                                             |" << endl;
                         cout << "+------------------------------------------------------------------------------------------+" << endl;
 
                         cout << "Ingrese una opcion: ";
@@ -88,7 +91,8 @@ int main()
                             case 6:InsertarCita(Citas, Pacientes, Medicos, Especialidades);break;
                             case 7:InsertarHabitacion(Habitaciones);break;
                             case 8:InsertarHospitalizacion(Hospitalizaciones,Pacientes,Habitaciones,Medicos);break;
-                            case 9:cout << "Regresando al menu principal..." << endl;break;
+                            case 9:InsertarDiagnostico(Diagnosticos);break;
+                            case 10:cout << "Regresando al menu principal..." << endl;break;
                             default:cout << "Opcion invalida." << endl;break;
                         }
                     }
@@ -113,7 +117,8 @@ int main()
                         cout << "|  6. BUSCAR CITA                                                                          |" << endl;
                         cout << "|  7. BUSCAR HABITACION                                                                    |" << endl;
                         cout << "|  8. BUSCAR HOSPITALIZACION                                                               |" << endl;
-                        cout << "|  9. REGRESAR                                                                             |" << endl;
+                        cout << "|  9. BUSCAR DIAGNOSTICO                                                                   |" << endl;
+                        cout << "|  10. REGRESAR                                                                            |" << endl;
                         cout << "+------------------------------------------------------------------------------------------+" << endl;
                         cout << "Ingrese una opcion: ";
                         cin >> opcionBuscar;
@@ -127,7 +132,8 @@ int main()
                             case 6: BuscarCita(Citas, Medicos, Pacientes); break;
                             case 7: BuscarHabitacion(Habitaciones); break;
                             case 8: BuscarHospitalizacion(Hospitalizaciones, Pacientes, Habitaciones); break;
-                            case 9: cout << "Regresando al menu principal..." << endl; break;
+                            case 9: BuscarDiagnostico(Diagnosticos); break;
+                            case 10: cout << "Regresando al menu principal..." << endl; break;
                             default: cout << "Opcion invalida." << endl; break;
                         }
                     }
@@ -152,7 +158,8 @@ int main()
                         cout << "|  6. ELIMINAR CITA                                                                        |" << endl;
                         cout << "|  7. ELIMINAR HABITACION                                                                  |" << endl;
                         cout << "|  8. ELIMINAR HOSPITALIZACION                                                             |" << endl;
-                        cout << "|  9. REGRESAR                                                                             |" << endl;
+                        cout << "|  9. ELIMINAR DIAGNOSTICO                                                                 |" << endl;
+                        cout << "|  10. REGRESAR                                                                             |" << endl;
                         cout << "+------------------------------------------------------------------------------------------+" << endl;
                         cout << "Ingrese una opcion: ";
                         cin >> opcionEliminar;
@@ -167,7 +174,8 @@ int main()
                             case 6: EliminarCita(Citas); break;
                             case 7: EliminarHabitacion(Habitaciones, Hospitalizaciones); break;
                             case 8: EliminarHospitalizacion(Hospitalizaciones); break;
-                            case 9: cout << "Regresando al menu principal..." << endl; break;
+							case 9: EliminarDiagnostico(Diagnosticos); break;
+                            case 10: cout << "Regresando al menu principal..." << endl; break;
                             default: cout << "Opcion invalida." << endl; break;
                         }
                     }
@@ -192,7 +200,8 @@ int main()
                         cout << "|  6. MODIFICAR CITA                                                                       |" << endl;
                         cout << "|  7. MODIFICAR HABITACION                                                                 |" << endl;
                         cout << "|  8. MODIFICAR HOSPITALIZACION                                                            |" << endl;
-                        cout << "|  9. REGRESAR                                                                             |" << endl;
+                        cout << "|  9. MODIFICAR DIAGNOSTICO                                                                |" << endl;
+                        cout << "|  10. REGRESAR                                                                             |" << endl;
                         cout << "+------------------------------------------------------------------------------------------+" << endl;
                         cout << "Ingrese una opcion: ";
                         cin >> opcionModificar;
@@ -207,7 +216,8 @@ int main()
                             case 6: ModificarCita(Citas, Pacientes, Medicos, Especialidades); break;
                             case 7: ModificarHabitacion(Habitaciones); break;
                             case 8: ModificarHospitalizacion(Hospitalizaciones, Pacientes, Habitaciones, Medicos); break;
-                            case 9: cout << "Regresando al menu principal..." << endl; break;
+                            case 9: ModificarDiagnostico(Diagnosticos); break;
+                            case 10: cout << "Regresando al menu principal..." << endl; break;
                             default: cout << "Opcion invalida." << endl; break;
                         }
                     }
@@ -233,7 +243,8 @@ int main()
                         cout << "|  6. MOSTRAR CITAS                                                                        |" << endl;
                         cout << "|  7. MOSTRAR HABITACIONES                                                                 |" << endl;
                         cout << "|  8. MOSTRAR HOSPITALIZACIONES                                                            |" << endl;
-                        cout << "|  9. REGRESAR                                                                             |" << endl;
+						cout << "|  9. MOSTRAR DIAGNOSTICOS                                                                 |" << endl;
+                        cout << "|  10. REGRESAR                                                                             |" << endl;
                         cout << "+------------------------------------------------------------------------------------------+" << endl;
                         cout << "Ingrese una opcion: ";
                         cin >> opcionMostrar;
@@ -248,7 +259,8 @@ int main()
                             case 6: Citas.Mostrar(); break;
                             case 7: Habitaciones.Mostrar(); break;
                             case 8: Hospitalizaciones.Mostrar(); break;
-                            case 9: cout << "Regresando al menu principal..." << endl; break;
+							case 9: Diagnosticos.Mostrar(); break;
+                            case 10: cout << "Regresando al menu principal..." << endl; break;
                             default: cout << "Opcion invalida." << endl; break;
                         }
                     }

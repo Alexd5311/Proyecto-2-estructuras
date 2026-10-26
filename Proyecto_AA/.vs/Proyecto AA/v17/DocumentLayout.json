@@ -1,94 +1,50 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\",
+  "WorkspaceRootPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Ciudades.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Ciudades.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Paises.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Paises.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Citas.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Citas.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Operaciones.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Operaciones.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\ProyectoDefinitivo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\ProyectoDefinitivo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:ProyectoDefinitivo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Habitaciones.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Diagnostico.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Diagnostico.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Pacientes.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Pacientes.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Operaciones.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Operaciones.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Habitaciones.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Tratamiento.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Tratamiento.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Paises.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Paises.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Medicos.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Medicos.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Hospitalizaciones.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Hospitalizaciones.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Especialidades.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Especialidades.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Diagnostico.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Diagnostico.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Diagnostico.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Ciudades.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Ciudades.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Citas.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Citas.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Pacientes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Pacientes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Medicos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Medicos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Medicos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Hospitalizaciones.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Hospitalizaciones.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Medicos.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Medicos.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Habitaciones.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Especialidades.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Especialidades.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Especialidades.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Comun_PDF.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Comun_PDF.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Comun_PDF.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Paises.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Paises.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Ciudades.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Ciudades.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Pacientes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A81F2B2C-92C8-4A5D-9F51-8D84C0A0B1D1}|Proyecto AA.vcxproj|solutionrelative:Pacientes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -98,35 +54,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 15,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Citas.h",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Citas.h",
-              "RelativeDocumentMoniker": "Citas.h",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Citas.h",
-              "RelativeToolTip": "Citas.h",
-              "ViewState": "AgIAAMEBAAAAAAAAAAAAAP8BAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-22T00:57:25.309Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Ciudades.h",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Ciudades.h",
-              "RelativeDocumentMoniker": "Ciudades.h",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Ciudades.h",
-              "RelativeToolTip": "Ciudades.h",
-              "ViewState": "AgIAABIAAAAAAAAAAAAiwB0AAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-22T00:59:17.193Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Bookmark",
@@ -142,245 +78,139 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Pacientes.csv",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Pacientes.csv",
-              "RelativeDocumentMoniker": "Pacientes.csv",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Pacientes.csv",
-              "RelativeToolTip": "Pacientes.csv",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABTAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "Diagnostico.csv",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Diagnostico.csv",
+              "RelativeDocumentMoniker": "Diagnostico.csv",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Diagnostico.csv",
+              "RelativeToolTip": "Diagnostico.csv",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2026-10-22T02:27:25.66Z"
+              "WhenOpened": "2026-10-26T07:21:26.868Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Habitaciones.h",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.h",
-              "RelativeDocumentMoniker": "Habitaciones.h",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.h",
-              "RelativeToolTip": "Habitaciones.h",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAF0BAAAZAAAAAAAAAA==",
+              "Title": "Medicos.csv",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Medicos.csv",
+              "RelativeDocumentMoniker": "Medicos.csv",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Medicos.csv",
+              "RelativeToolTip": "Medicos.csv",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2026-10-26T07:17:53.994Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Operaciones.h",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Operaciones.h",
+              "RelativeDocumentMoniker": "Operaciones.h",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Operaciones.h",
+              "RelativeToolTip": "Operaciones.h",
+              "ViewState": "AgIAAP0EAAAAAAAAAADgvwcFAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-22T02:15:54.3Z"
+              "WhenOpened": "2026-10-26T07:08:18.318Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ProyectoDefinitivo.cpp",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\ProyectoDefinitivo.cpp",
-              "RelativeDocumentMoniker": "ProyectoDefinitivo.cpp",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\ProyectoDefinitivo.cpp",
-              "RelativeToolTip": "ProyectoDefinitivo.cpp",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAAAFIAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-10-22T01:46:35.044Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Operaciones.h",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Operaciones.h",
-              "RelativeDocumentMoniker": "Operaciones.h",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Operaciones.h",
-              "RelativeToolTip": "Operaciones.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEBAAAFAAAAAAAAAA==",
+              "Title": "Medicos.h",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Medicos.h",
+              "RelativeDocumentMoniker": "Medicos.h",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Medicos.h",
+              "RelativeToolTip": "Medicos.h",
+              "ViewState": "AgIAACsBAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-22T02:17:45.988Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T07:05:58.565Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Paises.h",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Paises.h",
-              "RelativeDocumentMoniker": "Paises.h",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Paises.h",
-              "RelativeToolTip": "Paises.h",
-              "ViewState": "AgIAALkAAAAAAAAAAAAAAGcAAAAAAAAAAAAAAA==",
+              "Title": "Diagnostico.h",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Diagnostico.h",
+              "RelativeDocumentMoniker": "Diagnostico.h",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Diagnostico.h",
+              "RelativeToolTip": "Diagnostico.h",
+              "ViewState": "AgIAAFgBAAAAAAAAAADgv3IBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-22T02:01:12.543Z",
+              "WhenOpened": "2026-10-26T06:49:17.283Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Paises.csv",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Paises.csv",
-              "RelativeDocumentMoniker": "Paises.csv",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Paises.csv",
-              "RelativeToolTip": "Paises.csv",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2026-10-22T02:26:17.666Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "Tratamiento.csv",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Tratamiento.csv",
-              "RelativeDocumentMoniker": "Tratamiento.csv",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Tratamiento.csv",
-              "RelativeToolTip": "Tratamiento.csv",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2026-10-22T02:35:02.748Z"
+              "Title": "Paises.h",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Paises.h",
+              "RelativeDocumentMoniker": "Paises.h",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Paises.h",
+              "RelativeToolTip": "Paises.h",
+              "ViewState": "AgIAADoAAAAAAAAAAAAWwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-10-26T06:24:09.418Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Especialidades.csv",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Especialidades.csv",
-              "RelativeDocumentMoniker": "Especialidades.csv",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Especialidades.csv",
-              "RelativeToolTip": "Especialidades.csv",
+              "DocumentIndex": 9,
+              "Title": "Ciudades.csv",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Ciudades.csv",
+              "RelativeDocumentMoniker": "Ciudades.csv",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Ciudades.csv",
+              "RelativeToolTip": "Ciudades.csv",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2026-10-22T02:35:23.018Z"
+              "WhenOpened": "2026-10-26T06:23:52.696Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "Habitaciones.csv",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.csv",
-              "RelativeDocumentMoniker": "Habitaciones.csv",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.csv",
-              "RelativeToolTip": "Habitaciones.csv",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2026-10-22T02:35:25.848Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Hospitalizaciones.csv",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Hospitalizaciones.csv",
-              "RelativeDocumentMoniker": "Hospitalizaciones.csv",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Hospitalizaciones.csv",
-              "RelativeToolTip": "Hospitalizaciones.csv",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2026-10-22T02:35:31.565Z"
+              "Title": "Comun_PDF.h",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Comun_PDF.h",
+              "RelativeDocumentMoniker": "Comun_PDF.h",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Comun_PDF.h",
+              "RelativeToolTip": "Comun_PDF.h",
+              "ViewState": "AgIAABQAAAAAAAAAAAAcwCAAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-10-26T06:18:35.893Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "Medicos.csv",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Medicos.csv",
-              "RelativeDocumentMoniker": "Medicos.csv",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Medicos.csv",
-              "RelativeToolTip": "Medicos.csv",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2026-10-22T02:35:40.779Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Diagnostico.csv",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Diagnostico.csv",
-              "RelativeDocumentMoniker": "Diagnostico.csv",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Diagnostico.csv",
-              "RelativeToolTip": "Diagnostico.csv",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2026-10-22T02:35:21.194Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Ciudades.csv",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Ciudades.csv",
-              "RelativeDocumentMoniker": "Ciudades.csv",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Ciudades.csv",
-              "RelativeToolTip": "Ciudades.csv",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2026-10-22T02:35:18.757Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Citas.csv",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Citas.csv",
-              "RelativeDocumentMoniker": "Citas.csv",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Citas.csv",
-              "RelativeToolTip": "Citas.csv",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAACkAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2026-10-22T02:35:06.715Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Especialidades.h",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Especialidades.h",
-              "RelativeDocumentMoniker": "Especialidades.h",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Especialidades.h",
-              "RelativeToolTip": "Especialidades.h",
-              "ViewState": "AgIAACsBAAAAAAAAAAAAAC0BAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-22T02:15:45.744Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
               "Title": "Pacientes.h",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Pacientes.h",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Pacientes.h",
               "RelativeDocumentMoniker": "Pacientes.h",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Pacientes.h",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Pacientes.h",
               "RelativeToolTip": "Pacientes.h",
-              "ViewState": "AgIAAKoBAAAAAAAAAAAAAK8BAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-22T02:17:46.685Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Habitaciones.txt",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.txt",
-              "RelativeDocumentMoniker": "Habitaciones.txt",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Habitaciones.txt",
-              "RelativeToolTip": "Habitaciones.txt",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2026-10-22T02:16:02.799Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-10-26T05:17:05.632Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Hospitalizaciones.h",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Hospitalizaciones.h",
-              "RelativeDocumentMoniker": "Hospitalizaciones.h",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Hospitalizaciones.h",
-              "RelativeToolTip": "Hospitalizaciones.h",
-              "ViewState": "AgIAAPEBAAAAAAAAAAAAAPMBAAAAAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "Especialidades.h",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Especialidades.h",
+              "RelativeDocumentMoniker": "Especialidades.h",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\Especialidades.h",
+              "RelativeToolTip": "Especialidades.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEBAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-22T01:30:53.305Z"
+              "WhenOpened": "2026-10-26T05:16:10.186Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Medicos.h",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Medicos.h",
-              "RelativeDocumentMoniker": "Medicos.h",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Medicos.h",
-              "RelativeToolTip": "Medicos.h",
-              "ViewState": "AgIAANYBAAAAAAAAAAAAAOYBAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-22T01:31:30.596Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "Comun_PDF.h",
-              "DocumentMoniker": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Comun_PDF.h",
-              "RelativeDocumentMoniker": "Comun_PDF.h",
-              "ToolTip": "C:\\Users\\Ale\\OneDrive\\Documentos\\trabajosTEC\\Proyecto2\\Proyecto_AA_Visual_Studio\\Proyecto_AA\\Comun_PDF.h",
-              "RelativeToolTip": "Comun_PDF.h",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAHgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-22T01:43:00.211Z"
+              "DocumentIndex": 0,
+              "Title": "ProyectoDefinitivo.cpp",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\ProyectoDefinitivo.cpp",
+              "RelativeDocumentMoniker": "ProyectoDefinitivo.cpp",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Proyecto-2-estructuras\\Proyecto_AA\\ProyectoDefinitivo.cpp",
+              "RelativeToolTip": "ProyectoDefinitivo.cpp",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-10-26T04:38:47.594Z",
+              "EditorCaption": ""
             }
           ]
         }

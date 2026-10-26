@@ -101,7 +101,7 @@ void InsertarPaciente(ArbolBPacientes &Pacientes, ArbolABBCiudades &Ciudades)
 
 
 //Especialidad
-void InsertarEspecialidad(ListaEspecialidades &Especialidades)
+void InsertarEspecialidad(ArbolAAEspecialidades &Especialidades)
 {
     int IdEspecialidad;
     string Nombre;
@@ -130,7 +130,7 @@ void InsertarEspecialidad(ListaEspecialidades &Especialidades)
 }
 
 //Medicos
-void InsertarMedico(ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
+void InsertarMedico(ArbolBMedicos &Medicos, ArbolAAEspecialidades &Especialidades)
 {
     int IdMedico;
     string Nombre;
@@ -175,7 +175,7 @@ void InsertarMedico(ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
 }
 
 //Citas
-void InsertarCita(ArbolAVLCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
+void InsertarCita(ArbolAVLCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos &Medicos, ArbolAAEspecialidades &Especialidades)
 {
     int IdCita;
     int IdPaciente;
@@ -365,6 +365,32 @@ void InsertarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones, ArbolBPa
 }
 
 
+void InsertarDiagnostico(ArbolAADiagnostico& Diagnosticos)
+{
+    string id;
+    string nombre, descripcion;
+
+    cout << "Ingrese el ID del diagnostico: ";
+    cin >> id;
+    cin.ignore(10000, '\n');
+
+    if (Diagnosticos.Existe(id))
+    {
+        cout << "Ese ID ya existe." << endl;
+        return;
+    }
+
+    cout << "Ingrese el nombre del diagnostico: ";
+    getline(cin, nombre);
+
+    cout << "Ingrese la descripcion: ";
+    getline(cin, descripcion);
+
+    if (Diagnosticos.Insertar(id, nombre, descripcion))
+        cout << "Diagnostico insertado correctamente." << endl;
+    else
+        cout << "No se pudo insertar el diagnostico." << endl;
+}
 
 
     //╔════════════════════════════════════════════════════════════════════════╗
@@ -450,7 +476,7 @@ void BuscarPaciente(ArbolBPacientes &Pacientes, ArbolABBCiudades &Ciudades, Arbo
 
 
 //Especialidad
-void BuscarEspecialidad(ListaEspecialidades &Especialidades)
+void BuscarEspecialidad(ArbolAAEspecialidades &Especialidades)
 {
     int IdEspecialidad;
     cout << " " << endl;
@@ -465,7 +491,7 @@ void BuscarEspecialidad(ListaEspecialidades &Especialidades)
 }
 
 //Medicos
-void BuscarMedico(ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
+void BuscarMedico(ArbolBMedicos &Medicos, ArbolAAEspecialidades &Especialidades)
 {
     int IdMedico;
     int IdEspecialidad;
@@ -565,6 +591,16 @@ void BuscarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones,ArbolBPacie
     }
 }
 
+void BuscarDiagnostico(ArbolAADiagnostico& Diagnosticos)
+{
+    string id;
+
+    cout << "Ingrese el ID del diagnostico que desea buscar: ";
+    cin >> id;
+
+    if (!Diagnosticos.Buscar(id))
+        cout << "No se encontro el diagnostico." << endl;
+}
 
     //╔════════════════════════════════════════════════════════════════════════╗
     //║                                ELIMINAR                                ║
@@ -747,7 +783,7 @@ void EliminarMedico(ArbolBMedicos &Medicos, ArbolAVLCitas &Citas, ListaHospitali
     }
 }
 
-void EliminarEspecialidad(ListaEspecialidades &Especialidades, ArbolBMedicos &Medicos, ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarEspecialidad(ArbolAAEspecialidades &Especialidades, ArbolBMedicos &Medicos, ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
 {
     int IdEspecialidad;
     cout << " " << endl;
@@ -860,6 +896,29 @@ void EliminarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones)
     {
         cout << "No se pudo eliminar la hospitalizacion." << endl;
     }
+}
+
+void EliminarDiagnostico(ArbolAADiagnostico& Diagnosticos)
+{
+    string id;
+
+    cout << "Ingrese el ID del diagnostico que desea eliminar: ";
+    cin >> id;
+
+    if (Diagnosticos.Eliminar(id))
+        cout << "Diagnostico eliminado correctamente." << endl;
+    else
+        cout << "No se encontro el diagnostico." << endl;
+}
+
+void MostrarDiagnosticos(ArbolAADiagnostico& Diagnosticos)
+{
+    Diagnosticos.Mostrar();
+}
+
+void GenerarReporteDiagnosticos(ArbolAADiagnostico& Diagnosticos)
+{
+    ReporteDiagnosticos(Diagnosticos);
 }
 
 //╔═════════════════════════════════════════════════════════════════╗
@@ -975,7 +1034,7 @@ void ModificarPaciente(ArbolBPacientes &Pacientes, ArbolABBCiudades &Ciudades)
     }
 }
 
-void ModificarEspecialidad(ListaEspecialidades &Especialidades)
+void ModificarEspecialidad(ArbolAAEspecialidades &Especialidades)
 {
     int IdEspecialidad;
     string Nombre;
@@ -1007,7 +1066,7 @@ void ModificarEspecialidad(ListaEspecialidades &Especialidades)
     }
 }
 
-void ModificarMedico(ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
+void ModificarMedico(ArbolBMedicos &Medicos,ArbolAAEspecialidades &Especialidades)
 {
     int IdMedico;
     string Nombre;
@@ -1051,7 +1110,7 @@ void ModificarMedico(ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades
     }
 }
 
-void ModificarCita(ArbolAVLCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos &Medicos, ListaEspecialidades &Especialidades)
+void ModificarCita(ArbolAVLCitas &Citas, ArbolBPacientes &Pacientes, ArbolBMedicos &Medicos, ArbolAAEspecialidades &Especialidades)
 {
     int IdCita;
     int IdPaciente;
@@ -1222,5 +1281,32 @@ void ModificarHospitalizacion(ListaHospitalizaciones& Hospitalizaciones, ArbolBP
     else {
         cout << "No se pudo modificar la hospitalizacion." << endl;
     }
+}
+
+void ModificarDiagnostico(ArbolAADiagnostico& Diagnosticos)
+{
+    string id;
+    string nombre, descripcion;
+
+    cout << "Ingrese el ID del diagnostico que desea modificar: ";
+    cin >> id;
+    cin.ignore(10000, '\n');
+
+    if (!Diagnosticos.Existe(id))
+    {
+        cout << "No existe ese diagnostico." << endl;
+        return;
+    }
+
+    cout << "Ingrese el nuevo nombre: ";
+    getline(cin, nombre);
+
+    cout << "Ingrese la nueva descripcion: ";
+    getline(cin, descripcion);
+
+    if (Diagnosticos.Modificar(id, nombre, descripcion))
+        cout << "Diagnostico modificado correctamente." << endl;
+    else
+        cout << "No se pudo modificar el diagnostico." << endl;
 }
 

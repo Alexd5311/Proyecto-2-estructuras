@@ -432,7 +432,7 @@ void ReporteMedicosPorEspecialidad(ArbolBMedicos& Medicos) {
         cout << "No se pudo guardar el archivo PDF." << endl;
 }
 
-void CargarMedicos(ArbolBMedicos& Medicos, ListaEspecialidades& Especialidades) {
+void CargarMedicos(ArbolBMedicos& Medicos, ArbolAAEspecialidades& Especialidades) {
     ifstream archivo("Medicos.csv");
     if (!archivo) {
         cout << "No se pudo abrir el archivo Medicos.csv" << endl;
