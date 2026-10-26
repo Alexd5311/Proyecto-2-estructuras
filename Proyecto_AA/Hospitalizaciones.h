@@ -1,27 +1,9 @@
 #pragma once
 
-class ListaHospitalizaciones;
-
 class NodoHospitalizacion
 {
 public:
 
-    NodoHospitalizacion(int nuevoIdHospitalizacion, int nuevoIdPaciente,
-        int nuevoIdHabitacion, int nuevoIdMedico, string nuevaFechaIngreso,
-        string nuevaFechaSalida, string nuevoMotivo)
-    {
-        IdHospitalizacion = nuevoIdHospitalizacion;
-        IdPaciente = nuevoIdPaciente;
-        IdHabitacion = nuevoIdHabitacion;
-        IdMedico = nuevoIdMedico;
-        FechaIngreso = nuevaFechaIngreso;
-        FechaSalida = nuevaFechaSalida;
-        Motivo = nuevoMotivo;
-        siguiente = NULL;
-        anterior = NULL;
-    }
-
-private:
     int IdHospitalizacion;
     int IdPaciente;
     int IdHabitacion;
@@ -30,424 +12,625 @@ private:
     string FechaSalida;
     string Motivo;
 
+	bool rojo;
+
+	NodoHospitalizacion* Padre;
+    NodoHospitalizacion* Hijoizq;
+	NodoHospitalizacion* Hijoder;
+    NodoHospitalizacion* Tio;
+    NodoHospitalizacion* Abuelo;
+    NodoHospitalizacion(int NuevoIdHospitalizacion, int NuevoIdPaciente,int NuevoIdHabitacion, int NuevoIdMedico, string NuevoFechaIngreso,string NuevoFechaSalida, string NuevoMotivo)
+    {
+		IdHospitalizacion = NuevoIdHospitalizacion;
+		IdPaciente = NuevoIdPaciente;
+		IdHabitacion = NuevoIdHabitacion;
+		IdMedico = NuevoIdMedico;
+		FechaIngreso = NuevoFechaIngreso;
+		FechaSalida = NuevoFechaSalida;
+		Motivo = NuevoMotivo;
+
+		rojo = true;
+		Padre = NULL;
+		Hijoizq = NULL;
+		Hijoder = NULL;
+		Abuelo = NULL;
+		Tio = NULL;
+	}
+
+
+private:
+
     NodoHospitalizacion *siguiente;
     NodoHospitalizacion *anterior;
 
-    friend class ListaHospitalizaciones;
-    friend void ReporteHospitalizacionesPorMedico(ListaHospitalizaciones &Hospitalizaciones);
+    friend class ArbolRNHospitalizaciones;
+    friend void ReporteHospitalizacionesPorMedico(ArbolRNHospitalizaciones &Hospitalizaciones);
 };
 
 typedef NodoHospitalizacion *pnodoHospitalizacion;
 
 
 //╔═════════════════════════════════════════════════════════════════════════════╗
-//║                          LISTA DOBLE HOSPITALIZACIONES                      ║
+//║                          ARBOL ROJO NEGRO HOSPITALIZACIONES                      ║
 //╚═════════════════════════════════════════════════════════════════════════════╝
 
-class ListaHospitalizaciones
+class ArbolRNHospitalizaciones
 {
-public:
-    ListaHospitalizaciones(){
-        primero = NULL;
+
+private:
+    NodoHospitalizacion* primero;
+
+    NodoHospitalizacion* BuscarMinimo(NodoHospitalizacion* nodo)
+    {
+        if (nodo == NULL)
+            return NULL;
+        while (nodo->Hijoizq != NULL)
+            nodo = nodo->Hijoizq;
+        return nodo;
     }
-    ~ListaHospitalizaciones();
-    bool ListaVacia(){
+
+    void TransformarArbol(NodoHospitalizacion* nodoOriginal, NodoHospitalizacion* NodoReemplazo)
+    {
+        if (nodoOriginal->Padre == NULL)
+        {
+            primero = NodoReemplazo;
+        }
+        else if (nodoOriginal == nodoOriginal->Padre->Hijoizq)
+        {
+            nodoOriginal->Padre->Hijoizq = NodoReemplazo;
+        }
+        else
+        {
+            nodoOriginal->Padre->Hijoder = NodoReemplazo;
+        }
+        if (NodoReemplazo != NULL)
+        {
+            NodoReemplazo->Padre = nodoOriginal->Padre;
+        }
+    }
+
+
+    void ActualizarArbol(NodoHospitalizacion* nodo)
+    {
+        if (nodo == NULL)
+            return;
+        if (nodo->Hijoizq != NULL)
+            nodo->Hijoizq->Padre = nodo;
+        if (nodo->Hijoder != NULL)
+            nodo->Hijoder->Padre = nodo;
+        nodo->Abuelo = NULL;
+        nodo->Tio = NULL;
+        if (nodo->Padre != NULL)
+        {
+            nodo->Abuelo = nodo->Padre->Padre;
+            if (nodo->Abuelo != NULL)
+            {
+                if (nodo->Padre == nodo->Abuelo->Hijoizq)
+                    nodo->Tio = nodo->Abuelo->Hijoder;
+                else
+                    nodo->Tio = nodo->Abuelo->Hijoizq;
+            }
+        }
+        ActualizarArbol(nodo->Hijoizq);
+        ActualizarArbol(nodo->Hijoder);
+    }
+
+    void BalancearEliminacion(
+        NodoHospitalizacion* nodo,
+        NodoHospitalizacion* padre)
+    {
+        while (nodo != primero && ObtenerColor(nodo) == false)
+        {
+            if (padre == NULL)
+                break;
+
+            if (nodo == padre->Hijoizq)
+            {
+                NodoHospitalizacion* hermano = padre->Hijoder;
+
+                if (ObtenerColor(hermano))
+                {
+                    hermano->rojo = false;
+                    padre->rojo = true;
+                    RotarIzquierda(padre);
+                    hermano = padre->Hijoder;
+                }
+
+                if (hermano == NULL ||
+                    (!ObtenerColor(hermano->Hijoizq) &&
+                        !ObtenerColor(hermano->Hijoder)))
+                {
+                    if (hermano != NULL)
+                        hermano->rojo = true;
+                    nodo = padre;
+                    padre = nodo->Padre;
+                }
+                else
+                {
+                    if (!ObtenerColor(hermano->Hijoder))
+                    {
+                        if (hermano->Hijoizq != NULL)
+                            hermano->Hijoizq->rojo = false;
+
+                        hermano->rojo = true;
+                        RotarDerecha(hermano);
+                        hermano = padre->Hijoder;
+                    }
+
+                    hermano->rojo = padre->rojo;
+                    padre->rojo = false;
+
+                    if (hermano->Hijoder != NULL)
+                        hermano->Hijoder->rojo = false;
+
+                    RotarIzquierda(padre);
+                    nodo = primero;
+                    padre = NULL;
+                }
+            }
+            else
+            {
+                NodoHospitalizacion* hermano = padre->Hijoizq;
+
+                if (ObtenerColor(hermano))
+                {
+                    hermano->rojo = false;
+                    padre->rojo = true;
+                    RotarDerecha(padre);
+                    hermano = padre->Hijoizq;
+                }
+
+                if (hermano == NULL ||
+                    (!ObtenerColor(hermano->Hijoder) &&
+                        !ObtenerColor(hermano->Hijoizq)))
+                {
+                    if (hermano != NULL)
+                        hermano->rojo = true;
+                    nodo = padre;
+                    padre = nodo->Padre;
+                }
+                else
+                {
+                    if (!ObtenerColor(hermano->Hijoizq))
+                    {
+                        if (hermano->Hijoder != NULL)
+                            hermano->Hijoder->rojo = false;
+                        hermano->rojo = true;
+                        RotarIzquierda(hermano);
+                        hermano = padre->Hijoizq;
+                    }
+
+                    hermano->rojo = padre->rojo;
+                    padre->rojo = false;
+
+                    if (hermano->Hijoizq != NULL)
+                        hermano->Hijoizq->rojo = false;
+
+                    RotarDerecha(padre);
+                    nodo = primero;
+                    padre = NULL;
+                }
+            }
+        }
+
+        if (nodo != NULL)
+            nodo->rojo = false;
+
+        if (primero != NULL)
+            primero->rojo = false;
+
+        ActualizarArbol(primero);
+    }
+
+    bool EliminarNodo(NodoHospitalizacion* nodo)
+    {
+        if (nodo == NULL)
+            return false;
+
+		NodoHospitalizacion* objetivo = nodo;
+        NodoHospitalizacion* reemplazo = objetivo;
+		NodoHospitalizacion* hijo = NULL;
+		NodoHospitalizacion* padreHijo = NULL;
+
+		bool colorOriginal = reemplazo->rojo;
+        if (objetivo->Hijoizq == NULL)
+        {
+            hijo = objetivo->Hijoder;
+            TransformarArbol(objetivo, objetivo->Hijoder);
+            padreHijo = objetivo->Padre;
+        }
+        else if (objetivo->Hijoder == NULL)
+        {
+            hijo = objetivo->Hijoizq;
+            TransformarArbol(objetivo, objetivo->Hijoizq);
+            padreHijo = objetivo->Padre;
+        }
+        else
+        {
+            reemplazo = BuscarMinimo(objetivo->Hijoder);
+            colorOriginal = reemplazo->rojo;
+            hijo = reemplazo->Hijoder;
+            if (reemplazo->Padre == objetivo)
+            {
+                if (hijo != NULL)
+                    hijo->Padre = reemplazo;
+                padreHijo = reemplazo;
+            }
+            else
+            {
+                TransformarArbol(reemplazo, reemplazo->Hijoder);
+                reemplazo->Hijoder = objetivo->Hijoder;
+                if (reemplazo->Hijoder != NULL)
+                    reemplazo->Hijoder->Padre = reemplazo;
+                padreHijo = reemplazo->Padre;
+            }
+            TransformarArbol(objetivo, reemplazo);
+            reemplazo->Hijoizq = objetivo->Hijoizq;
+            if (reemplazo->Hijoizq != NULL)
+                reemplazo->Hijoizq->Padre = reemplazo;
+			reemplazo->rojo = objetivo->rojo;
+
+            delete objetivo;
+            if (colorOriginal == false)
+            {
+                BalancearEliminacion(hijo, padreHijo);
+            }
+            if (primero != NULL)
+            {
+                primero->rojo = false;
+            }
+			ActualizarArbol(reemplazo);
+			return true;
+        }
+
+    }
+
+    void BuscarPorPaciente(NodoHospitalizacion* nodo, int IdPaciente, vector<NodoHospitalizacion*>& resultados) {
+        if (nodo == NULL) {
+            return;
+        }
+        if (nodo->IdPaciente == IdPaciente) {
+            resultados.push_back(nodo);
+        }
+        BuscarPorPaciente(nodo->Hijoizq, IdPaciente, resultados);
+        BuscarPorPaciente(nodo->Hijoder, IdPaciente, resultados);
+	}
+
+
+    void RotarDerecha(NodoHospitalizacion* nodo) {
+        NodoHospitalizacion* nuevoPadre = nodo->Hijoizq;
+        nodo->Hijoizq = nuevoPadre->Hijoder;
+        if (nuevoPadre->Hijoder != NULL) {
+            nuevoPadre->Hijoder->Padre = nodo;
+        }
+        nuevoPadre->Padre = nodo->Padre;
+        if (nodo->Padre == NULL) {
+            primero = nuevoPadre;
+        }
+        else if (nodo == nodo->Padre->Hijoizq) {
+            nodo->Padre->Hijoizq = nuevoPadre;
+        }
+        else {
+            nodo->Padre->Hijoder = nuevoPadre;
+        }
+        nuevoPadre->Hijoder = nodo;
+        nodo->Padre = nuevoPadre;
+        ActualizarArbol(primero);
+    }
+
+    void RotarIzquierda(NodoHospitalizacion* nodo) {
+        NodoHospitalizacion* nuevoPadre = nodo->Hijoder;
+        nodo->Hijoder = nuevoPadre->Hijoizq;
+        if (nuevoPadre->Hijoizq != NULL) {
+            nuevoPadre->Hijoizq->Padre = nodo;
+        }
+        nuevoPadre->Padre = nodo->Padre;
+        if (nodo->Padre == NULL) {
+            primero = nuevoPadre;
+        }
+        else if (nodo == nodo->Padre->Hijoizq) {
+            nodo->Padre->Hijoizq = nuevoPadre;
+        }
+        else {
+            nodo->Padre->Hijoder = nuevoPadre;
+        }
+        nuevoPadre->Hijoizq = nodo;
+        nodo->Padre = nuevoPadre;
+        ActualizarArbol(primero);
+    }
+
+    void Balancear(NodoHospitalizacion* nodo) {
+        if (nodo->Padre == NULL) {
+            nodo->rojo = false;
+            return;
+        }
+        if (!nodo->Padre->rojo) {
+            return;
+        }
+        if (nodo->Tio != NULL && nodo->Tio->rojo) {
+            nodo->Padre->rojo = false;
+            nodo->Tio->rojo = false;
+            nodo->Abuelo->rojo = true;
+            Balancear(nodo->Abuelo);
+        }
+        else {
+            if (nodo == nodo->Padre->Hijoder && nodo->Padre == nodo->Abuelo->Hijoizq) {
+                RotarIzquierda(nodo->Padre);
+                nodo = nodo->Hijoizq;
+            }
+            else if (nodo == nodo->Padre->Hijoizq && nodo->Padre == nodo->Abuelo->Hijoder) {
+                RotarDerecha(nodo->Padre);
+                nodo = nodo->Hijoder;
+            }
+            nodo->Padre->rojo = false;
+            nodo->Abuelo->rojo = true;
+            if (nodo == nodo->Padre->Hijoizq) {
+                RotarDerecha(nodo->Abuelo);
+            }
+            else {
+                RotarIzquierda(nodo->Abuelo);
+            }
+        }
+        primero->rojo = false;
+        ActualizarArbol(primero);
+    }
+
+    void Mostrar(NodoHospitalizacion* nodo)
+    {
+        if (nodo == NULL) {
+            return;
+        }
+        Mostrar(nodo->Hijoizq);
+        cout << "IdHospitalizacion: " << nodo->IdHospitalizacion << ", IdPaciente: " << nodo->IdPaciente
+            << ", IdHabitacion: " << nodo->IdHabitacion << ", IdMedico: " << nodo->IdMedico
+            << ", FechaIngreso: " << nodo->FechaIngreso << ", FechaSalida: " << nodo->FechaSalida
+            << ", Motivo: " << nodo->Motivo << endl;
+        cout << "Color: " << (nodo->rojo ? "Rojo" : "Negro") << endl;
+
+        Mostrar(nodo->Hijoder);
+    }
+
+    bool ObtenerColor(NodoHospitalizacion* nodo)
+    {
+        if (nodo == NULL) {
+            return false;
+        }
+        return nodo->rojo;
+    }
+
+    void BuscarPorHabitacion(NodoHospitalizacion* nodo, int IdHabitacion, int identificadores[], int& cantidad)
+    {
+        if (nodo == NULL)
+            return;
+
+        BuscarPorHabitacion(
+            nodo->Hijoizq, IdHabitacion, identificadores, cantidad);
+
+        if (nodo->IdHabitacion == IdHabitacion)
+        {
+            identificadores[cantidad] = nodo->IdHospitalizacion;
+            cantidad++;
+        }
+
+        BuscarPorHabitacion(
+            nodo->Hijoder, IdHabitacion, identificadores, cantidad);
+    }
+
+    int ContarNodos(NodoHospitalizacion* nodo)
+    {
+        if (nodo == NULL) {
+            return 0;
+        }
+        return 1 + ContarNodos(nodo->Hijoizq) + ContarNodos(nodo->Hijoder);
+    }
+
+    void BuscarPorMedico(NodoHospitalizacion* nodo, int IdMedico, int identificadores[], int& cantidad)
+    {
+        if (nodo == NULL)
+            return;
+
+        BuscarPorMedico(nodo->Hijoizq, IdMedico, identificadores, cantidad);
+
+        if (nodo->IdMedico == IdMedico)
+        {
+            identificadores[cantidad] = nodo->IdHospitalizacion;
+            cantidad++;
+        }
+
+        BuscarPorMedico(nodo->Hijoder, IdMedico, identificadores, cantidad);
+    }
+    
+    void BuscarPorPaciente(NodoHospitalizacion* nodo, int IdPaciente, int identificadores[], int& cantidad)
+    {
+        if (nodo == NULL)
+            return;
+        BuscarPorPaciente(nodo->Hijoizq, IdPaciente, identificadores, cantidad);
+        if (nodo->IdPaciente == IdPaciente)
+        {
+            identificadores[cantidad] = nodo->IdHospitalizacion;
+            cantidad++;
+        }
+        BuscarPorPaciente(nodo->Hijoder, IdPaciente, identificadores, cantidad);
+	}
+public:
+    
+    ArbolRNHospitalizaciones() {
+		primero = NULL;
+    }
+
+    bool ListaVacia() {
         return primero == NULL;
     }
-    bool Existe(int IdHospitalizacion);
-    bool Insertar(int IdHospitalizacion, int IdPaciente,
-        int IdHabitacion, int IdMedico, string FechaIngreso,
-        string FechaSalida, string Motivo);
-    bool Buscar(int IdHospitalizacion);
-    bool Eliminar(int IdHospitalizacion);
-    bool EliminarPorPaciente(int IdPaciente);
-    bool EliminarPorHabitacion(int IdHabitacion);
-    bool EliminarPorMedico(int IdMedico);
-    bool Modificar(int IdHospitalizacion, int IdPaciente,
-        int IdHabitacion, int IdMedico, string FechaIngreso,
-        string FechaSalida, string Motivo);
-    void Mostrar();
-    void ReportePDF(GeneradorPDF &pdf);
-    friend void ReporteHospitalizacionesPorMedico(ListaHospitalizaciones &Hospitalizaciones);
-private:
-    pnodoHospitalizacion primero;
+
+
+    NodoHospitalizacion* BuscarHospitalizacion(int Id) {
+		NodoHospitalizacion* aux = primero;
+        while (aux != NULL) {
+            if (aux->IdHospitalizacion == Id) {
+                return aux;
+            }
+            else if (Id < aux->IdHospitalizacion) {
+                aux = aux->Hijoizq;
+            }
+            else {
+                aux = aux->Hijoder;
+			}
+        }
+		return NULL;
+	}
+
+    bool InsertarHospitalizacion(int IdHospitalizacion,int IdPaciente, int IdHabitacion, int IdMedico,string FechaIngreso, string FechaSalida, string Motivo)
+    {
+        if (Existe(IdHospitalizacion))
+        {
+            cout << "La hospitalizacion con Id "
+                << IdHospitalizacion
+                << " ya existe." << endl;
+            return false;
+        }
+
+        if (primero == NULL)
+        {
+            primero = new NodoHospitalizacion(
+                IdHospitalizacion, IdPaciente, IdHabitacion,
+                IdMedico, FechaIngreso, FechaSalida, Motivo);
+            primero->rojo = false;
+        }
+        else
+        {
+            NodoHospitalizacion* nuevoNodo = new NodoHospitalizacion(
+                IdHospitalizacion, IdPaciente, IdHabitacion,
+                IdMedico, FechaIngreso, FechaSalida, Motivo);
+            NodoHospitalizacion* aux = primero;
+            NodoHospitalizacion* padre = NULL;
+
+            while (aux != NULL)
+            {
+                padre = aux;
+
+                if (IdHospitalizacion < aux->IdHospitalizacion)
+                    aux = aux->Hijoizq;
+                else
+                    aux = aux->Hijoder;
+            }
+            nuevoNodo->Padre = padre;
+            if (IdHospitalizacion < padre->IdHospitalizacion)
+                padre->Hijoizq = nuevoNodo;
+            else
+                padre->Hijoder = nuevoNodo;
+            Balancear(nuevoNodo);
+        }
+
+        return true;
+    }
+
+    bool Existe(int IdHospitalizacion)
+    {
+        return BuscarHospitalizacion(IdHospitalizacion) != NULL;
+    }
+
+    void MostrarHospitalizaciones()
+    {
+        if (ListaVacia()) {
+            cout << "No hay hospitalizaciones registradas." << endl;
+            return;
+        }
+        Mostrar(primero);
+	}
+    
+	NodoHospitalizacion* Buscar(int IdHospitalizacion) {
+        return BuscarHospitalizacion(IdHospitalizacion);
+    }
+    bool Modificar(int IdHospitalizacion, int IdPaciente, int IdHabitacion, int IdMedico, string FechaIngreso, string FechaSalida, string Motivo) {
+        NodoHospitalizacion* nodo = Buscar(IdHospitalizacion);
+        if (nodo != NULL) {
+            nodo->IdPaciente = IdPaciente;
+            nodo->IdHabitacion = IdHabitacion;
+            nodo->IdMedico = IdMedico;
+            nodo->FechaIngreso = FechaIngreso;
+            nodo->FechaSalida = FechaSalida;
+            nodo->Motivo = Motivo;
+            return true;
+        }
+        return false;
+	}
+
+    bool Eliminar(int IdHospitalizacion) {
+        NodoHospitalizacion* nodo = Buscar(IdHospitalizacion);
+        if (nodo != NULL) {
+            return EliminarNodo(nodo);
+        }
+        return false;
+	}
+
+
+    int EliminarPorPaciente(int IdPaciente)
+    {
+        int cantidadMaxima = ContarNodos(primero);
+        if (cantidadMaxima == 0)
+            return 0;
+        int* identificadores = new int[cantidadMaxima];
+        int cantidad = 0;
+
+        BuscarPorPaciente(primero, IdPaciente, identificadores, cantidad);
+
+        int eliminados = 0;
+
+        for (int i = 0; i < cantidad; i++)
+        {
+            if (Eliminar(identificadores[i]))
+                eliminados++;
+        }
+
+        delete[] identificadores;
+        return eliminados;
+    }
+
+    int EliminarPorHabitacion(int IdHabitacion) {
+        int identificadores[100];
+        int cantidad = 0;
+        BuscarPorHabitacion(primero, IdHabitacion, identificadores, cantidad);
+        int eliminados = 0;
+        for (int i = 0; i < cantidad; i++) {
+            if (EliminarNodo(BuscarHospitalizacion(identificadores[i]))) {
+                eliminados++;
+            }
+        }
+		delete[] identificadores;
+        return eliminados;
+	}
+
+    int EliminarPorMedico(int IdMedico)
+    {
+        int cantidadMaxima = ContarNodos(primero);
+        if (cantidadMaxima == 0)
+            return 0;
+        int* identificadores = new int[cantidadMaxima];
+        int cantidad = 0;
+
+        BuscarPorMedico(primero, IdMedico, identificadores, cantidad);
+        int eliminados = 0;
+        for (int i = 0; i < cantidad; i++)
+        {
+            if (Eliminar(identificadores[i]))
+                eliminados++;
+        }
+
+        delete[] identificadores;
+        return eliminados;
+    }
+
 };
-
-
-ListaHospitalizaciones::~ListaHospitalizaciones()
-{
-    pnodoHospitalizacion aux;
-    while (primero){
-        aux = primero;
-        primero = primero->siguiente;
-        delete aux;
-    }
-    primero = NULL;
-}
-
-
-//╔═══════════════════════════════════════════════════════════════╗
-//║                         VALIDACION                            ║
-//╚═══════════════════════════════════════════════════════════════╝
-bool ListaHospitalizaciones::Existe(int IdHospitalizacion)
-{
-    pnodoHospitalizacion aux = primero;
-    while (aux != NULL){
-        if (aux->IdHospitalizacion == IdHospitalizacion){
-            return true;
-        }
-        aux = aux->siguiente;
-    }
-    return false;
-}
-
-
-//╔═══════════════════════════════════════════════════════════════╗
-//║                          INSERTAR                             ║
-//╚═══════════════════════════════════════════════════════════════╝
-bool ListaHospitalizaciones::Insertar(int IdHospitalizacion,
-    int IdPaciente, int IdHabitacion, int IdMedico,
-    string FechaIngreso, string FechaSalida, string Motivo)
-{
-    if (Existe(IdHospitalizacion)){
-        return false;
-    }
-    pnodoHospitalizacion nuevo = new NodoHospitalizacion(
-        IdHospitalizacion,
-        IdPaciente,
-        IdHabitacion,
-        IdMedico,
-        FechaIngreso,
-        FechaSalida,
-        Motivo
-    );
-
-    if (ListaVacia()){
-        primero = nuevo;
-        primero->anterior = NULL;
-    }
-    else
-    {
-        pnodoHospitalizacion aux = primero;
-        while (aux->siguiente != NULL){
-            aux = aux->siguiente;
-        }
-        aux->siguiente = nuevo;
-        nuevo->anterior = aux;
-    }
-    return true;
-}
-
-
-
-//╔═════════════════════════════════════════════════════════════════╗
-//║                             BUSCAR                              ║
-//╚═════════════════════════════════════════════════════════════════╝
-bool ListaHospitalizaciones::Buscar(int IdHospitalizacion)
-{
-    pnodoHospitalizacion aux = primero;
-    while (aux != NULL){
-        if (aux->IdHospitalizacion == IdHospitalizacion){
-            cout << "IdHospitalizacion: " << aux->IdHospitalizacion << endl;
-            cout << "IdPaciente: " << aux->IdPaciente << endl;
-            cout << "IdHabitacion: " << aux->IdHabitacion << endl;
-            cout << "IdMedico: " << aux->IdMedico << endl;
-            cout << "FechaIngreso: " << aux->FechaIngreso << endl;
-            cout << "FechaSalida: " << aux->FechaSalida << endl;
-            cout << "Motivo: " << aux->Motivo << endl;
-            return true;
-        }
-        aux = aux->siguiente;
-    }
-    return false;
-}
-
-
-//╔═══════════════════════════════════════════════════════════════════╗
-//║                              ELIMINAR                              ║
-//╚═══════════════════════════════════════════════════════════════════╝
-
-
-bool ListaHospitalizaciones::Eliminar(int IdHospitalizacion)
-{
-    if (ListaVacia()){
-        return false;
-    }
-    pnodoHospitalizacion aux = primero;
-    while (aux != NULL){
-        if (aux->IdHospitalizacion == IdHospitalizacion){
-            if (aux == primero){
-                primero = primero->siguiente;
-                if (primero != NULL)
-                    primero->anterior = NULL;
-            }
-            else{
-                aux->anterior->siguiente = aux->siguiente;
-                if (aux->siguiente != NULL)
-                    aux->siguiente->anterior = aux->anterior;
-            }
-            delete aux;
-            return true;
-        }
-        aux = aux->siguiente;
-    }
-    return false;
-}
-
-
-bool ListaHospitalizaciones::EliminarPorHabitacion(int IdHabitacion)
-{
-    bool eliminado = false;
-    pnodoHospitalizacion aux = primero;
-
-    while (aux != NULL)
-    {
-        if (aux->IdHabitacion == IdHabitacion)
-        {
-            pnodoHospitalizacion temp = aux;
-
-            if (aux == primero)
-            {
-                primero = primero->siguiente;
-                if (primero != NULL)
-                    primero->anterior = NULL;
-            }
-            else
-            {
-                aux->anterior->siguiente = aux->siguiente;
-                if (aux->siguiente != NULL)
-                    aux->siguiente->anterior = aux->anterior;
-            }
-            aux = aux->siguiente;
-            delete temp;
-            eliminado = true;
-        }
-        else
-        {
-            aux = aux->siguiente;
-        }
-    }
-    return eliminado;
-}
-
-bool ListaHospitalizaciones::EliminarPorMedico(int IdMedico)
-{
-    bool eliminado = false;
-    pnodoHospitalizacion aux = primero;
-
-    while (aux != NULL)
-    {
-        if (aux->IdMedico == IdMedico)
-        {
-            pnodoHospitalizacion temp = aux;
-
-            if (aux == primero)
-            {
-                primero = primero->siguiente;
-                if (primero != NULL)
-                    primero->anterior = NULL;
-            }
-            else
-            {
-                aux->anterior->siguiente = aux->siguiente;
-                if (aux->siguiente != NULL)
-                    aux->siguiente->anterior = aux->anterior;
-            }
-
-            aux = aux->siguiente;
-            delete temp;
-            eliminado = true;
-        }
-        else
-        {
-            aux = aux->siguiente;
-        }
-    }
-
-    return eliminado;
-}
-
-
-
-
-//╔═════════════════════════════════════════════════════════════════╗
-//║                             Modificar                           ║
-//╚═════════════════════════════════════════════════════════════════╝
-
-
-
-bool ListaHospitalizaciones::Modificar(int IdHospitalizacion,
-    int IdPaciente, int IdHabitacion, int IdMedico,
-    string FechaIngreso, string FechaSalida, string Motivo)
-{
-    pnodoHospitalizacion aux = primero;
-    while (aux != NULL)
-    {
-        if (aux->IdHospitalizacion == IdHospitalizacion)
-        {
-            aux->IdPaciente = IdPaciente;
-            aux->IdHabitacion = IdHabitacion;
-            aux->IdMedico = IdMedico;
-            aux->FechaIngreso = FechaIngreso;
-            aux->FechaSalida = FechaSalida;
-            aux->Motivo = Motivo;
-            return true;
-        }
-        aux = aux->siguiente;
-    }
-    return false;
-}
-
-//╔═════════════════════════════════════════════════════════════════╗
-//║                             REPORTES                            ║
-//╚═════════════════════════════════════════════════════════════════╝
-void ListaHospitalizaciones::ReportePDF(GeneradorPDF &pdf)
-{
-    if (ListaVacia()){
-        pdf.Linea("(No hay hospitalizaciones registradas)");
-        return;
-    }
-    pnodoHospitalizacion aux = primero;
-    while (aux != NULL){
-        string salida = aux->FechaSalida;
-        if (salida.find("0000") == 0){
-            salida = "Sin fecha de salida";
-        }
-        pdf.Linea(Rellenar(to_string(aux->IdHospitalizacion), 8) + Rellenar(to_string(aux->IdPaciente), 10)
-                    + Rellenar(to_string(aux->IdHabitacion), 8) + Rellenar(to_string(aux->IdMedico), 8)
-                    + Rellenar(aux->FechaIngreso, 14) + Rellenar(salida, 21)
-                    + Rellenar(aux->Motivo, 49));
-        aux = aux->siguiente;
-    }
-}
-
-void ReporteHospitalizaciones(ListaHospitalizaciones &Hospitalizaciones)
-{
-    GeneradorPDF pdf("Reporte_Hospitalizaciones.pdf", "REPORTE DE HOSPITALIZACIONES",
-                    Rellenar("ID", 8) + Rellenar("PACIENTE", 10) + Rellenar("HAB.", 8)
-                    + Rellenar("MEDICO", 8) + Rellenar("INGRESO", 14) + Rellenar("SALIDA", 21)
-                    + Rellenar("MOTIVO", 49));
-    if (!pdf.Valido()){
-        cout << "No se pudo crear el documento PDF." << endl;
-        return;
-    }
-    Hospitalizaciones.ReportePDF(pdf);
-    if (pdf.Guardar()){
-        cout << "Reporte generado: Reporte_Hospitalizaciones.pdf" << endl;
-    }
-    else{
-        cout << "No se pudo guardar el archivo PDF." << endl;
-    }
-}
-
-
-void ReporteHospitalizacionesPorMedico(ListaHospitalizaciones &Hospitalizaciones)
-{
-    int IdMedico;
-    cout << "Ingrese el IdMedico: ";
-    cin >> IdMedico;
-
-    GeneradorPDF pdf("Reporte_Hospitalizaciones_Por_Medico.pdf", "REPORTE DE HOSPITALIZACIONES POR MEDICO",
-                    Rellenar("ID", 8) + Rellenar("PACIENTE", 10) + Rellenar("HAB.", 8)
-                    + Rellenar("MEDICO", 8) + Rellenar("INGRESO", 14) + Rellenar("SALIDA", 21)
-                    + Rellenar("MOTIVO", 49));
-    if (!pdf.Valido()){
-        cout << "No se pudo crear el documento PDF." << endl;
-        return;
-    }
-    pnodoHospitalizacion aux = Hospitalizaciones.primero;
-    bool encontrado = false;
-    while (aux != NULL){
-        if (aux->IdMedico == IdMedico){
-            string salida = aux->FechaSalida;
-            if (salida.find("0000") == 0){
-                salida = "Sin fecha de salida";
-            }
-            pdf.Linea(Rellenar(to_string(aux->IdHospitalizacion), 8) + Rellenar(to_string(aux->IdPaciente), 10)
-                        + Rellenar(to_string(aux->IdHabitacion), 8) + Rellenar(to_string(aux->IdMedico), 8)
-                        + Rellenar(aux->FechaIngreso, 14) + Rellenar(salida, 21)
-                        + Rellenar(aux->Motivo, 49));
-            encontrado = true;
-        }
-        aux = aux->siguiente;
-    }
-    if (!encontrado){
-        pdf.Linea("(No hay hospitalizaciones registradas para este medico)");
-    }
-    if (pdf.Guardar()){
-        cout << "Reporte generado: Reporte_Hospitalizaciones_Por_Medico.pdf" << endl;
-    }
-    else{
-        cout << "No se pudo guardar el archivo PDF." << endl;
-    }
-}
-
-//╔═════════════════════════════════════════════════════════════════╗
-//║                             MOSTRAR                             ║
-//╚═════════════════════════════════════════════════════════════════╝
-bool ListaHospitalizaciones::EliminarPorPaciente(int IdPaciente)
-{
-    bool eliminado = false;
-    pnodoHospitalizacion aux = primero;
-
-    while (aux != NULL)
-    {
-        if (aux->IdPaciente == IdPaciente)
-        {
-            pnodoHospitalizacion temp = aux;
-
-            if (aux == primero)
-            {
-                primero = primero->siguiente;
-                if (primero != NULL)
-                    primero->anterior = NULL;
-            }
-            else
-            {
-                aux->anterior->siguiente = aux->siguiente;
-                if (aux->siguiente != NULL)
-                    aux->siguiente->anterior = aux->anterior;
-            }
-
-            aux = aux->siguiente;
-            delete temp;
-            eliminado = true;
-        }
-        else
-        {
-            aux = aux->siguiente;
-        }
-    }
-
-    return eliminado;
-}
-
-void ListaHospitalizaciones::Mostrar()
-{
-    pnodoHospitalizacion aux = primero;
-    while (aux != NULL){
-        cout << "IdHospitalizacion: " << aux->IdHospitalizacion
-                << " | IdPaciente: " << aux->IdPaciente
-                << " | IdHabitacion: " << aux->IdHabitacion
-                << " | IdMedico: " << aux->IdMedico
-                << " | FechaIngreso: " << aux->FechaIngreso
-                << " | FechaSalida: " << aux->FechaSalida
-                << " | Motivo: " << aux->Motivo
-                << endl;
-        aux = aux->siguiente;
-    }
-}
 
 
 //╔═════════════════════════════════════════════════════════════════════════════╗
 //║                    CARGAR HOSPITALIZACIONES                                ║
 //╚═════════════════════════════════════════════════════════════════════════════╝
 
-void CargarHospitalizaciones(ListaHospitalizaciones &Hospitalizaciones, ArbolBPacientes &Pacientes, 
+void CargarHospitalizaciones(ArbolRNHospitalizaciones &Hospitalizaciones, ArbolBPacientes &Pacientes, 
     ArbolAVLHabitaciones &Habitaciones, ArbolBMedicos &Medicos)
 {
     ifstream archivo("Hospitalizaciones.csv");
-
     if (!archivo){
         cout << "No se pudo abrir el archivo Hospitalizaciones.csv" << endl;
         return;
@@ -476,24 +659,23 @@ void CargarHospitalizaciones(ListaHospitalizaciones &Hospitalizaciones, ArbolBPa
         int IdPaciente = stoi(IdPacienteTexto);
         int IdHabitacion = stoi(IdHabitacionTexto);
         int IdMedico = stoi(IdMedicoTexto);
-        if (!Pacientes.Existe(IdPaciente)){
+        if (!Pacientes.Existe(IdPaciente)) {
             continue;
         }
 
-        if (!Habitaciones.Existe(IdHabitacion)){
+        if (!Habitaciones.Existe(IdHabitacion)) {
             continue;
         }
 
-        if (!Medicos.Existe(IdMedico)){
+        if (!Medicos.Existe(IdMedico)) {
             continue;
         }
-
-        if (Hospitalizaciones.Existe(IdHospitalizacion)){
-            continue;
-        }
-        Hospitalizaciones.Insertar(IdHospitalizacion, IdPaciente, IdHabitacion, IdMedico, FechaIngreso, FechaSalida, Motivo);
+        Hospitalizaciones.InsertarHospitalizacion(IdHospitalizacion, IdPaciente, IdHabitacion, IdMedico, FechaIngreso, FechaSalida, Motivo);
     }
 
     archivo.close();
     cout << "Hospitalizaciones cargadas correctamente." << endl;
 }
+
+
+

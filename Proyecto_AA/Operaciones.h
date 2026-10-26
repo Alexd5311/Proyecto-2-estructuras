@@ -302,7 +302,7 @@ void InsertarHabitacion(ArbolAVLHabitaciones &Habitaciones)
 }
 
 //Hospitalizaciones
-void InsertarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones, ArbolBPacientes &Pacientes, ArbolAVLHabitaciones &Habitaciones, ArbolBMedicos &Medicos)
+void InsertarHospitalizacion(ArbolRNHospitalizaciones &Hospitalizaciones, ArbolBPacientes &Pacientes, ArbolAVLHabitaciones &Habitaciones, ArbolBMedicos &Medicos)
 {
     int IdHospitalizacion;
     int IdPaciente;
@@ -355,7 +355,7 @@ void InsertarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones, ArbolBPa
     cout << "Ingrese el motivo: ";
     getline(cin, Motivo);
 
-    if (Hospitalizaciones.Insertar(IdHospitalizacion, IdPaciente, IdHabitacion, IdMedico, FechaIngreso, FechaSalida, Motivo))
+    if (Hospitalizaciones.InsertarHospitalizacion(IdHospitalizacion, IdPaciente, IdHabitacion, IdMedico, FechaIngreso, FechaSalida, Motivo))
     {
         cout << "Hospitalizacion insertada correctamente." << endl;
     }
@@ -391,6 +391,48 @@ void InsertarDiagnostico(ArbolAADiagnostico& Diagnosticos)
     else
         cout << "No se pudo insertar el diagnostico." << endl;
 }
+
+
+void InsertarTratamiento(ArbolRNTratamientos& Tratamientos)
+{
+    int IdTratamiento;
+    string Nombre;
+    string Descripcion;
+    double Costo;
+
+    cout << "\n------------------------" << endl;
+    cout << "INSERTAR TRATAMIENTO" << endl;
+    cout << "------------------------" << endl;
+    cout << "Ingrese el IdTratamiento: ";
+    cin >> IdTratamiento;
+
+    if (Tratamientos.Existe(IdTratamiento))
+    {
+        cout << "El tratamiento ya existe." << endl;
+        return;
+    }
+
+    cin.ignore(10000, '\n');
+    cout << "Ingrese el nombre: ";
+    getline(cin, Nombre);
+
+    cout << "Ingrese la descripcion: ";
+    getline(cin, Descripcion);
+    cout << "Ingrese el costo: ";
+    if (!(cin >> Costo) || Costo < 0)
+    {
+        cout << "Costo invalido." << endl;
+        cin.clear();
+        cin.ignore(10000, '\n');
+        return;
+    }
+
+    if (Tratamientos.Insertar(IdTratamiento, Nombre, Descripcion, Costo))
+        cout << "Tratamiento insertado correctamente." << endl;
+    else
+        cout << "No se pudo insertar el tratamiento." << endl;
+}
+
 
 
     //╔════════════════════════════════════════════════════════════════════════╗
@@ -562,7 +604,7 @@ void BuscarHabitacion(ArbolAVLHabitaciones &Habitaciones)
 
 
 //Hospitalizaciones
-void BuscarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones,ArbolBPacientes &Pacientes, ArbolAVLHabitaciones &Habitaciones)
+void BuscarHospitalizacion(ArbolRNHospitalizaciones &Hospitalizaciones,ArbolBPacientes &Pacientes, ArbolAVLHabitaciones &Habitaciones)
 {
     int IdHospitalizacion;
     int IdPaciente;
@@ -602,6 +644,21 @@ void BuscarDiagnostico(ArbolAADiagnostico& Diagnosticos)
         cout << "No se encontro el diagnostico." << endl;
 }
 
+void BuscarTratamiento(ArbolRNTratamientos& Tratamientos)
+{
+    int IdTratamiento;
+
+    cout << "\n----------------------" << endl;
+    cout << "BUSCAR TRATAMIENTO" << endl;
+    cout << "----------------------" << endl;
+
+    cout << "Ingrese el IdTratamiento: ";
+    cin >> IdTratamiento;
+
+    if (!Tratamientos.Buscar(IdTratamiento))
+        cout << "El tratamiento no existe." << endl;
+}
+
     //╔════════════════════════════════════════════════════════════════════════╗
     //║                                ELIMINAR                                ║
     //╚════════════════════════════════════════════════════════════════════════╝
@@ -611,7 +668,7 @@ void BuscarDiagnostico(ArbolAADiagnostico& Diagnosticos)
 
 
 void EliminarPais(ArbolABBPaises &Paises, ArbolABBCiudades &Ciudades, ArbolBPacientes &Pacientes,
-    ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+    ArbolAVLCitas &Citas, ArbolRNHospitalizaciones &Hospitalizaciones)
 {
     int CodPais;
     cout << " " << endl;
@@ -643,7 +700,7 @@ void EliminarPais(ArbolABBPaises &Paises, ArbolABBCiudades &Ciudades, ArbolBPaci
     }
 }
 
-void EliminarPaciente(ArbolBPacientes &Pacientes, ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarPaciente(ArbolBPacientes &Pacientes, ArbolAVLCitas &Citas, ArbolRNHospitalizaciones &Hospitalizaciones)
 {
     int IdPaciente;
     cout << " " << endl;
@@ -666,7 +723,7 @@ void EliminarPaciente(ArbolBPacientes &Pacientes, ArbolAVLCitas &Citas, ListaHos
     }
 
     if (Hospitalizaciones.EliminarPorPaciente(IdPaciente)){
-        hospitalizacionesEliminadas = 1;
+        hospitalizacionesEliminadas = Hospitalizaciones.EliminarPorPaciente(IdPaciente);
     }
 
     if (Pacientes.Eliminar(IdPaciente)){
@@ -682,7 +739,7 @@ void EliminarPaciente(ArbolBPacientes &Pacientes, ArbolAVLCitas &Citas, ListaHos
 }
 
 
-void EliminarCiudad(ArbolABBCiudades &Ciudades, ArbolABBPaises &Paises, ArbolBPacientes &Pacientes, ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarCiudad(ArbolABBCiudades &Ciudades, ArbolABBPaises &Paises, ArbolBPacientes &Pacientes, ArbolAVLCitas &Citas, ArbolRNHospitalizaciones &Hospitalizaciones)
 {
     int CodPais;
     int CodCiudad;
@@ -754,7 +811,7 @@ void EliminarPaciente(ArbolBPacientes &Pacientes)
 
 
 
-void EliminarMedico(ArbolBMedicos &Medicos, ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarMedico(ArbolBMedicos &Medicos, ArbolAVLCitas &Citas, ArbolRNHospitalizaciones &Hospitalizaciones)
 {
     int IdMedico;
     cout << " " << endl;
@@ -783,7 +840,7 @@ void EliminarMedico(ArbolBMedicos &Medicos, ArbolAVLCitas &Citas, ListaHospitali
     }
 }
 
-void EliminarEspecialidad(ArbolAAEspecialidades &Especialidades, ArbolBMedicos &Medicos, ArbolAVLCitas &Citas, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarEspecialidad(ArbolAAEspecialidades &Especialidades, ArbolBMedicos &Medicos, ArbolAVLCitas &Citas, ArbolRNHospitalizaciones &Hospitalizaciones)
 {
     int IdEspecialidad;
     cout << " " << endl;
@@ -844,7 +901,7 @@ void EliminarCita(ArbolAVLCitas &Citas)
     }
 }
 
-void EliminarHabitacion(ArbolAVLHabitaciones &Habitaciones, ListaHospitalizaciones &Hospitalizaciones)
+void EliminarHabitacion(ArbolAVLHabitaciones &Habitaciones, ArbolRNHospitalizaciones &Hospitalizaciones)
 {
     int IdHabitacion;
     cout << " " << endl;
@@ -872,7 +929,7 @@ void EliminarHabitacion(ArbolAVLHabitaciones &Habitaciones, ListaHospitalizacion
     }
 }
 
-void EliminarHospitalizacion(ListaHospitalizaciones &Hospitalizaciones)
+void EliminarHospitalizacion(ArbolRNHospitalizaciones &Hospitalizaciones)
 {
     int IdHospitalizacion;
     cout << " " << endl;
@@ -916,10 +973,43 @@ void MostrarDiagnosticos(ArbolAADiagnostico& Diagnosticos)
     Diagnosticos.Mostrar();
 }
 
+
 void GenerarReporteDiagnosticos(ArbolAADiagnostico& Diagnosticos)
 {
     ReporteDiagnosticos(Diagnosticos);
 }
+
+
+
+void EliminarTratamiento(ArbolRNTratamientos& Tratamientos)
+{
+    int IdTratamiento;
+
+    cout << "\n------------------------" << endl;
+    cout << "ELIMINAR TRATAMIENTO" << endl;
+    cout << "------------------------" << endl;
+
+    cout << "Ingrese el IdTratamiento: ";
+    cin >> IdTratamiento;
+
+    if (!Tratamientos.Existe(IdTratamiento))
+    {
+        cout << "El tratamiento no existe." << endl;
+        return;
+    }
+
+    if (Tratamientos.Eliminar(IdTratamiento))
+        cout << "Tratamiento eliminado correctamente." << endl;
+    else
+        cout << "No se pudo eliminar el tratamiento." << endl;
+}
+
+
+void MostrarTratamientos(ArbolRNTratamientos& Tratamientos)
+{
+    Tratamientos.Mostrar();
+}
+
 
 //╔═════════════════════════════════════════════════════════════════╗
 //║                             Modificar                           ║
@@ -1223,7 +1313,7 @@ void ModificarHabitacion(ArbolAVLHabitaciones &Habitaciones)
 }
 
 
-void ModificarHospitalizacion(ListaHospitalizaciones& Hospitalizaciones, ArbolBPacientes& Pacientes, ArbolAVLHabitaciones& Habitaciones, ArbolBMedicos& Medicos)
+void ModificarHospitalizacion(ArbolRNHospitalizaciones& Hospitalizaciones, ArbolBPacientes& Pacientes, ArbolAVLHabitaciones& Habitaciones, ArbolBMedicos& Medicos)
 {
     int IdHospitalizacion;
     int IdPaciente;
@@ -1308,5 +1398,48 @@ void ModificarDiagnostico(ArbolAADiagnostico& Diagnosticos)
         cout << "Diagnostico modificado correctamente." << endl;
     else
         cout << "No se pudo modificar el diagnostico." << endl;
+}
+
+void ModificarTratamiento(ArbolRNTratamientos& Tratamientos)
+{
+    int IdTratamiento;
+    string Nombre;
+    string Descripcion;
+    double Costo;
+
+    cout << "\n------------------------" << endl;
+    cout << "MODIFICAR TRATAMIENTO" << endl;
+    cout << "------------------------" << endl;
+
+    cout << "Ingrese el IdTratamiento: ";
+    cin >> IdTratamiento;
+
+    if (!Tratamientos.Existe(IdTratamiento))
+    {
+        cout << "El tratamiento no existe." << endl;
+        return;
+    }
+
+    cin.ignore(10000, '\n');
+
+    cout << "Ingrese el nuevo nombre: ";
+    getline(cin, Nombre);
+
+    cout << "Ingrese la nueva descripcion: ";
+    getline(cin, Descripcion);
+
+    cout << "Ingrese el nuevo costo: ";
+    if (!(cin >> Costo) || Costo < 0)
+    {
+        cout << "Costo invalido." << endl;
+        cin.clear();
+        cin.ignore(10000, '\n');
+        return;
+    }
+
+    if (Tratamientos.Modificar(IdTratamiento, Nombre, Descripcion, Costo))
+        cout << "Tratamiento modificado correctamente." << endl;
+    else
+        cout << "No se pudo modificar el tratamiento." << endl;
 }
 
