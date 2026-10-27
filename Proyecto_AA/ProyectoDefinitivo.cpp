@@ -306,13 +306,13 @@ int main()
                     cout << "|  10. REPORTE CITAS POR FECHA                                                             |" << endl;
                     cout << "|  11. REPORTE CITAS POR ESPECIALIDAD                                                      |" << endl;
                     cout << "|  12. REPORTE CITAS DE UN MEDICO                                                          |" << endl;
-                    cout << "|  13. REGRESAR                                                                             |" << endl;
+                    cout << "|  13. REGRESAR                                                                            |" << endl;
                     cout << "+------------------------------------------------------------------------------------------+" << endl;
                     cout << "Ingrese una opcion: ";
                     cin >> opcionReporte;
                     switch (opcionReporte)
                     {
-                        case 1: ReportePaises(Paises); break;D
+                        case 1: ReportePaises(Paises); break;
                         case 2: ReporteCiudades(Ciudades, Paises); break;
                         case 3: ReporteEspecialidades(Especialidades); break;
                         case 4: ReporteHabitacionesDisponibles(Habitaciones); break;
