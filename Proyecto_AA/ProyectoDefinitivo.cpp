@@ -66,7 +66,7 @@ int main()
             case 1:
                 {
                     int opcionInsertar = 0;
-                    while (opcionInsertar != 9)
+                    while (opcionInsertar != 11)
                     {
                         cout << " " << endl;
 
@@ -112,7 +112,7 @@ int main()
             case 2:
                 {
                     int opcionBuscar = 0;
-                    while (opcionBuscar != 9)
+                    while (opcionBuscar != 11)
                     {
                         cout << " " << endl;
                         cout << "+------------------------------------------------------------------------------------------+" << endl;
@@ -155,7 +155,7 @@ int main()
             case 3:
                 {
                     int opcionEliminar = 0;
-                    while (opcionEliminar != 9)
+                    while (opcionEliminar != 11)
                     {
                         cout << " " << endl;
                         cout << "+------------------------------------------------------------------------------------------+" << endl;
@@ -199,7 +199,7 @@ int main()
             case 4:
                 {
                     int opcionModificar = 0;
-                    while (opcionModificar != 9)
+                    while (opcionModificar != 11)
                     {
                         cout << " " << endl;
                         cout << "+------------------------------------------------------------------------------------------+" << endl;
@@ -244,7 +244,7 @@ int main()
             case 5:
                 {
                     int opcionMostrar = 0;
-                    while (opcionMostrar != 9)
+                    while (opcionMostrar != 11)
                     {
                         cout << " " << endl;
                         cout << "+------------------------------------------------------------------------------------------+" << endl;
@@ -312,7 +312,7 @@ int main()
                     cin >> opcionReporte;
                     switch (opcionReporte)
                     {
-                        case 1: ReportePaises(Paises); break;
+                        case 1: ReportePaises(Paises); break;D
                         case 2: ReporteCiudades(Ciudades, Paises); break;
                         case 3: ReporteEspecialidades(Especialidades); break;
                         case 4: ReporteHabitacionesDisponibles(Habitaciones); break;
