@@ -452,6 +452,55 @@ private:
         }
         BuscarPorPaciente(nodo->Hijoder, IdPaciente, identificadores, cantidad);
 	}
+
+    void EscribirLineaHospitalizacion(GeneradorPDF& pdf, NodoHospitalizacion* nodo)
+    {
+        string salida = nodo->FechaSalida;
+
+        if (salida.find("0000") == 0)
+            salida = "Sin fecha de salida";
+
+        pdf.Linea(
+            Rellenar(to_string(nodo->IdHospitalizacion), 8) +
+            Rellenar(to_string(nodo->IdPaciente), 10) +
+            Rellenar(to_string(nodo->IdHabitacion), 8) +
+            Rellenar(to_string(nodo->IdMedico), 8) +
+            Rellenar(nodo->FechaIngreso, 14) +
+            Rellenar(salida, 21) +
+            Rellenar(nodo->Motivo, 49)
+        );
+    }
+
+    void ReportePDFRecursivo(GeneradorPDF& pdf, NodoHospitalizacion* nodo)
+    {
+        if (nodo == NULL)
+            return;
+
+        ReportePDFRecursivo(pdf, nodo->Hijoizq);
+
+        EscribirLineaHospitalizacion(pdf, nodo);
+
+        ReportePDFRecursivo(pdf, nodo->Hijoder);
+    }
+
+
+    void ReportePDFPorMedicoRecursivo(GeneradorPDF& pdf,NodoHospitalizacion* nodo,int IdMedico, int& cantidad)
+    {
+        if (nodo == NULL)
+            return;
+
+        ReportePDFPorMedicoRecursivo(pdf, nodo->Hijoizq, IdMedico, cantidad);
+
+        if (nodo->IdMedico == IdMedico)
+        {
+            EscribirLineaHospitalizacion(pdf, nodo);
+            cantidad++;
+        }
+
+        ReportePDFPorMedicoRecursivo(pdf, nodo->Hijoder, IdMedico, cantidad);
+    }
+
+
 public:
     
     ArbolRNHospitalizaciones() {
@@ -518,6 +567,7 @@ public:
                 padre->Hijoizq = nuevoNodo;
             else
                 padre->Hijoder = nuevoNodo;
+			ActualizarArbol(primero);
             Balancear(nuevoNodo);
         }
 
@@ -620,7 +670,89 @@ public:
         return eliminados;
     }
 
+    void ReportePDF(GeneradorPDF& pdf)
+    {
+        if (ListaVacia())
+        {
+            pdf.Linea("(No hay hospitalizaciones registradas)");
+            return;
+        }
+
+        ReportePDFRecursivo(pdf, primero);
+    }
+
+    void ReportePDFPorMedico(GeneradorPDF& pdf, int IdMedico, int& cantidad)
+    {
+        ReportePDFPorMedicoRecursivo(pdf, primero, IdMedico, cantidad);
+    }
+
 };
+
+void ReporteHospitalizaciones(ArbolRNHospitalizaciones& Hospitalizaciones)
+{
+    GeneradorPDF pdf(
+        "Reporte_Hospitalizaciones.pdf",
+        "REPORTE DE HOSPITALIZACIONES",
+        Rellenar("ID", 8) +
+        Rellenar("PACIENTE", 10) +
+        Rellenar("HAB.", 8) +
+        Rellenar("MEDICO", 8) +
+        Rellenar("INGRESO", 14) +
+        Rellenar("SALIDA", 21) +
+        Rellenar("MOTIVO", 49)
+    );
+
+    if (!pdf.Valido())
+    {
+        cout << "No se pudo crear el documento PDF." << endl;
+        return;
+    }
+
+    Hospitalizaciones.ReportePDF(pdf);
+
+    if (pdf.Guardar())
+        cout << "Reporte generado: Reporte_Hospitalizaciones.pdf" << endl;
+    else
+        cout << "No se pudo guardar el archivo PDF." << endl;
+}
+
+void ReporteHospitalizacionesPorMedico(ArbolRNHospitalizaciones& Hospitalizaciones)
+{
+    int IdMedico;
+
+    cout << "Ingrese el IdMedico: ";
+    cin >> IdMedico;
+
+    GeneradorPDF pdf(
+        "Reporte_Hospitalizaciones_Medico_" + to_string(IdMedico) + ".pdf",
+        "REPORTE DE HOSPITALIZACIONES POR MEDICO",
+        Rellenar("ID", 8) +
+        Rellenar("PACIENTE", 10) +
+        Rellenar("HAB.", 8) +
+        Rellenar("MEDICO", 8) +
+        Rellenar("INGRESO", 14) +
+        Rellenar("SALIDA", 21) +
+        Rellenar("MOTIVO", 49)
+    );
+
+    if (!pdf.Valido())
+    {
+        cout << "No se pudo crear el documento PDF." << endl;
+        return;
+    }
+
+    int cantidad = 0;
+
+    Hospitalizaciones.ReportePDFPorMedico(pdf, IdMedico, cantidad);
+
+    if (cantidad == 0)
+        pdf.Linea("(No hay hospitalizaciones registradas para este medico)");
+
+    if (pdf.Guardar())
+        cout << "Reporte generado correctamente." << endl;
+    else
+        cout << "No se pudo guardar el archivo PDF." << endl;
+}
 
 
 //╔═════════════════════════════════════════════════════════════════════════════╗

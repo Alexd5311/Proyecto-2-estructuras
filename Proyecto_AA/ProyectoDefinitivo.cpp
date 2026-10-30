@@ -317,8 +317,8 @@ int main()
                         case 3: ReporteEspecialidades(Especialidades); break;
                         case 4: ReporteHabitacionesDisponibles(Habitaciones); break;
                         case 5: ReporteHabitacionesOcupadas(Habitaciones); break;
-                        case 6: cout << "Reporte Hospitalizaciones" << endl; break;
-                        case 7: cout << "Reporte Hospitalizaciones de un Medico" << endl; break;
+                        case 6: ReporteHospitalizaciones(Hospitalizaciones); break;
+                        case 7: ReporteHospitalizacionesPorMedico(Hospitalizaciones); break;
                         case 8: ReporteMedicos(Medicos); break;
                         case 9: ReporteMedicosPorEspecialidad(Medicos); break;
                         case 10: ReporteCitasPorFecha(Citas); break;
