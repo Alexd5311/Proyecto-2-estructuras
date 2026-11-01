@@ -329,7 +329,7 @@ int main()
                         case 10: ReporteCitasPorFecha(Citas); break;
                         case 11: ReporteCitasPorEspecialidad(Citas); break;
                         case 12: ReporteCitasPorMedico(Citas); break;
-                        case 13: ReporteCitasPorPaciente(Citas); break;
+                        case 13: ReportePDFPacientesPorPais(Pacientes, Paises); break;
                         case 14: ReportePacientesPorCiudad(Pacientes, Ciudades);; break;
                         case 15: ReporteCitasPorPaciente(Citas); break;
                         case 16: ReporteDiagnosticos(Diagnosticos); break;

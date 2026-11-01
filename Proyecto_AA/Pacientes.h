@@ -528,7 +528,33 @@ public:
 
         return cantidad;
     }
+
+    int ReportePDFPorPais(GeneradorPDF& pdf, int CodPais)
+    {
+        vector<RegistroPaciente> Registros;
+        Recopilar(Raiz, Registros);
+        int cantidad = 0;
+        for (const RegistroPaciente& R : Registros)
+        {
+            if (R.CodPais == CodPais)
+            {
+                pdf.Linea(
+                    Rellenar(to_string(R.IdPaciente), 8) +
+                    Rellenar(R.Nombre, 25) +
+                    Rellenar(R.FechaNacimiento, 14) +
+                    Rellenar(R.Telefono, 14) +
+                    Rellenar(to_string(R.CodPais), 10) +
+                    Rellenar(to_string(R.CodCiudad), 10) +
+                    Rellenar(R.Correo, 35)
+                );
+                cantidad++;
+            }
+        }
+
+        return cantidad;
+    }
 };
+
 
 
 
@@ -590,6 +616,48 @@ void ReportePacientesPorCiudad(
     }
 }
 
+
+void ReportePDFPacientesPorPais(ArbolBPacientes& Pacientes,
+    ArbolABBPaises& Paises)
+{
+    int CodPais;
+
+    cout << endl;
+    cout << "Ingrese el CodPais: ";
+    cin >> CodPais;
+    if (!Paises.Existe(CodPais))
+    {
+        cout << "El CodPais no existe." << endl;
+        return;
+    }
+    GeneradorPDF pdf(
+        "Reporte_Pacientes_Pais_" + to_string(CodPais) + ".pdf",
+        "REPORTE DE PACIENTES POR PAIS: " + to_string(CodPais),
+        Rellenar("ID", 8) +
+        Rellenar("NOMBRE", 25) +
+        Rellenar("FECHA NAC.", 14) +
+        Rellenar("TELEFONO", 14) +
+        Rellenar("CODPAIS", 10) +
+        Rellenar("CODCIUDAD", 10) +
+        Rellenar("CORREO", 35)
+    );
+
+    if (!pdf.Valido())
+    {
+        cout << "No se pudo crear el documento PDF." << endl;
+        return;
+    }
+    int cantidad = Pacientes.ReportePDFPorPais(pdf, CodPais);
+
+    if (cantidad == 0)
+        pdf.Linea("(Este pais no tiene pacientes registrados)");
+
+    if (pdf.Guardar())
+        cout << "Reporte generado: Reporte_Pacientes_Pais_"
+        << CodPais << ".pdf" << endl;
+    else
+        cout << "No se pudo guardar el archivo PDF." << endl;
+}
 
 //╔══════════════════════════════════════════════════════════════════════╗
 //║                         CARGAR PACIENTES                             ║
