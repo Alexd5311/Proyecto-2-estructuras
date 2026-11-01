@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include "Comun_PDF.h"
 
 using namespace std;
 
@@ -357,6 +358,37 @@ private:
         delete nodo;
     }
 
+
+    void ReportePDFRecursivo(NodoTratamiento* nodo, GeneradorPDF& pdf)
+    {
+        if (nodo == nullptr)
+            return;
+
+        ReportePDFRecursivo(nodo->Hijoizq, pdf);
+
+        ostringstream costoTexto;
+        costoTexto << fixed << setprecision(2) << nodo->Costo;
+
+        pdf.Linea(
+            Rellenar(to_string(nodo->IdTratamiento), 10) +
+            Rellenar(nodo->Nombre, 25) +
+            Rellenar(nodo->Descripcion, 65) +
+            Rellenar(costoTexto.str(), 12)
+        );
+
+        ReportePDFRecursivo(nodo->Hijoder, pdf);
+    }
+
+    int ContarTratamientos(NodoTratamiento* nodo)
+    {
+        if (nodo == nullptr)
+            return 0;
+
+        return 1 +
+            ContarTratamientos(nodo->Hijoizq) +
+            ContarTratamientos(nodo->Hijoder);
+    }
+
 public:
 
 
@@ -550,6 +582,16 @@ public:
     {
         Mostrar();
     }
+
+    int ReportePDF(GeneradorPDF& pdf)
+    {
+        if (ListaVacia())
+            return 0;
+
+        ReportePDFRecursivo(primero, pdf);
+
+        return ContarTratamientos(primero);
+    }
 };
 
 
@@ -599,4 +641,35 @@ inline void CargarTratamientos(ArbolRNTratamientos& Tratamientos)
     archivo.close();
 
     cout << "Tratamientos cargados: " << cargados << endl;
+}
+
+inline void ReporteTratamientos(ArbolRNTratamientos& Tratamientos)
+{
+    GeneradorPDF pdf(
+        "Reporte_Tratamientos.pdf",
+        "REPORTE DE TRATAMIENTOS",
+        Rellenar("ID", 10) +
+        Rellenar("NOMBRE", 25) +
+        Rellenar("DESCRIPCION", 65) +
+        Rellenar("COSTO", 12)
+    );
+
+    if (!pdf.Valido())
+    {
+        cout << "No se pudo crear el documento PDF." << endl;
+        return;
+    }
+
+    int total = Tratamientos.ReportePDF(pdf);
+
+    if (total == 0)
+        pdf.Linea("(No hay tratamientos registrados)");
+
+    pdf.Linea("--------------------------------------------");
+    pdf.Linea("Total de tratamientos: " + to_string(total));
+
+    if (pdf.Guardar())
+        cout << "Reporte generado: Reporte_Tratamientos.pdf" << endl;
+    else
+        cout << "No se pudo guardar el archivo PDF." << endl;
 }

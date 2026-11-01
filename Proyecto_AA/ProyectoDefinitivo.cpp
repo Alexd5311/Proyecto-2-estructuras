@@ -288,7 +288,7 @@ int main()
             case 6:
             {
                 int opcionReporte = 0;
-                while (opcionReporte != 13)
+                while (opcionReporte != 18)
                 {
                     cout << " " << endl;
                     cout << "+------------------------------------------------------------------------------------------+" << endl;
@@ -306,7 +306,12 @@ int main()
                     cout << "|  10. REPORTE CITAS POR FECHA                                                             |" << endl;
                     cout << "|  11. REPORTE CITAS POR ESPECIALIDAD                                                      |" << endl;
                     cout << "|  12. REPORTE CITAS DE UN MEDICO                                                          |" << endl;
-                    cout << "|  13. REGRESAR                                                                            |" << endl;
+                    cout << "|  13. REPORTE PACIENTES DE UN PAIS                                                        |" << endl;
+                    cout << "|  14. REPORTE PACIENTES DE UNA CIUDAD                                                     |" << endl;
+                    cout << "|  15. REPORTE CITAS DE UN PACIENTE                                                        |" << endl;
+                    cout << "|  16. REPORTE DIAGNOSTICOS                                                                |" << endl;
+                    cout << "|  17. REPORTE TRATAMIENTOS                                                                |" << endl;
+                    cout << "|  18. REGRESAR                                                                            |" << endl;
                     cout << "+------------------------------------------------------------------------------------------+" << endl;
                     cout << "Ingrese una opcion: ";
                     cin >> opcionReporte;
@@ -324,7 +329,12 @@ int main()
                         case 10: ReporteCitasPorFecha(Citas); break;
                         case 11: ReporteCitasPorEspecialidad(Citas); break;
                         case 12: ReporteCitasPorMedico(Citas); break;
-                        case 13: cout << "Regresando al menu principal..." << endl; break;
+                        case 13: ReporteCitasPorPaciente(Citas); break;
+                        case 14: ReportePacientesPorCiudad(Pacientes, Ciudades);; break;
+                        case 15: ReporteCitasPorPaciente(Citas); break;
+                        case 16: ReporteDiagnosticos(Diagnosticos); break;
+                        case 17: ReporteTratamientos(Tratamientos); break;
+                        case 18: cout << "Regresando al menu principal..." << endl; break;
                         default: cout << "Opcion invalida." << endl; break;
                     }
                 }

@@ -5,6 +5,7 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include "Comun_PDF.h"
 
 using namespace std;
 
@@ -370,6 +371,8 @@ private:
         MostrarRecursivo(P->Ramas[P->Cuenta]);
     }
 
+
+
 public:
     ArbolBPacientes() { Raiz = nullptr; }
 
@@ -497,11 +500,95 @@ public:
         cout << "-------------------" << endl;
         MostrarRecursivo(Raiz);
     }
+
+    int ReportePDFPorCiudad(GeneradorPDF& pdf, int CodPais, int CodCiudad)
+    {
+        vector<RegistroPaciente> Registros;
+        Recopilar(Raiz, Registros);
+
+        int cantidad = 0;
+
+        for (const RegistroPaciente& R : Registros)
+        {
+            if (R.CodPais == CodPais && R.CodCiudad == CodCiudad)
+            {
+                pdf.Linea(
+                    Rellenar(to_string(R.IdPaciente), 8) +
+                    Rellenar(R.Nombre, 25) +
+                    Rellenar(R.FechaNacimiento, 12) +
+                    Rellenar(R.Telefono, 15) +
+                    Rellenar(to_string(R.CodPais), 10) +
+                    Rellenar(to_string(R.CodCiudad), 12) +
+                    Rellenar(R.Correo, 25)
+                );
+
+                cantidad++;
+            }
+        }
+
+        return cantidad;
+    }
 };
 
 
 
+void ReportePacientesPorCiudad(
+    ArbolBPacientes& Pacientes,
+    ArbolABBCiudades& Ciudades)
+{
+    int CodPais, CodCiudad;
 
+    cout << "Ingrese el codigo del pais: ";
+    cin >> CodPais;
+
+    cout << "Ingrese el codigo de la ciudad: ";
+    cin >> CodCiudad;
+
+    if (!Ciudades.Existe(CodPais, CodCiudad))
+    {
+        cout << "La ciudad indicada no existe." << endl;
+        return;
+    }
+
+    GeneradorPDF pdf(
+        "Reporte_Pacientes_Ciudad_" +
+        to_string(CodPais) + "_" +
+        to_string(CodCiudad) + ".pdf",
+
+        "REPORTE DE PACIENTES POR CIUDAD",
+
+        Rellenar("ID", 8) +
+        Rellenar("NOMBRE", 25) +
+        Rellenar("NACIMIENTO", 12) +
+        Rellenar("TELEFONO", 15) +
+        Rellenar("COD PAIS", 10) +
+        Rellenar("COD CIUDAD", 12) +
+        Rellenar("CORREO", 25)
+    );
+
+    if (!pdf.Valido())
+    {
+        cout << "No se pudo crear el documento PDF." << endl;
+        return;
+    }
+
+    int cantidad = Pacientes.ReportePDFPorCiudad(
+        pdf, CodPais, CodCiudad
+    );
+
+    if (cantidad == 0)
+        pdf.Linea("(No hay pacientes registrados en esta ciudad)");
+
+    if (pdf.Guardar())
+    {
+        cout << "Reporte generado: Reporte_Pacientes_Ciudad_"
+            << CodPais << "_" << CodCiudad << ".pdf" << endl;
+    }
+    else
+    {
+        cout << "No se pudo guardar el archivo PDF." << endl;
+    }
+}
 
 
 //╔══════════════════════════════════════════════════════════════════════╗

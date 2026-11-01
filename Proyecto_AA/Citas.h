@@ -376,6 +376,26 @@ private:
         }
     }
 
+    void ReportePDFPorPacienteRecursivo(
+        GeneradorPDF& pdf,
+        pNodoCita n,
+        int IdPaciente,
+        int& cantidad)
+    {
+        if (n == nullptr)
+            return;
+
+        ReportePDFPorPacienteRecursivo(pdf, n->Hizq, IdPaciente, cantidad);
+
+        if (n->IdPaciente == IdPaciente)
+        {
+            EscribirLineaCita(pdf, n);
+            cantidad++;
+        }
+
+        ReportePDFPorPacienteRecursivo(pdf, n->Hder, IdPaciente, cantidad);
+    }
+
 public:
     ArbolAVLCitas() : raiz(nullptr) {}
 
@@ -511,6 +531,12 @@ public:
         ReportePDFPorMedicoRecursivo(pdf, raiz, IdMedico, cantidad);
     }
 
+
+    void ReportePDFPorPaciente(GeneradorPDF& pdf, int IdPaciente, int& cantidad)
+    {
+        ReportePDFPorPacienteRecursivo(pdf, raiz, IdPaciente, cantidad);
+    }
+
 private:
     void EscribirLineaCita(GeneradorPDF& pdf, pNodoCita n)
     {
@@ -598,7 +624,49 @@ void ReporteCitasPorMedico(ArbolAVLCitas& Citas)
     else cout << "No se pudo guardar el archivo PDF." << endl;
 }
 
+void ReporteCitasPorPaciente(ArbolAVLCitas& Citas)
+{
+    int IdPaciente;
 
+    cout << "Ingrese el IdPaciente: ";
+    cin >> IdPaciente;
+
+    GeneradorPDF pdf(
+        "Reporte_Citas_Paciente_" + to_string(IdPaciente) + ".pdf",
+        "REPORTE DE CITAS POR PACIENTE",
+        Rellenar("ID CITA", 8) +
+        Rellenar("ID PACIENTE", 12) +
+        Rellenar("ID MEDICO", 10) +
+        Rellenar("ID ESPECIALIDAD", 15) +
+        Rellenar("FECHA", 12) +
+        Rellenar("HORA", 8) +
+        Rellenar("MOTIVO", 30) +
+        Rellenar("ESTADO", 8)
+    );
+
+    if (!pdf.Valido())
+    {
+        cout << "No se pudo crear el documento PDF." << endl;
+        return;
+    }
+
+    int cantidad = 0;
+
+    Citas.ReportePDFPorPaciente(pdf, IdPaciente, cantidad);
+
+    if (cantidad == 0)
+        pdf.Linea("(No hay citas registradas para este paciente)");
+
+    if (pdf.Guardar())
+    {
+        cout << "Reporte generado: Reporte_Citas_Paciente_"
+            << IdPaciente << ".pdf" << endl;
+    }
+    else
+    {
+        cout << "No se pudo guardar el archivo PDF." << endl;
+    }
+}
 
 void CargarCitas(ArbolAVLCitas& Citas, ArbolBPacientes& Pacientes,
     ArbolBMedicos& Medicos, ArbolAAEspecialidades& Especialidades)
