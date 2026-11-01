@@ -1,9 +1,22 @@
 ﻿IdTratamiento;Nombre;Descripcion;Costo
-1;Antibioticoterapia;Tratamiento con antibióticos por vía oral o intravenosa;35000
-2;Fisioterapia;Sesiones de rehabilitación física;20000
-3;Hidratación IV;Administración de líquidos intravenosos;15000
-4;Cirugía menor;Procedimiento quirúrgico ambulatorio;250000
-5;Quimioterapia;Ciclo de tratamiento oncológico;800000
-6;Oxigenoterapia;Suministro de oxígeno suplementario;45000
-7;Analgesia;Control del dolor con medicamentos;12000
-8;Terapia respiratoria;Ejercicios y nebulizaciones;28000
+1;Paracetamol;Analgésico y antipirético para aliviar dolor y fiebre;2500
+2;Ibuprofeno;Antiinflamatorio no esteroideo para aliviar dolor e inflamación;3200
+3;Amoxicilina;Antibiótico utilizado para tratar determinadas infecciones bacterianas;4500
+4;Omeprazol;Medicamento que reduce la producción de ácido estomacal;3800
+5;Loratadina;Antihistamínico para aliviar síntomas de alergias;2100
+6;Metformina;Medicamento utilizado en el tratamiento de la diabetes tipo 2;5200
+7;Salbutamol;Broncodilatador utilizado para aliviar síntomas del asma;4100
+8;Losartán;Medicamento utilizado para controlar la presión arterial;3600
+9;Atorvastatina;Medicamento utilizado para controlar los niveles de colesterol;4800
+10;Diclofenaco;Antiinflamatorio utilizado para aliviar dolor e inflamación;2900
+11;Suero oral;Solución para ayudar a reponer líquidos y electrolitos;1500
+12;Vitamina D;Suplemento utilizado para complementar los niveles de vitamina D;2700
+13;Cetirizina;Antihistamínico utilizado para aliviar síntomas alérgicos;2300
+14;Hidrocortisona;Medicamento antiinflamatorio utilizado en determinadas afecciones de la piel;3400
+15;Sales de rehidratación;Preparado para reponer agua y electrolitos;1800
+1;Tratamiento duplicado;Registro con ID ya existente para probar duplicados;3000
+16;;Tratamiento sin nombre para probar campos vacíos;2000
+17;Costo negativo;Caso de prueba con costo negativo;-500
+18;Costo no numérico;Caso de prueba con costo escrito como texto;abc
+19;Costo cero;Caso de prueba con costo igual a cero;0
+20;Costo con texto adicional;Caso para probar conversión parcial del costo;1200abc

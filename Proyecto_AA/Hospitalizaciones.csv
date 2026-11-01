@@ -1,13 +1,22 @@
 ﻿IdHospitalizacion;IdPaciente;IdHabitacion;IdMedico;Fechaingreso;Fechasalida;Motivo
-1;1001;101;105;27/9/2026;0;Deshidratación severa
-2;1002;102;110;27/9/2026;0;Observación postoperatoria
-3;1010;103;108;28/9/2026;0;Observación postoperatoria
-4;1004;104;109;12/9/2026;0;Crisis hipertensiva
-5;1005;201;101;15/9/2026;0;Infarto agudo
-6;1006;202;110;23/9/2026;0;Crisis hipertensiva
-7;1007;203;107;8/9/2026;0;Neumonía
-8;1008;204;108;11/9/2026;0;Crisis hipertensiva
-9;1003;205;103;20/7/2026;29/7/2026;Cirugía programada
-10;1009;301;105;13/6/2026;16/6/2026;Observación postoperatoria
-11;1011;205;103;2/6/2026;10/6/2026;Apendicitis
-12;1012;204;102;31/7/2026;7/8/2026;Crisis hipertensiva
+5001;1001;4001;2001;2026-10-20;2026-10-23;Observación por control de presión arterial
+5002;1002;4002;2002;2026-10-21;2026-10-24;Atención por infección respiratoria
+5003;1003;4003;2003;2026-10-22;;Tratamiento por fiebre persistente
+5004;1004;4004;2004;2026-10-23;2026-10-27;Evaluación neurológica
+5005;1005;4005;2005;2026-10-24;;Recuperación por lesión de rodilla
+5006;1006;4006;2006;2026-10-25;2026-10-28;Seguimiento cardiológico
+5007;1007;4007;2007;2026-10-26;;Observación pediátrica
+5008;1008;4008;2008;2026-10-27;2026-10-30;Tratamiento por dolor abdominal
+5009;1009;4009;2009;2026-10-28;;Evaluación por migraña
+5010;1010;4010;2010;2026-10-29;2026-10-31;Atención por lesión en el hombro
+5011;1011;4011;2011;2026-10-30;;Monitoreo cardíaco
+5012;1012;4012;2012;2026-10-31;;Observación por reacción alérgica
+5013;1013;4013;2013;2026-11-01;;Estudios por dolor abdominal
+5014;1014;4014;2014;2026-11-01;;Evaluación por mareos
+5015;1015;4015;2015;2026-11-01;;Tratamiento por dolor de espalda
+5001;1002;4002;2002;2026-11-01;;ID de hospitalización duplicado
+5016;9999;4001;2001;2026-11-01;;Paciente inexistente
+5017;1001;9999;2001;2026-11-01;;Habitación inexistente
+5018;1001;4001;9999;2026-11-01;;Médico inexistente
+-1;1002;4002;2002;2026-11-01;;ID negativo para probar el control de identificadores
+5019;1003;4003;2003;fecha-inválida;;Fecha de ingreso no válida

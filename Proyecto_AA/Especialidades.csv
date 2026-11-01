@@ -1,9 +1,11 @@
 ﻿IdEspecialidad;Nombre;Descripcion
-1;Cardiología;Enfermedades del corazón y sistema circulatorio
-2;Pediatría;Atención médica de niños y adolescentes
-3;Medicina General;Atención primaria y control general
-4;Dermatología;Enfermedades de la piel, pelo y uñas
-5;Neurología;Enfermedades del sistema nervioso
-6;Ortopedia;Huesos, músculos y articulaciones
-7;Ginecología;Salud reproductiva femenina
-8;Oftalmología;Enfermedades de los ojos
+1;Cardiología;Diagnóstico y tratamiento de enfermedades del corazón y del sistema circulatorio
+2;Pediatría;Atención médica y seguimiento de la salud de niños y adolescentes
+3;Medicina General;Atención primaria y diagnóstico de enfermedades comunes
+4;Neurología;Diagnóstico y tratamiento de enfermedades del sistema nervioso
+5;Traumatología;Atención de lesiones y enfermedades de huesos articulaciones y músculos
+1;Cardiología duplicada;Registro duplicado para probar el control de identificadores
+0;Especialidad con ID cero;Caso de prueba con identificador cero
+-2;Especialidad con ID negativo;Caso de prueba con identificador negativo
+abc;ID no numérico;Caso de prueba para comprobar la conversión del identificador
+6;;Nombre vacío para probar la validación

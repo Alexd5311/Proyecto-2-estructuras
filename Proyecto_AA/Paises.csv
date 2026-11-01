@@ -1,4 +1,26 @@
 ﻿Codpais;Nombre
-506;Costa Rica
-507;Panamá
-505;Nicaragua
+1;Costa Rica
+2;Panamá
+3;Nicaragua
+4;Honduras
+5;El Salvador
+6;Guatemala
+7;Belice
+8;México
+9;Estados Unidos
+10;Canadá
+11;Colombia
+12;Venezuela
+13;Ecuador
+14;Perú
+15;Bolivia
+16;Chile
+17;Argentina
+18;Uruguay
+19;Paraguay
+20;Brasil
+1;Costa Rica duplicado
+0;Código cero
+-5;Código negativo
+41;
+42abc;Código con texto adicional

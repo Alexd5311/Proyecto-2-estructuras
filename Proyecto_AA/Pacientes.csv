@@ -1,15 +1,22 @@
 ﻿Idpaciente;Nombre;Fechanacimiento;Telefono;CodPais;CodCiudad;Correo
-1001;Paola Solano Araya;25/10/1952;506-4169-3287;506;3;paola.solano32@correo.com
-1002;Lucía Quesada Mora;7/1/2007;506-6788-8019;506;2;lucia.quesada75@correo.com
-1003;Camila Jiménez López;17/9/1985;52-6042-2489;507;4;camila.jimenez97@correo.com
-1004;José López Martínez;22/1/2011;506-7574-7916;506;4;jose.lopez77@correo.com
-1005;Jorge Solano Brenes;28/12/1981;507-6334-5119;507;2;jorge.solano71@correo.com
-1006;Isabel Fernández Quesada;13/5/2007;506-4185-6573;506;1;isabel.fernandez15@correo.com
-1007;Daniela Martínez Araya;16/4/1940;505-9813-5315;505;1;daniela.martinez65@correo.com
-1008;Laura Salas Fernández;5/2/2018;507-7122-5889;507;3;laura.salas82@correo.com
-1009;Elena Vargas López;18/7/1973;505-8246-3646;505;2;elena.vargas70@correo.com
-1010;Fernando Rodríguez Brenes;29/1/1969;506-6002-1319;506;5;fernando.rodriguez15@correo.com
-1011;Valeria Jiménez Pérez;10/8/1961;507-9192-2290;507;1;valeria.jimenez11@correo.com
-1012;Paola Gómez Quesada;14/9/2008;505-3030-3103;505;1;paola.gomez85@correo.com
-1013;Lucía Martínez Mora;4/5/1987;505-9146-7932;505;1;lucia.martinez28@correo.com
-1014;Esteban Vargas Castro;18/10/1975;506-7502-7118;506;2;esteban.vargas57@correo.com
+1001;Ana María Rodríguez;1998-04-12;8888-1001;1;1;ana.rodriguez@example.com
+1002;Carlos Andrés Méndez;1985-09-23;8888-1002;1;2;carlos.mendez@example.com
+1003;Lucía Fernández Soto;2001-01-07;8888-1003;1;3;lucia.fernandez@example.com
+1004;José Pablo Vargas;1976-11-30;8888-1004;2;1;jose.vargas@example.com
+1005;María José Castillo;1992-06-18;8888-1005;2;2;maria.castillo@example.com
+1006;Diego Alejandro Ruiz;2004-03-02;8888-1006;3;1;diego.ruiz@example.com
+1007;Sofía Herrera López;1995-12-14;8888-1007;3;2;sofia.herrera@example.com
+1008;Andrés Felipe Gómez;1988-07-25;8888-1008;4;1;andres.gomez@example.com
+1009;Valeria Morales Cruz;2000-05-09;8888-1009;5;1;valeria.morales@example.com
+1010;Fernando Jiménez Rojas;1969-02-16;8888-1010;6;1;fernando.jimenez@example.com
+1011;Camila Torres Díaz;1999-08-21;8888-1011;8;1;camila.torres@example.com
+1012;Mateo Sánchez Pérez;2010-10-05;8888-1012;8;2;mateo.sanchez@example.com
+1013;Isabella Martínez;1990-03-17;8888-1013;9;1;isabella.martinez@example.com
+1014;Daniela Ramírez;1982-12-01;8888-1014;10;1;daniela.ramirez@example.com
+1015;Sebastián Castro;1979-07-11;8888-1015;11;1;sebastian.castro@example.com
+1001;Paciente duplicado;1994-02-02;8888-2001;1;1;duplicado@example.com
+1016;Ciudad inexistente;1991-04-04;8888-1016;1;999;ciudad.inexistente@example.com
+1017;País inexistente;1987-05-05;8888-1017;999;1;pais.inexistente@example.com
+abc;ID no numérico;1993-06-06;8888-1018;1;1;id.invalido@example.com
+1019;;1996-07-07;8888-1019;1;1;nombre.vacio@example.com
+1020;Correo y teléfono inválidos;fecha-inválida;teléfono;1;1;correo-invalido

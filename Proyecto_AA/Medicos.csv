@@ -1,11 +1,22 @@
 ﻿Idmedico;Nombre;Telefono;Correo;Idespecialidad
-101;Dra. Carlos Mora Jiménez;506-3828-3286;carlos.mora95@hospital.cr;1
-102;Dr. Carmen Quesada Gómez;506-6837-7912;carmen.quesada5@hospital.cr;2
-103;Dr. Pedro Jiménez Salas;506-6931-1434;pedro.jimenez72@hospital.cr;3
-104;Dr. Gabriel Quesada Rojas;506-3805-8359;gabriel.quesada76@hospital.cr;4
-105;Dr. Carlos Martínez Rojas;506-4787-5552;carlos.martinez20@hospital.cr;5
-106;Dr. Esteban Ramírez Fernández;506-2759-7224;esteban.ramirez13@hospital.cr;6
-107;Dr. Camila Brenes Mora;506-8611-1711;camila.brenes94@hospital.cr;7
-108;Dr. José Solano Gómez;506-6522-5803;jose.solano81@hospital.cr;8
-109;Dra. Camila Mena Vargas;506-7771-2139;camila.mena6@hospital.cr;1
-110;Dra. Esteban Castro Gómez;506-9006-4814;esteban.castro13@hospital.cr;2
+2001;Dr. Ricardo Salazar;8888-2001;ricardo.salazar@example.com;1
+2002;Dra. Gabriela Méndez;8888-2002;gabriela.mendez@example.com;2
+2003;Dr. Esteban Vargas;8888-2003;esteban.vargas@example.com;3
+2004;Dra. Laura Jiménez;8888-2004;laura.jimenez@example.com;4
+2005;Dr. Mauricio Castro;8888-2005;mauricio.castro@example.com;5
+2006;Dra. Natalia Rojas;8888-2006;natalia.rojas@example.com;1
+2007;Dr. Felipe Herrera;8888-2007;felipe.herrera@example.com;2
+2008;Dra. Daniela Solís;8888-2008;daniela.solis@example.com;3
+2009;Dr. Andrés Molina;8888-2009;andres.molina@example.com;4
+2010;Dra. Paula Navarro;8888-2010;paula.navarro@example.com;5
+2011;Dr. Sebastián León;8888-2011;sebastian.leon@example.com;1
+2012;Dra. Mariana Quesada;8888-2012;mariana.quesada@example.com;2
+2013;Dr. Tomás Alvarado;8888-2013;tomas.alvarado@example.com;3
+2014;Dra. Verónica Chaves;8888-2014;veronica.chaves@example.com;4
+2015;Dr. Pablo Fernández;8888-2015;pablo.fernandez@example.com;5
+2001;Médico duplicado;8888-3001;duplicado.medico@example.com;1
+2016;Especialidad inexistente;8888-2016;especialidad.inexistente@example.com;999
+abc;ID no numérico;8888-2017;id.invalido@example.com;1
+2017;;8888-2018;nombre.vacio@example.com;1
+2018;Correo y teléfono inválidos;teléfono;correo-invalido;2
+2019;ID cero;8888-2019;id.cero@example.com;1
